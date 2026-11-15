@@ -4,7 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Log Masuk Pentadbir | Polis Diraja MYMahkota</title>
 
 <style>
@@ -19,556 +18,236 @@
     --red:#ffb6b6;
     --green:#a9edc2;
 }
-
-* {
-    box-sizing:border-box;
+*{box-sizing:border-box}
+body{
+    margin:0;min-height:100vh;background:var(--bg);
+    color:var(--text);font-family:Arial,sans-serif;
+    display:flex;flex-direction:column
 }
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+[hidden]{display:none!important}
 
-body {
-    margin:0;
-    min-height:100vh;
-    background:var(--bg);
-    color:var(--text);
-    font-family:Arial,sans-serif;
-    display:flex;
-    flex-direction:column;
+header{
+    background:#151d29;border-bottom:1px solid var(--border);
+    padding:18px 6%
 }
-
-button,input {
-    font:inherit;
+.header-inner{
+    max-width:1250px;margin:auto;display:flex;
+    align-items:center;justify-content:space-between;gap:15px
 }
-
-button {
-    cursor:pointer;
+.brand{display:flex;align-items:center;gap:15px}
+.brand img{width:60px;height:60px;object-fit:contain}
+.brand h1{margin:0;color:var(--gold);font-size:15px}
+.brand p{
+    margin:6px 0 0;color:var(--muted);
+    font-size:10px;letter-spacing:2px
 }
-
-a {
-    color:inherit;
-    text-decoration:none;
+.official{
+    color:var(--gold);font-size:10px;letter-spacing:2px;
+    border:1px solid #665535;border-radius:5px;padding:10px 13px
 }
-
-[hidden] {
-    display:none!important;
-}
-
-header {
-    background:#151d29;
-    border-bottom:1px solid var(--border);
-    padding:18px 6%;
-}
-
-.header-inner {
-    max-width:1250px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.brand {
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.brand img {
-    width:60px;
-    height:60px;
-    object-fit:contain;
-}
-
-.brand h1 {
-    margin:0;
-    color:var(--gold);
-    font-size:15px;
-}
-
-.brand p {
-    margin:6px 0 0;
-    color:var(--muted);
-    font-size:10px;
-    letter-spacing:2px;
-}
-
-.official {
-    color:var(--gold);
-    font-size:10px;
-    letter-spacing:2px;
-    border:1px solid #665535;
-    border-radius:5px;
-    padding:10px 13px;
-}
-
-main {
-    flex:1;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+main{
+    flex:1;display:flex;justify-content:center;align-items:center;
     padding:45px 16px;
-    background:radial-gradient(
-        circle at top,
-        #39301e,
-        #17191d 45%,
-        #0d1118 75%
-    );
+    background:radial-gradient(circle at top,#39301e,#17191d 45%,#0d1118 75%)
 }
-
-.login-container {
-    width:100%;
-    max-width:480px;
-    background:var(--panel);
-    border:1px solid #554b39;
-    border-top:4px solid var(--gold);
-    border-radius:12px;
-    padding:36px;
-    box-shadow:0 22px 65px #0009;
+.login-container{
+    width:100%;max-width:480px;background:var(--panel);
+    border:1px solid #554b39;border-top:4px solid var(--gold);
+    border-radius:12px;padding:36px;box-shadow:0 22px 65px #0009
 }
-
-.login-header {
-    text-align:center;
-    margin-bottom:27px;
+.login-header{text-align:center;margin-bottom:27px}
+.login-header img{width:90px;height:90px;object-fit:contain}
+.login-header small{
+    display:block;margin-top:16px;color:var(--gold);
+    font-size:10px;letter-spacing:2px;font-weight:bold
 }
-
-.login-header img {
-    width:90px;
-    height:90px;
-    object-fit:contain;
+.login-header h2{margin:10px 0;font-size:24px}
+.login-header p{
+    margin:8px 0;color:var(--muted);
+    font-size:12px;line-height:1.8
 }
-
-.login-header small {
-    display:block;
-    margin-top:16px;
-    color:var(--gold);
-    font-size:10px;
-    letter-spacing:2px;
-    font-weight:bold;
+.notice{
+    background:#302a1e;border:1px solid #665535;
+    border-radius:7px;padding:15px;color:#e6d29c;
+    font-size:12px;line-height:1.8;margin-bottom:26px
 }
-
-.login-header h2 {
-    margin:10px 0;
-    font-size:24px;
+.notice strong{display:block;margin-bottom:5px}
+.field{margin-bottom:21px}
+.field label{
+    display:block;color:var(--gold);font-size:11px;
+    font-weight:bold;margin-bottom:9px
 }
-
-.login-header p {
-    margin:8px 0;
-    color:var(--muted);
-    font-size:12px;
-    line-height:1.8;
+.field input{
+    width:100%;background:#101722;color:white;
+    border:1px solid var(--border);border-radius:6px;
+    padding:15px;outline:none;font-size:13px
 }
-
-.notice {
-    background:#302a1e;
-    border:1px solid #665535;
-    border-radius:7px;
-    padding:15px;
-    color:#e6d29c;
-    font-size:12px;
-    line-height:1.8;
-    margin-bottom:26px;
+.field input:focus{border-color:var(--gold)}
+.password-wrap{position:relative}
+.password-wrap input{padding-right:98px}
+.show-password{
+    position:absolute;right:8px;top:50%;
+    transform:translateY(-50%);border:0;border-radius:4px;
+    background:#303b4d;color:var(--gold);
+    padding:9px;font-size:10px;font-weight:bold
 }
-
-.notice strong {
-    display:block;
-    margin-bottom:5px;
+.login-button{
+    display:block;width:100%;border:0;border-radius:7px;
+    padding:16px;background:var(--gold);color:#151515;
+    font-size:12px;font-weight:bold
 }
-
-.field {
-    margin-bottom:21px;
+.login-button:hover{background:#f0d994}
+.login-button:disabled{opacity:.65;cursor:not-allowed}
+.register-divider{
+    display:flex;align-items:center;gap:13px;
+    margin:26px 0;color:var(--muted);font-size:11px
 }
-
-.field label {
-    display:block;
-    color:var(--gold);
-    font-size:11px;
-    font-weight:bold;
-    margin-bottom:9px;
+.register-divider::before,.register-divider::after{
+    content:"";flex:1;height:1px;background:var(--border)
 }
-
-.field input {
-    width:100%;
-    background:#101722;
-    color:white;
-    border:1px solid var(--border);
-    border-radius:6px;
-    padding:15px;
-    outline:none;
-    font-size:13px;
+.register-card{
+    background:#131b28;border:1px solid var(--border);
+    border-radius:8px;padding:20px;text-align:center
 }
-
-.field input:focus {
-    border-color:var(--gold);
+.register-card h3{margin:0 0 8px;color:var(--gold);font-size:16px}
+.register-card p{
+    margin:0 0 19px;color:var(--muted);
+    font-size:12px;line-height:1.8
 }
-
-.password-wrap {
-    position:relative;
+.register-button{
+    display:block;width:100%;border:1px solid var(--gold2);
+    border-radius:6px;padding:15px;color:var(--gold);
+    background:#342d1e;font-size:12px;font-weight:bold;text-align:center
 }
-
-.password-wrap input {
-    padding-right:98px;
+.register-button:hover{background:#4b3e24}
+.message{
+    padding:14px;margin-top:20px;border-radius:7px;
+    font-size:12px;line-height:1.8
 }
-
-.show-password {
-    position:absolute;
-    right:8px;
-    top:50%;
-    transform:translateY(-50%);
-    border:0;
-    border-radius:4px;
-    background:#303b4d;
-    color:var(--gold);
-    padding:9px;
-    font-size:10px;
-    font-weight:bold;
+.message.error{
+    background:#48282d;border:1px solid #8c444c;color:var(--red)
 }
-
-.login-button {
-    display:block;
-    width:100%;
-    border:0;
-    border-radius:7px;
-    padding:16px;
-    background:var(--gold);
-    color:#151515;
-    font-size:12px;
-    font-weight:bold;
+.message.success{
+    background:#19432f;border:1px solid #327c55;color:var(--green)
 }
-
-.login-button:hover {
-    background:#f0d994;
+.footer-links{
+    display:flex;justify-content:center;flex-wrap:wrap;
+    gap:20px;margin-top:27px;padding-top:21px;
+    border-top:1px solid var(--border)
 }
-
-.login-button:disabled {
-    opacity:.65;
-    cursor:not-allowed;
+.footer-links a{color:var(--gold);font-size:11px}
+.security-label{
+    text-align:center;color:var(--muted);
+    font-size:10px;line-height:1.8;margin-top:22px
 }
-
-.register-divider {
-    display:flex;
-    align-items:center;
-    gap:13px;
-    margin:26px 0;
-    color:var(--muted);
-    font-size:11px;
+footer{
+    border-top:1px solid var(--border);color:var(--muted);
+    text-align:center;font-size:10px;padding:21px 15px
 }
-
-.register-divider::before,
-.register-divider::after {
-    content:"";
-    flex:1;
-    height:1px;
-    background:var(--border);
+button:focus-visible,a:focus-visible,input:focus-visible{
+    outline:2px solid var(--gold);outline-offset:3px
 }
-
-.register-card {
-    background:#131b28;
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:20px;
-    text-align:center;
-}
-
-.register-card h3 {
-    margin:0 0 8px;
-    color:var(--gold);
-    font-size:16px;
-}
-
-.register-card p {
-    margin:0 0 19px;
-    color:var(--muted);
-    font-size:12px;
-    line-height:1.8;
-}
-
-.register-button {
-    display:block;
-    width:100%;
-    border:1px solid var(--gold2);
-    border-radius:6px;
-    padding:15px;
-    color:var(--gold);
-    background:#342d1e;
-    font-size:12px;
-    font-weight:bold;
-    text-align:center;
-}
-
-.register-button:hover {
-    background:#4b3e24;
-}
-
-.message {
-    padding:14px;
-    margin-top:20px;
-    border-radius:7px;
-    font-size:12px;
-    line-height:1.8;
-}
-
-.message.error {
-    background:#48282d;
-    border:1px solid #8c444c;
-    color:var(--red);
-}
-
-.message.success {
-    background:#19432f;
-    border:1px solid #327c55;
-    color:var(--green);
-}
-
-.footer-links {
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:20px;
-    margin-top:27px;
-    padding-top:21px;
-    border-top:1px solid var(--border);
-}
-
-.footer-links a {
-    color:var(--gold);
-    font-size:11px;
-}
-
-.security-label {
-    text-align:center;
-    color:var(--muted);
-    font-size:10px;
-    line-height:1.8;
-    margin-top:22px;
-}
-
-footer {
-    border-top:1px solid var(--border);
-    color:var(--muted);
-    text-align:center;
-    font-size:10px;
-    padding:21px 15px;
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-    outline:2px solid var(--gold);
-    outline-offset:3px;
-}
-
-@media(max-width:600px) {
-    header {
-        padding:15px;
-    }
-
-    .brand img {
-        width:48px;
-        height:48px;
-    }
-
-    .brand h1 {
-        font-size:12px;
-    }
-
-    .official {
-        display:none;
-    }
-
-    .login-container {
-        padding:26px 20px;
-    }
-
-    .login-header h2 {
-        font-size:21px;
-    }
+@media(max-width:600px){
+    header{padding:15px}
+    .brand img{width:48px;height:48px}
+    .brand h1{font-size:12px}
+    .official{display:none}
+    main{padding:30px 13px}
+    .login-container{padding:26px 20px}
+    .login-header h2{font-size:21px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
     <div class="header-inner">
-
         <a href="index.html" class="brand">
-
-            <img
-                src="logo.png"
-                alt="Logo Polis Diraja MYMahkota"
-            >
-
+            <img src="logo.png" alt="Logo Polis Diraja MYMahkota">
             <div>
                 <h1>POLIS DIRAJA MYMAHKOTA</h1>
                 <p>PORTAL PENTADBIRAN</p>
             </div>
-
         </a>
-
-        <span class="official">
-            SISTEM AKSES PENTADBIRAN
-        </span>
-
+        <span class="official">SISTEM AKSES PENTADBIRAN</span>
     </div>
 </header>
 
 <main>
-
 <div class="login-container">
 
-    <!-- KEPALA -->
     <div class="login-header">
-
-        <img
-            src="logo.png"
-            alt="Logo Polis Diraja MYMahkota"
-        >
-
-        <small>
-            POLIS DIRAJA MYMAHKOTA
-        </small>
-
+        <img src="logo.png" alt="Logo Polis Diraja MYMahkota">
+        <small>POLIS DIRAJA MYMAHKOTA</small>
         <h2>LOG MASUK PENTADBIR</h2>
-
-        <p>
-            Sistem Pengurusan Pentadbiran
-            <br>
-            Polis Diraja MYMahkota
-        </p>
-
+        <p>Sistem Pengurusan Pentadbiran<br>Polis Diraja MYMahkota</p>
     </div>
 
-    <!-- MAKLUMAN -->
     <div class="notice">
-
         <strong>MAKLUMAN AKSES PENTADBIRAN</strong>
-
-        Hanya Pentadbir Utama dan pentadbir
-        yang telah mendapat kelulusan serta
-        masih berstatus aktif dibenarkan
-        memasuki Panel Pentadbiran.
-
+        Pentadbir Utama G2002 mempunyai akses khas.
+        Pentadbir lain hendaklah mendapat kelulusan
+        dan mempunyai status aktif.
     </div>
 
-    <!-- BORANG LOG MASUK -->
     <form id="loginForm">
-
         <div class="field">
-
-            <label for="adminId">
-                NOMBOR BADAN PENTADBIR
-            </label>
-
-            <input
-                type="text"
-                id="adminId"
+            <label for="adminId">NOMBOR BADAN PENTADBIR</label>
+            <input type="text" id="adminId"
                 placeholder="Masukkan nombor badan"
-                autocomplete="username"
-                maxlength="30"
-                required
-            >
-
+                autocomplete="username" maxlength="30" required>
         </div>
 
         <div class="field">
-
-            <label for="adminPassword">
-                KATA LALUAN PENTADBIRAN
-            </label>
-
+            <label for="adminPassword">KATA LALUAN PENTADBIRAN</label>
             <div class="password-wrap">
-
-                <input
-                    type="password"
-                    id="adminPassword"
+                <input type="password" id="adminPassword"
                     placeholder="Masukkan kata laluan pentadbiran"
-                    autocomplete="current-password"
-                    required
-                >
-
-                <button
-                    type="button"
-                    class="show-password"
-                    id="togglePassword"
-                    aria-pressed="false">
+                    autocomplete="current-password" required>
+                <button type="button" class="show-password"
+                    id="togglePassword" aria-pressed="false">
                     LIHAT
                 </button>
-
             </div>
-
         </div>
 
-        <button
-            type="submit"
-            class="login-button"
-            id="loginButton">
+        <button type="submit" class="login-button" id="loginButton">
             LOG MASUK KE PANEL PENTADBIRAN
         </button>
-
     </form>
 
-    <!-- STATUS -->
-    <div
-        class="message error"
-        id="errorMessage"
-        role="alert"
-        hidden>
-    </div>
+    <div class="message error" id="errorMessage" role="alert" hidden></div>
+    <div class="message success" id="successMessage" role="status" hidden></div>
 
-    <div
-        class="message success"
-        id="successMessage"
-        role="status"
-        aria-live="polite"
-        hidden>
-    </div>
-
-    <!-- PENDAFTARAN PENTADBIR -->
-    <div class="register-divider">
-        ATAU
-    </div>
+    <div class="register-divider">ATAU</div>
 
     <div class="register-card">
-
         <h3>BELUM MENJADI PENTADBIR?</h3>
-
         <p>
-            Anggota yang ingin mendapatkan
-            akses pentadbiran hendaklah
-            mengemukakan permohonan terlebih dahulu.
-
-            Kelulusan pihak pentadbiran
-            diperlukan sebelum akses diberikan.
+            Anggota yang ingin mendapatkan akses pentadbiran
+            hendaklah mengemukakan permohonan terlebih dahulu.
+            Kelulusan pihak pentadbiran diperlukan sebelum akses diberikan.
         </p>
-
-        <a
-            href="daftar-pentadbir.html"
-            class="register-button">
+        <a href="daftar-pentadbir.html" class="register-button">
             DAFTAR PENTADBIR
         </a>
-
     </div>
 
     <div class="security-label">
-        AKSES KHAS PENTADBIRAN
-        <br>
+        AKSES KHAS PENTADBIRAN<br>
         POLIS DIRAJA MYMAHKOTA
     </div>
 
     <div class="footer-links">
-
-        <a href="dashboard.html">
-            DASHBOARD ANGGOTA
-        </a>
-
-        <a href="index.html">
-            PORTAL UTAMA
-        </a>
-
+        <a href="dashboard.html">DASHBOARD ANGGOTA</a>
+        <a href="index.html">PORTAL UTAMA</a>
     </div>
 
 </div>
-
 </main>
 
 <footer>
@@ -579,101 +258,110 @@ input:focus-visible {
 <script>
 "use strict";
 
-/* ======================================
-   KONFIGURASI
-====================================== */
-
-const STORE_KEY =
-    "MYMAHKOTA_PORTAL_V1";
-
-const SESSION_KEY =
-    "MYMAHKOTA_ADMIN_SESSION";
+const STORE_KEY = "MYMAHKOTA_PORTAL_V1";
+const SESSION_KEY = "MYMAHKOTA_ADMIN_SESSION";
 
 const MAIN_ADMIN_ID = "G2002";
 
-const MAIN_ADMIN_NAME =
-    "Dato' Sri Muhammad Ilham Bin Musa";
+const MAIN_ADMIN = {
+    noBadan: "G2002",
+    idPentadbir: "G2002",
+    nama: "Dato' Sri Muhammad Ilham Bin Musa",
+    peranan: "Pentadbir Utama",
+    status: "AKTIF",
+    kelulusan: "DILULUSKAN",
+    passwordHash:
+    "6c0bcf8d5716f63aaf6f5ca09696f008ef007da60f61fa4affdabb84f1745f15"
+};
 
-/*
-   UNTUK PROTOTAIP TEMPATAN SAHAJA.
-
-   Kata laluan bersama dikekalkan
-   untuk keserasian sistem terdahulu.
-
-   PENTING:
-   Kata laluan yang berada dalam kod
-   JavaScript boleh dilihat oleh sesiapa
-   yang mempunyai akses kepada fail.
-
-   Jangan gunakan kaedah ini apabila
-   portal diterbitkan kepada orang awam.
-*/
-const SHARED_ADMIN_PASSWORD =
-    "MAHKOTA2026";
-
-/* ======================================
-   FUNGSI ASAS
-====================================== */
-
-const $ = id =>
-    document.getElementById(id);
+const $ = id => document.getElementById(id);
 
 function normalize(value) {
-    return String(value ?? "")
-        .trim()
-        .toUpperCase();
+    return String(value ?? "").trim().toUpperCase();
 }
 
-function list(value) {
-    return Array.isArray(value) ? value : [];
-}
-
-/* ======================================
-   BACA PANGKALAN DATA TEMPATAN
-====================================== */
+/* =====================================
+   PANGKALAN DATA
+===================================== */
 
 function getDatabase() {
     try {
-        const saved =
-            localStorage.getItem(STORE_KEY);
+        const db = JSON.parse(
+            localStorage.getItem(STORE_KEY) || "{}"
+        );
 
-        const db = saved
-            ? JSON.parse(saved)
-            : {};
-
-        if (
-            !db ||
-            typeof db !== "object" ||
-            Array.isArray(db)
-        ) {
-            return null;
+        if (!db || typeof db !== "object" || Array.isArray(db)) {
+            throw new Error("Data tidak sah.");
         }
 
-        if (!Array.isArray(db.members)) {
-            db.members = [];
-        }
-
-        if (!Array.isArray(db.admins)) {
-            db.admins = [];
-        }
-
-        if (!Array.isArray(db.adminRequests)) {
-            db.adminRequests = [];
-        }
+        if (!Array.isArray(db.members)) db.members = [];
+        if (!Array.isArray(db.admins)) db.admins = [];
+        if (!Array.isArray(db.adminRequests)) db.adminRequests = [];
 
         return db;
 
-    } catch(error) {
+    } catch (error) {
         return null;
     }
 }
 
-/* ======================================
-   PAPAR MESEJ
-====================================== */
+function saveDatabase(db) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(db));
+}
 
-function showMessage(message,type="error") {
+/* =====================================
+   SEDIAKAN AKAUN G2002 SECARA AUTOMATIK
+===================================== */
 
+function initializeMainAdmin() {
+    const db = getDatabase();
+
+    if (!db) {
+        return false;
+    }
+
+    let member = db.members.find(m =>
+        normalize(m.noBadan || m.idAnggota) === MAIN_ADMIN_ID
+    );
+
+    if (!member) {
+        member = {
+            noBadan: MAIN_ADMIN_ID,
+            idAnggota: MAIN_ADMIN_ID,
+            nama: MAIN_ADMIN.nama,
+            pangkat: "Pentadbir Utama",
+            jawatan: "Pentadbir Utama",
+            jabatan: "Pentadbiran Tertinggi",
+            status: "AKTIF"
+        };
+
+        db.members.push(member);
+    } else {
+        member.noBadan = MAIN_ADMIN_ID;
+        member.nama = MAIN_ADMIN.nama;
+        member.status = "AKTIF";
+    }
+
+    let admin = db.admins.find(a =>
+        normalize(a.noBadan || a.idPentadbir) === MAIN_ADMIN_ID
+    );
+
+    if (!admin) {
+        admin = {...MAIN_ADMIN};
+        db.admins.push(admin);
+    } else {
+        Object.assign(admin, MAIN_ADMIN);
+    }
+
+    saveDatabase(db);
+    return true;
+}
+
+/* =====================================
+   MESEJ
+===================================== */
+
+function showMessage(message, type = "error") {
     $("errorMessage").hidden = true;
     $("successMessage").hidden = true;
 
@@ -685,328 +373,249 @@ function showMessage(message,type="error") {
     target.hidden = false;
 }
 
-/* ======================================
-   REKOD ANGGOTA
-====================================== */
-
-function getMemberId(record) {
-    return normalize(
-        record?.noBadan ||
-        record?.idAnggota ||
-        ""
-    );
-}
-
-function findMember(db,noBadan) {
-    return list(db.members).find(member =>
-        getMemberId(member) ===
-        normalize(noBadan)
-    ) || null;
-}
-
-function isMemberActive(db,noBadan) {
-    const member = findMember(db,noBadan);
-
-    return member !== null &&
-        normalize(member.status) === "AKTIF";
-}
-
-/* ======================================
-   REKOD PENTADBIR
-====================================== */
+/* =====================================
+   ID DAN REKOD
+===================================== */
 
 function getAdminId(record) {
     return normalize(
         record?.noBadan ||
         record?.idPentadbir ||
-        ""
+        record?.idAnggota
     );
 }
 
-function findAdmin(db,noBadan) {
-    return list(db.admins).find(admin =>
-        getAdminId(admin) ===
-        normalize(noBadan)
+function findAdmin(db, id) {
+    return db.admins.find(a => getAdminId(a) === normalize(id)) || null;
+}
+
+function findMember(db, id) {
+    return db.members.find(m =>
+        normalize(m.noBadan || m.idAnggota) === normalize(id)
     ) || null;
 }
 
-function hasPendingApplication(db,noBadan) {
-    return list(db.adminRequests).some(request =>
-        getAdminId(request) ===
-            normalize(noBadan) &&
-        normalize(request.status) ===
-            "MENUNGGU"
-    );
+/* =====================================
+   KATA LALUAN SHA-256
+===================================== */
+
+async function hashPassword(password) {
+    if (!crypto?.subtle) {
+        throw new Error("Pelayar tidak menyokong pengesahan kata laluan.");
+    }
+
+    const data = new TextEncoder().encode(password);
+    const result = await crypto.subtle.digest("SHA-256", data);
+
+    return Array.from(new Uint8Array(result))
+        .map(b => b.toString(16).padStart(2, "0"))
+        .join("");
 }
 
-/* ======================================
-   SEMAK AKSES
-====================================== */
+async function verifyPassword(password, admin) {
+    if (!admin || !admin.passwordHash) {
+        return false;
+    }
 
-function getAdminAccess(db,noBadan) {
+    const hash = await hashPassword(password);
 
-    const id = normalize(noBadan);
+    return hash.toLowerCase() ===
+        String(admin.passwordHash).toLowerCase();
+}
+
+/* =====================================
+   SEMAK KELAYAKAN
+===================================== */
+
+function getAdminAccess(db, id) {
+
+    id = normalize(id);
 
     /*
-       PENTADBIR UTAMA
-
-       Selaras dengan pentadbir.html:
-       G2002 ialah pentadbir utama.
-
-       Jika ada rekod anggota G2002
-       yang tidak aktif, akses ditolak.
+       G2002:
+       PENTADBIR UTAMA.
+       Tidak perlu permohonan atau kelulusan.
     */
 
     if (id === MAIN_ADMIN_ID) {
+        const admin = findAdmin(db, MAIN_ADMIN_ID);
 
-        const member = findMember(
-            db,
-            MAIN_ADMIN_ID
-        );
-
-        if (
-            member &&
-            normalize(member.status) !== "AKTIF"
-        ) {
+        if (!admin) {
             return {
-                allowed:false,
-                reason:
-                    "Status perkhidmatan Pentadbir Utama tidak aktif."
+                allowed: false,
+                reason: "Akaun Pentadbir Utama belum disediakan."
             };
         }
 
         return {
-            allowed:true,
-            noBadan:MAIN_ADMIN_ID,
-            nama:MAIN_ADMIN_NAME,
-            peranan:"Pentadbir Utama"
+            allowed: true,
+            noBadan: MAIN_ADMIN_ID,
+            nama: MAIN_ADMIN.nama,
+            peranan: "Pentadbir Utama"
         };
     }
 
     /*
        PENTADBIR BIASA
-
-       1. Mesti menjadi anggota berdaftar.
-       2. Anggota mesti aktif.
-       3. Rekod admins mesti wujud.
-       4. Status pentadbir mesti Aktif.
     */
 
-    const member = findMember(db,id);
+    const member = findMember(db, id);
+    const admin = findAdmin(db, id);
 
     if (!member) {
         return {
-            allowed:false,
-            reason:
-                "Nombor badan tidak dijumpai dalam rekod anggota."
+            allowed: false,
+            reason: "Nombor badan tidak dijumpai dalam rekod anggota."
         };
     }
 
-    if (!isMemberActive(db,id)) {
+    if (normalize(member.status) !== "AKTIF") {
         return {
-            allowed:false,
-            reason:
-                "Akaun anggota tidak aktif, digantung atau telah ditamatkan."
+            allowed: false,
+            reason: "Status anggota tidak aktif."
         };
     }
-
-    const admin = findAdmin(db,id);
 
     if (!admin) {
-
-        if (hasPendingApplication(db,id)) {
-            return {
-                allowed:false,
-                reason:
-                    "Permohonan pentadbiran masih menunggu kelulusan."
-            };
-        }
-
         return {
-            allowed:false,
-            reason:
-                "Anda belum mempunyai akses pentadbiran. Sila daftar terlebih dahulu."
+            allowed: false,
+            reason: "Anda belum mempunyai akaun pentadbir yang diluluskan."
         };
     }
 
-    if (normalize(admin.status) !== "AKTIF") {
+    if (
+        !["AKTIF", "DILULUSKAN"].includes(
+            normalize(admin.status)
+        )
+    ) {
         return {
-            allowed:false,
-            reason:
-                "Akses pentadbiran telah dibatalkan atau ditamatkan."
+            allowed: false,
+            reason: "Akaun pentadbir belum diluluskan atau tidak aktif."
         };
     }
 
     return {
-        allowed:true,
-        noBadan:id,
-        nama:member.nama,
-        peranan:admin.peranan || "Pentadbir"
+        allowed: true,
+        noBadan: id,
+        nama: admin.nama || member.nama,
+        peranan: admin.peranan || "Pentadbir"
     };
 }
 
-/* ======================================
+/* =====================================
    SIMPAN SESI
-====================================== */
+===================================== */
 
 function saveSession(admin) {
-
-    const activeSession = {
-        noBadan:normalize(admin.noBadan),
-        nama:admin.nama,
-        peranan:admin.peranan,
-        loginAt:Date.now()
+    const session = {
+        noBadan: normalize(admin.noBadan),
+        nama: admin.nama,
+        peranan: admin.peranan,
+        loginAt: Date.now()
     };
 
     sessionStorage.setItem(
         SESSION_KEY,
-        JSON.stringify(activeSession)
+        JSON.stringify(session)
     );
 }
 
-/* ======================================
-   LIHAT / SEMBUNYIKAN KATA LALUAN
-====================================== */
+/* =====================================
+   LIHAT KATA LALUAN
+===================================== */
 
-$("togglePassword").addEventListener(
-    "click",
-    function() {
+$("togglePassword").addEventListener("click", function() {
+    const input = $("adminPassword");
+    const visible = input.type === "password";
 
-        const input = $("adminPassword");
+    input.type = visible ? "text" : "password";
+    this.textContent = visible ? "SEMBUNYI" : "LIHAT";
 
-        const visible =
-            input.type === "password";
+    this.setAttribute("aria-pressed", String(visible));
+});
 
-        input.type =
-            visible ? "text" : "password";
+/* =====================================
+   LOG MASUK
+===================================== */
 
-        this.textContent =
-            visible ? "SEMBUNYI" : "LIHAT";
+$("loginForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-        this.setAttribute(
-            "aria-pressed",
-            String(visible)
-        );
+    const id = normalize($("adminId").value);
+    const password = $("adminPassword").value;
+    const button = $("loginButton");
+
+    $("errorMessage").hidden = true;
+    $("successMessage").hidden = true;
+
+    if (!id || !password) {
+        showMessage("Sila masukkan nombor badan dan kata laluan.");
+        return;
     }
-);
 
-/* ======================================
-   LOG MASUK PENTADBIR
-====================================== */
+    button.disabled = true;
+    button.textContent = "MENGESAHKAN AKAUN...";
 
-$("loginForm").addEventListener(
-    "submit",
-    function(event) {
-
-        event.preventDefault();
-
-        const noBadan = normalize(
-            $("adminId").value
-        );
-
-        const password =
-            $("adminPassword").value;
-
-        const loginButton =
-            $("loginButton");
-
-        $("errorMessage").hidden = true;
-        $("successMessage").hidden = true;
-
-        if (!noBadan || !password) {
-            showMessage(
-                "Sila masukkan nombor badan dan kata laluan."
-            );
-            return;
+    try {
+        if (!initializeMainAdmin()) {
+            throw new Error("Data sistem tidak dapat disediakan.");
         }
 
-        loginButton.disabled = true;
-        loginButton.textContent =
-            "MENGESAHKAN AKAUN...";
+        const db = getDatabase();
 
-        try {
-
-            const db = getDatabase();
-
-            if (!db) {
-                throw new Error(
-                    "Rekod pentadbiran tidak dapat dibaca."
-                );
-            }
-
-            /*
-               Semak identiti dan kelayakan
-               pentadbiran sebelum membenarkan
-               sesi log masuk.
-            */
-
-            const access = getAdminAccess(
-                db,
-                noBadan
-            );
-
-            if (!access.allowed) {
-                throw new Error(access.reason);
-            }
-
-            /*
-               Pengesahan prototaip:
-               kata laluan bersama.
-
-               Kelayakan pentadbiran sahaja
-               tidak cukup tanpa kata laluan.
-            */
-
-            if (password !== SHARED_ADMIN_PASSWORD) {
-                throw new Error(
-                    "Kata laluan pentadbiran tidak sah."
-                );
-            }
-
-            /*
-               Simpan sesi pentadbir.
-            */
-
-            saveSession(access);
-
-            $("adminPassword").value = "";
-
-            showMessage(
-                "Log masuk berjaya. Selamat datang, " +
-                access.nama + ".",
-                "success"
-            );
-
-            /*
-               Pastikan laluan sama dengan
-               panel pentadbiran.
-            */
-
-            window.location.assign(
-                "pentadbir.html"
-            );
-
-        } catch(error) {
-
-            sessionStorage.removeItem(
-                SESSION_KEY
-            );
-
-            showMessage(
-                error.message ||
-                "Log masuk pentadbiran gagal.",
-                "error"
-            );
-
-        } finally {
-
-            loginButton.disabled = false;
-
-            loginButton.textContent =
-                "LOG MASUK KE PANEL PENTADBIRAN";
+        if (!db) {
+            throw new Error("Data sistem tidak dapat dibaca.");
         }
+
+        const access = getAdminAccess(db, id);
+
+        if (!access.allowed) {
+            throw new Error(access.reason);
+        }
+
+        const admin = findAdmin(db, id);
+
+        const validPassword = await verifyPassword(
+            password,
+            admin
+        );
+
+        if (!validPassword) {
+            throw new Error("Kata laluan tidak sah.");
+        }
+
+        saveSession(access);
+
+        $("adminPassword").value = "";
+
+        showMessage(
+            "Log masuk berjaya. Selamat datang, " + access.nama + ".",
+            "success"
+        );
+
+        setTimeout(() => {
+            window.location.href = "pentadbir.html";
+        }, 500);
+
+    } catch (error) {
+        sessionStorage.removeItem(SESSION_KEY);
+
+        showMessage(
+            error.message || "Log masuk gagal."
+        );
+
+    } finally {
+        button.disabled = false;
+        button.textContent = "LOG MASUK KE PANEL PENTADBIRAN";
     }
-);
+});
+
+/* =====================================
+   JALANKAN PENYEDIAAN AKAUN G2002
+===================================== */
+
+initializeMainAdmin();
+
 </script>
 
 </body>
