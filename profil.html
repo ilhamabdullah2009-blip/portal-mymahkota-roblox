@@ -1,0 +1,1124 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Profil Organisasi | Polis Diraja MYMahkota</title>
+
+<meta name="description"
+content="Profil organisasi, sejarah, visi, misi, objektif dan kepimpinan pengasas Polis Diraja MYMahkota.">
+
+<style>
+:root {
+  --bg: #0e1118;
+  --panel: #191e28;
+  --panel2: #242b38;
+  --gold: #d9b96e;
+  --gold-dark: #a88a48;
+  --text: #f5f5f5;
+  --muted: #b8c0cc;
+  --border: #3a4350;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.8;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+header {
+  background: #171c26;
+  border-bottom: 3px solid var(--gold-dark);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 22px;
+}
+
+.logo {
+  width: 78px;
+  height: 78px;
+  object-fit: contain;
+}
+
+.brand h1 {
+  color: var(--gold);
+  font-size: 24px;
+  margin: 0;
+}
+
+.brand p {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin: 4px 0;
+}
+
+nav {
+  background: #202632;
+  padding: 13px;
+  text-align: center;
+}
+
+nav a {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--gold);
+}
+
+.hero {
+  text-align: center;
+  padding: 85px 20px;
+  background:
+    radial-gradient(
+      ellipse at top,
+      #45371e,
+      transparent 75%
+    ),
+    #10141c;
+  border-bottom: 1px solid #4d402a;
+}
+
+.hero-label {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  font-weight: bold;
+}
+
+.hero h2 {
+  font-size: clamp(32px, 5vw, 52px);
+  margin: 16px 0;
+  line-height: 1.3;
+}
+
+.hero h2 span {
+  color: var(--gold);
+}
+
+.hero p {
+  max-width: 750px;
+  margin: auto;
+  color: var(--muted);
+}
+
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.hero-badges span {
+  border: 1px solid #79633a;
+  background: #29241b;
+  color: var(--gold);
+  border-radius: 7px;
+  padding: 9px 16px;
+  font-size: 12px;
+}
+
+.container {
+  max-width: 1150px;
+  margin: auto;
+  padding: 60px 22px;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: var(--gold);
+}
+
+.section-title {
+  margin: 10px 0 15px;
+  font-size: clamp(25px, 4vw, 34px);
+  line-height: 1.4;
+}
+
+.gold-line {
+  width: 65px;
+  height: 3px;
+  background: var(--gold);
+  margin-bottom: 25px;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 950px;
+}
+
+.section-dark {
+  background: #141922;
+  border-top: 1px solid #29313e;
+  border-bottom: 1px solid #29313e;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 35px;
+}
+
+.info-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold-dark);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.info-card small {
+  display: block;
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.info-card strong {
+  display: block;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.info-card p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+.history {
+  background: var(--panel);
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: 9px;
+  margin-top: 30px;
+}
+
+.history p {
+  color: #d2d7df;
+  font-size: 15px;
+}
+
+.timeline {
+  margin-top: 35px;
+  padding-left: 28px;
+  border-left: 2px solid var(--gold-dark);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 28px 22px;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -36px;
+  top: 7px;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid #292b31;
+}
+
+.timeline-item strong {
+  color: var(--gold);
+}
+
+.timeline-item p {
+  color: var(--muted);
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.vision-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 35px;
+}
+
+.vision-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px;
+}
+
+.vision-card h3 {
+  color: var(--gold);
+  font-size: 23px;
+  margin-top: 0;
+}
+
+.vision-card p,
+.vision-card li {
+  color: #d1d7df;
+  font-size: 14px;
+}
+
+.vision-card ul {
+  padding-left: 20px;
+}
+
+.vision-card li {
+  margin-bottom: 12px;
+}
+
+.objective-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.objective-card {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 22px;
+  border-radius: 9px;
+}
+
+.objective-number {
+  color: var(--gold);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.objective-card h3 {
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.objective-card p {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.value-card {
+  background: var(--panel);
+  padding: 25px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.value-card .symbol {
+  display: block;
+  font-size: 27px;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+.value-card h3 {
+  color: var(--gold);
+  font-size: 17px;
+}
+
+.value-card p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.functions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.function-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 23px;
+}
+
+.function-card h3 {
+  margin: 0 0 10px;
+  color: var(--gold);
+  font-size: 17px;
+}
+
+.function-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.motto-section {
+  padding: 65px 20px;
+  background:
+    linear-gradient(135deg, #302719, #131820);
+  text-align: center;
+  border-top: 1px solid #56462b;
+  border-bottom: 1px solid #56462b;
+}
+
+.motto-section span {
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.motto-section h2 {
+  font-size: clamp(27px, 5vw, 43px);
+  margin: 15px 0;
+  line-height: 1.3;
+}
+
+.motto-section p {
+  color: var(--muted);
+  max-width: 650px;
+  margin: auto;
+}
+
+.directory-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--gold);
+  border-radius: 12px;
+  padding: 35px;
+  text-align: center;
+}
+
+.directory-panel h2 {
+  margin-top: 0;
+}
+
+.directory-panel p {
+  color: var(--muted);
+  max-width: 670px;
+  margin: 0 auto 25px;
+}
+
+.button-gold {
+  display: inline-block;
+  background: var(--gold);
+  color: #151515;
+  padding: 14px 26px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.button-gold:hover {
+  background: #f0d58f;
+}
+
+footer {
+  background: #171c26;
+  border-top: 2px solid var(--gold-dark);
+  padding: 35px 20px;
+  text-align: center;
+}
+
+footer strong {
+  color: var(--gold);
+}
+
+footer p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media(max-width: 700px) {
+  .header-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .brand h1 {
+    font-size: 19px;
+  }
+
+  nav a {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .hero {
+    padding: 55px 20px;
+  }
+
+  .info-grid,
+  .vision-grid,
+  .objective-grid,
+  .values-grid,
+  .functions {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 43px 18px;
+  }
+
+  .history,
+  .directory-panel {
+    padding: 22px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+
+    <a href="index.html">
+      <img
+        src="logo.png"
+        alt="Logo Polis Diraja MYMahkota"
+        class="logo"
+      >
+    </a>
+
+    <div class="brand">
+      <h1>POLIS DIRAJA MYMAHKOTA</h1>
+      <p>PORTAL RASMI ORGANISASI</p>
+    </div>
+
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav aria-label="Navigasi utama">
+  <a href="index.html">UTAMA</a>
+  <a href="profil.html" class="active">PROFIL ORGANISASI</a>
+  <a href="direktori.html">DIREKTORI JABATAN</a>
+  <a href="index.html#pengumuman">PENGUMUMAN</a>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-label">
+    MENGENALI ORGANISASI
+  </span>
+
+  <h2>
+    PROFIL <span>ORGANISASI</span>
+  </h2>
+
+  <p>
+    Mengenali sejarah, identiti, wawasan,
+    matlamat dan nilai yang menjadi asas
+    kepada Polis Diraja MYMahkota.
+  </p>
+
+  <div class="hero-badges">
+    <span>DITUBUHKAN 17 NOVEMBER 2024</span>
+    <span>INTEGRITI</span>
+    <span>PROFESIONALISME</span>
+    <span>AMANAH</span>
+  </div>
+</section>
+
+<!-- PENGENALAN -->
+<section class="container">
+
+  <span class="section-label">LATAR BELAKANG</span>
+
+  <h2 class="section-title">
+    Mengenai Polis Diraja MYMahkota
+  </h2>
+
+  <div class="gold-line"></div>
+
+  <p class="lead">
+    Polis Diraja MYMahkota merupakan sebuah
+    organisasi kepolisan dalam dunia MYMahkota
+    yang berperanan memelihara keamanan,
+    memastikan ketenteraman awam serta
+    menegakkan prinsip keadilan dan
+    pematuhan undang-undang.
+  </p>
+
+  <p class="lead">
+    Organisasi ini mengutamakan perkhidmatan
+    yang berintegriti, kepimpinan berwibawa,
+    disiplin anggota, profesionalisme dan
+    kerjasama erat dengan masyarakat.
+    Pengurusan yang sistematik dan latihan
+    berterusan menjadi asas dalam
+    membentuk pasukan yang cekap serta
+    bertanggungjawab.
+  </p>
+
+  <div class="info-grid">
+
+    <div class="info-card">
+      <small>TARIKH PENUBUHAN</small>
+      <strong>17 November 2024</strong>
+      <p>Tarikh penubuhan organisasi.</p>
+    </div>
+
+    <div class="info-card">
+      <small>PENGASAS ORGANISASI</small>
+      <strong>QIQI</strong>
+      <p>Pengasas Polis Diraja MYMahkota.</p>
+    </div>
+
+    <div class="info-card">
+      <small>TIMBALAN PENGASAS</small>
+      <strong>KoCi</strong>
+      <p>Timbalan pengasas organisasi.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SEJARAH -->
+<section class="section-dark">
+  <div class="container">
+
+    <span class="section-label">
+      SEJARAH ORGANISASI
+    </span>
+
+    <h2 class="section-title">
+      Sejarah Penubuhan
+    </h2>
+
+    <div class="gold-line"></div>
+
+    <div class="history">
+
+      <p>
+        Polis Diraja MYMahkota telah
+        ditubuhkan pada 17 November 2024
+        oleh QIQI bersama KoCi sebagai
+        Timbalan Pengasas organisasi.
+      </p>
+
+      <p>
+        Penubuhan organisasi ini menjadi
+        titik permulaan kepada pembentukan
+        sebuah institusi kepolisan yang
+        menekankan disiplin, kepimpinan,
+        tanggungjawab dan perkhidmatan
+        kepada masyarakat.
+      </p>
+
+      <p>
+        Seiring dengan matlamat organisasi,
+        pembangunan pentadbiran,
+        pengurusan keanggotaan dan
+        pembahagian fungsi jabatan
+        menjadi kerangka penting bagi
+        membentuk organisasi yang
+        lebih teratur dan profesional.
+      </p>
+
+      <p>
+        Rekod terperinci mengenai
+        peristiwa sejarah dan perkembangan
+        organisasi akan dilengkapkan
+        berdasarkan maklumat yang
+        disahkan oleh pihak pengurusan.
+      </p>
+
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <strong>17 NOVEMBER 2024</strong>
+        <p>
+          Penubuhan Polis Diraja MYMahkota
+          oleh QIQI bersama Timbalan
+          Pengasas, KoCi.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <strong>HALA TUJU ORGANISASI</strong>
+        <p>
+          Memberikan penekanan kepada
+          pembangunan pentadbiran,
+          kecekapan anggota, integriti
+          dan kualiti perkhidmatan.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VISI DAN MISI -->
+<section class="container">
+
+  <span class="section-label">
+    HALA TUJU ORGANISASI
+  </span>
+
+  <h2 class="section-title">
+    Visi dan Misi
+  </h2>
+
+  <div class="gold-line"></div>
+
+  <div class="vision-grid">
+
+    <div class="vision-card">
+      <h3>VISI</h3>
+
+      <p>
+        Menjadi sebuah institusi
+        kepolisan yang unggul,
+        profesional, berintegriti
+        dan dipercayai dalam
+        memelihara keamanan,
+        menegakkan keadilan
+        serta menjamin kesejahteraan
+        masyarakat MYMahkota.
+      </p>
+    </div>
+
+    <div class="vision-card">
+      <h3>MISI</h3>
+
+      <ul>
+        <li>
+          Memelihara keamanan dan
+          ketenteraman awam secara
+          berkesan dan bertanggungjawab.
+        </li>
+
+        <li>
+          Mengukuhkan integriti,
+          disiplin dan profesionalisme
+          setiap anggota.
+        </li>
+
+        <li>
+          Meningkatkan kecekapan
+          perkhidmatan melalui latihan
+          dan pembangunan berterusan.
+        </li>
+
+        <li>
+          Memperkasakan tadbir urus
+          yang telus, sistematik
+          dan berakauntabiliti.
+        </li>
+
+        <li>
+          Memupuk kerjasama dan
+          keyakinan masyarakat
+          terhadap organisasi.
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- OBJEKTIF -->
+<section class="section-dark">
+  <div class="container">
+
+    <span class="section-label">
+      MATLAMAT STRATEGIK
+    </span>
+
+    <h2 class="section-title">
+      Objektif Penubuhan
+    </h2>
+
+    <div class="gold-line"></div>
+
+    <div class="objective-grid">
+
+      <div class="objective-card">
+        <span class="objective-number">01</span>
+        <div>
+          <h3>Memelihara Keamanan</h3>
+          <p>
+            Memastikan keselamatan,
+            keamanan dan ketenteraman
+            masyarakat sentiasa menjadi
+            keutamaan organisasi.
+          </p>
+        </div>
+      </div>
+
+      <div class="objective-card">
+        <span class="objective-number">02</span>
+        <div>
+          <h3>Membentuk Disiplin Anggota</h3>
+          <p>
+            Membentuk anggota yang
+            berdisiplin, beretika,
+            amanah dan bertanggungjawab.
+          </p>
+        </div>
+      </div>
+
+      <div class="objective-card">
+        <span class="objective-number">03</span>
+        <div>
+          <h3>Memantapkan Kepimpinan</h3>
+          <p>
+            Melahirkan barisan kepimpinan
+            yang berwibawa, adil,
+            berpengetahuan dan cekap
+            dalam pengurusan organisasi.
+          </p>
+        </div>
+      </div>
+
+      <div class="objective-card">
+        <span class="objective-number">04</span>
+        <div>
+          <h3>Meningkatkan Profesionalisme</h3>
+          <p>
+            Mempertingkatkan kecekapan
+            melalui latihan, penilaian
+            prestasi dan pembangunan kerjaya.
+          </p>
+        </div>
+      </div>
+
+      <div class="objective-card">
+        <span class="objective-number">05</span>
+        <div>
+          <h3>Memperkukuh Integriti</h3>
+          <p>
+            Mewujudkan budaya kerja
+            yang telus, berintegriti
+            dan mematuhi peraturan
+            organisasi.
+          </p>
+        </div>
+      </div>
+
+      <div class="objective-card">
+        <span class="objective-number">06</span>
+        <div>
+          <h3>Memperkasa Hubungan Komuniti</h3>
+          <p>
+            Membina kerjasama antara
+            organisasi dan masyarakat
+            bagi meningkatkan keyakinan
+            serta kesejahteraan awam.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- MOTO -->
+<section class="motto-section">
+
+  <span>MOTO ORGANISASI</span>
+
+  <h2>
+    BERKHIDMAT DENGAN INTEGRITI
+  </h2>
+
+  <p>
+    Berpegang teguh kepada amanah,
+    profesionalisme dan tanggungjawab
+    dalam setiap pelaksanaan tugas.
+  </p>
+
+</section>
+
+<!-- NILAI TERAS -->
+<section class="container">
+
+  <span class="section-label">
+    PRINSIP ORGANISASI
+  </span>
+
+  <h2 class="section-title">
+    Nilai Teras
+  </h2>
+
+  <div class="gold-line"></div>
+
+  <div class="values-grid">
+
+    <div class="value-card">
+      <span class="symbol">◆</span>
+      <h3>Integriti</h3>
+      <p>
+        Menjalankan amanah dengan
+        jujur, telus dan beretika.
+      </p>
+    </div>
+
+    <div class="value-card">
+      <span class="symbol">◆</span>
+      <h3>Disiplin</h3>
+      <p>
+        Mematuhi peraturan,
+        arahan dan tatakelakuan
+        organisasi.
+      </p>
+    </div>
+
+    <div class="value-card">
+      <span class="symbol">◆</span>
+      <h3>Profesionalisme</h3>
+      <p>
+        Memberikan perkhidmatan
+        secara cekap, berkualiti
+        dan bertanggungjawab.
+      </p>
+    </div>
+
+    <div class="value-card">
+      <span class="symbol">◆</span>
+      <h3>Amanah</h3>
+      <p>
+        Menjaga kepercayaan yang
+        diberikan dalam menjalankan
+        tugas serta kuasa.
+      </p>
+    </div>
+
+    <div class="value-card">
+      <span class="symbol">◆</span>
+      <h3>Kepimpinan</h3>
+      <p>
+        Memimpin secara adil,
+        berwawasan dan menjadi
+        teladan kepada anggota.
+      </p>
+    </div>
+
+    <div class="value-card">
+      <span class="symbol">◆</span>
+      <h3>Kerjasama</h3>
+      <p>
+        Mengutamakan semangat
+        berpasukan dan hubungan
+        baik dengan masyarakat.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FUNGSI -->
+<section class="section-dark">
+  <div class="container">
+
+    <span class="section-label">
+      PERANAN DAN PERKHIDMATAN
+    </span>
+
+    <h2 class="section-title">
+      Fungsi Utama Organisasi
+    </h2>
+
+    <div class="gold-line"></div>
+
+    <div class="functions">
+
+      <div class="function-card">
+        <h3>01. Keselamatan dan Ketenteraman Awam</h3>
+        <p>
+          Memelihara keamanan,
+          mengurus keselamatan awam
+          dan membantu menangani
+          gangguan ketenteraman.
+        </p>
+      </div>
+
+      <div class="function-card">
+        <h3>02. Pencegahan Jenayah</h3>
+        <p>
+          Menyelaras usaha pencegahan
+          jenayah, rondaan keselamatan
+          dan kesedaran masyarakat.
+        </p>
+      </div>
+
+      <div class="function-card">
+        <h3>03. Penguatkuasaan Undang-undang</h3>
+        <p>
+          Melaksanakan fungsi
+          penguatkuasaan mengikut
+          undang-undang, prosedur
+          dan bidang kuasa organisasi.
+        </p>
+      </div>
+
+      <div class="function-card">
+        <h3>04. Pengurusan dan Pentadbiran</h3>
+        <p>
+          Mengurus sumber manusia,
+          perjawatan, dasar, rekod,
+          perkhidmatan dan
+          pembangunan organisasi.
+        </p>
+      </div>
+
+      <div class="function-card">
+        <h3>05. Integriti dan Pematuhan Standard</h3>
+        <p>
+          Memantau tatakelakuan,
+          pematuhan peraturan,
+          integriti dan disiplin
+          anggota organisasi.
+        </p>
+      </div>
+
+      <div class="function-card">
+        <h3>06. Latihan dan Pembangunan Anggota</h3>
+        <p>
+          Menyediakan latihan,
+          meningkatkan kemahiran
+          dan membentuk anggota
+          yang berpengetahuan
+          serta profesional.
+        </p>
+      </div>
+
+      <div class="function-card">
+        <h3>07. Perhubungan Komuniti</h3>
+        <p>
+          Memperkukuh hubungan
+          antara pasukan kepolisan
+          dan masyarakat melalui
+          komunikasi serta kerjasama.
+        </p>
+      </div>
+
+      <div class="function-card">
+        <h3>08. Pengurusan Operasi dan Kesiapsiagaan</h3>
+        <p>
+          Menyelaras keperluan
+          operasi, kesiapsiagaan
+          anggota, peralatan
+          dan penugasan pasukan.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- JABATAN -->
+<section class="container">
+
+  <div class="directory-panel">
+
+    <span class="section-label">
+      STRUKTUR ORGANISASI
+    </span>
+
+    <h2>
+      Jabatan dan Carta Organisasi
+    </h2>
+
+    <p>
+      Polis Diraja MYMahkota mempunyai
+      empat jabatan utama yang menjalankan
+      fungsi pentadbiran, keselamatan,
+      integriti serta pencegahan jenayah.
+      Maklumat pengarah, ketua bahagian,
+      ketua unit dan bidang tanggungjawab
+      boleh dirujuk melalui Direktori Jabatan.
+    </p>
+
+    <a href="direktori.html" class="button-gold">
+      LIHAT DIREKTORI JABATAN
+    </a>
+
+  </div>
+
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <strong>POLIS DIRAJA MYMAHKOTA</strong>
+
+  <p>
+    BERKHIDMAT DENGAN INTEGRITI,
+    PROFESIONALISME DAN AMANAH
+  </p>
+
+  <p>
+    Ditubuhkan pada 17 November 2024
+  </p>
+
+  <p>
+    &copy; 2026 Polis Diraja MYMahkota
+  </p>
+</footer>
+
+</body>
+</html>

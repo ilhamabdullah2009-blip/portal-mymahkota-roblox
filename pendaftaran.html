@@ -1,0 +1,1424 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pendaftaran Anggota | Polis Diraja MYMahkota</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+:root {
+    --bg:#0e1118;
+    --panel:#191e28;
+    --panel2:#232b38;
+    --gold:#d8b76b;
+    --gold-light:#f0d58f;
+    --border:#51442e;
+    --text:#f5f5f5;
+    --muted:#abb5c4;
+}
+
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    line-height:1.6;
+}
+button,input,select { font:inherit; }
+button { cursor:pointer; }
+[hidden] { display:none!important; }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+}
+
+.registration-page {
+    min-height:90vh;
+    padding:55px 20px;
+    background:radial-gradient(
+        ellipse at top,#342b1c,#0e1118 70%
+    );
+}
+.registration-container {
+    max-width:850px;
+    margin:auto;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-top:4px solid var(--gold);
+    border-radius:10px;
+    padding:38px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+.registration-heading {
+    text-align:center;
+    padding-bottom:26px;
+    margin-bottom:28px;
+    border-bottom:1px solid #414753;
+}
+.registration-heading img {
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:15px;
+}
+.registration-heading h2 {
+    color:var(--gold);
+    font-size:25px;
+    margin:8px 0;
+    letter-spacing:1px;
+}
+.registration-heading p {
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.8;
+    letter-spacing:1px;
+}
+.gold-line {
+    width:75px;
+    height:3px;
+    margin:18px auto 0;
+    background:var(--gold);
+}
+.registration-notice {
+    background:#302719;
+    border:1px solid #75603a;
+    color:#e8d19d;
+    padding:18px;
+    border-radius:7px;
+    font-size:12px;
+    line-height:1.9;
+    margin-bottom:28px;
+}
+.registration-notice strong {
+    display:block;
+    margin-bottom:8px;
+    letter-spacing:1px;
+}
+.registration-notice p { margin:0; }
+
+.registration-steps {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:30px;
+}
+.step-card {
+    background:var(--panel2);
+    border:1px solid #414753;
+    border-radius:8px;
+    padding:17px 13px;
+    text-align:center;
+}
+.step-number {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:34px;
+    height:34px;
+    margin:0 auto 12px;
+    border-radius:50%;
+    background:#44371e;
+    color:var(--gold);
+    font-size:12px;
+    font-weight:bold;
+}
+.step-card strong {
+    display:block;
+    font-size:11px;
+    color:var(--gold);
+    margin-bottom:8px;
+}
+.step-card p {
+    font-size:11px;
+    color:var(--muted);
+    margin:0;
+}
+.form-section {
+    margin:33px 0 20px;
+    padding-bottom:13px;
+    border-bottom:1px solid #414753;
+}
+.form-section h3 {
+    color:var(--gold);
+    font-size:16px;
+    margin:0;
+}
+.form-section p {
+    color:var(--muted);
+    font-size:12px;
+    margin:8px 0 0;
+}
+.form-grid {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:20px;
+}
+.form-group { min-width:0; }
+.form-group.full { grid-column:1/-1; }
+.form-group label {
+    display:block;
+    color:var(--gold);
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+.form-group input,
+.form-group select {
+    width:100%;
+    padding:15px;
+    background:#10141c;
+    border:1px solid #4a5361;
+    color:#fff;
+    border-radius:6px;
+    font-size:14px;
+}
+.form-group input:focus,
+.form-group select:focus {
+    border-color:var(--gold);
+    box-shadow:0 0 0 2px rgba(216,183,107,.12);
+}
+.form-group input::placeholder { color:#929aaa; }
+.form-group select option {
+    background:#191e28;
+    color:white;
+}
+.form-group select:disabled {
+    opacity:.6;
+    cursor:not-allowed;
+}
+.form-group small {
+    display:block;
+    margin-top:8px;
+    color:#aab4c2;
+    font-size:11px;
+    line-height:1.7;
+}
+.required { color:#f0d58f; }
+
+.password-field { position:relative; }
+.password-field input { padding-right:105px; }
+.show-password {
+    position:absolute;
+    right:7px;
+    top:50%;
+    transform:translateY(-50%);
+    padding:10px;
+    background:transparent;
+    border:0;
+    color:var(--gold);
+    font-size:11px;
+    font-weight:bold;
+}
+.password-guide {
+    background:#222a36;
+    border:1px solid #414753;
+    padding:15px;
+    border-radius:7px;
+    margin-top:20px;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.8;
+}
+.agreement {
+    margin:28px 0;
+    padding:18px;
+    background:#232b38;
+    border:1px solid #414753;
+    border-radius:7px;
+}
+.agreement label {
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    color:#d0d7e2;
+    font-size:12px;
+    line-height:1.9;
+    cursor:pointer;
+}
+.agreement input {
+    flex-shrink:0;
+    margin-top:5px;
+    accent-color:var(--gold);
+}
+.submit-button {
+    display:block;
+    width:100%;
+    padding:17px;
+    background:var(--gold);
+    color:#111;
+    border:0;
+    border-radius:6px;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:1px;
+    transition:.2s;
+}
+.submit-button:hover { background:var(--gold-light); }
+.submit-button:disabled {
+    opacity:.6;
+    cursor:not-allowed;
+}
+.form-message {
+    display:none;
+    margin-top:22px;
+    padding:18px;
+    background:#302719;
+    border:1px solid #75603a;
+    color:#ead49a;
+    border-radius:7px;
+    font-size:13px;
+    line-height:1.8;
+    white-space:pre-line;
+    overflow-wrap:anywhere;
+}
+.form-message.success {
+    background:#193a2b;
+    border-color:#42835d;
+    color:#b5e6c6;
+}
+.form-message.error {
+    background:#391f23;
+    border-color:#9a4b52;
+    color:#ffb4bb;
+}
+.reference-card {
+    display:none;
+    margin-top:22px;
+    padding:23px;
+    background:#111923;
+    border:1px solid var(--gold);
+    border-radius:8px;
+    text-align:center;
+}
+.reference-card small {
+    color:var(--muted);
+    font-size:11px;
+}
+.reference-card strong {
+    display:block;
+    color:var(--gold);
+    font-size:23px;
+    margin:12px 0;
+    overflow-wrap:anywhere;
+}
+.reference-card p {
+    color:var(--muted);
+    font-size:12px;
+}
+.copy-button {
+    margin-top:10px;
+    padding:11px 18px;
+    background:transparent;
+    border:1px solid var(--gold);
+    border-radius:6px;
+    color:var(--gold);
+    font-size:11px;
+    font-weight:bold;
+}
+.back-link {
+    display:block;
+    color:var(--gold);
+    text-align:center;
+    text-decoration:none;
+    margin-top:25px;
+    font-size:13px;
+}
+.footer-note {
+    color:#929aaa;
+    text-align:center;
+    font-size:11px;
+    margin-top:25px;
+    line-height:1.8;
+}
+@media(max-width:650px) {
+    .registration-page { padding:30px 14px; }
+    .registration-container { padding:25px 18px; }
+    .registration-heading h2 { font-size:20px; }
+    .form-grid {
+        grid-template-columns:1fr;
+        gap:19px;
+    }
+    .form-group.full { grid-column:auto; }
+    .registration-steps { grid-template-columns:1fr; }
+    .step-card {
+        display:flex;
+        align-items:center;
+        gap:14px;
+        text-align:left;
+    }
+    .step-number {
+        margin:0;
+        flex-shrink:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="brand">
+            <img src="logo.png"
+                 alt="Logo Polis Diraja MYMahkota">
+            <div class="brand-text">
+                <h1>POLIS DIRAJA</h1>
+                <h2>MYMAHKOTA</h2>
+                <span>PENDAFTARAN ANGGOTA</span>
+            </div>
+        </a>
+        <div class="header-right">
+            <span class="official-label">
+                SISTEM ANGGOTA
+            </span>
+            <span class="official-dot"></span>
+        </div>
+    </div>
+</header>
+
+<main class="registration-page">
+
+<div class="registration-container">
+
+    <div class="registration-heading">
+        <img src="logo.png"
+             alt="Logo Polis Diraja MYMahkota">
+
+        <h2>PENDAFTARAN AKAUN ANGGOTA</h2>
+
+        <p>
+            SISTEM PENGURUSAN ANGGOTA
+            <br>
+            POLIS DIRAJA MYMAHKOTA
+        </p>
+
+        <div class="gold-line"></div>
+    </div>
+
+    <!-- MAKLUMAN -->
+    <div class="registration-notice">
+        <strong>MAKLUMAN PENDAFTARAN</strong>
+        <p>
+            Pendaftaran akaun anggota adalah
+            tertakluk kepada semakan dan kelulusan
+            pihak pentadbiran.
+
+            Maklumat nombor badan, pangkat, jawatan,
+            jabatan dan penempatan akan disahkan
+            melalui proses kelulusan.
+
+            Akaun hanya boleh digunakan selepas
+            permohonan diluluskan.
+        </p>
+    </div>
+
+    <!-- LANGKAH -->
+    <div class="registration-steps">
+
+        <div class="step-card">
+            <span class="step-number">01</span>
+            <div>
+                <strong>PERMOHONAN</strong>
+                <p>Lengkapkan borang pendaftaran anggota.</p>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <span class="step-number">02</span>
+            <div>
+                <strong>SEMAKAN</strong>
+                <p>Pentadbir menyemak maklumat pemohon.</p>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <span class="step-number">03</span>
+            <div>
+                <strong>KELULUSAN</strong>
+                <p>Akaun diaktifkan selepas diluluskan.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BORANG -->
+    <form id="registrationForm">
+
+        <!-- SEKSYEN 01 -->
+        <div class="form-section">
+            <h3>01 — MAKLUMAT IDENTITI</h3>
+            <p>Lengkapkan maklumat pengenalan anggota.</p>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group full">
+                <label for="nama">
+                    NAMA PENUH ANGGOTA
+                    <span class="required">*</span>
+                </label>
+                <input type="text"
+                       id="nama"
+                       placeholder="Masukkan nama penuh anggota"
+                       autocomplete="name"
+                       maxlength="100"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="idAnggota">
+                    NOMBOR BADAN / ID ANGGOTA
+                    <span class="required">*</span>
+                </label>
+                <input type="text"
+                       id="idAnggota"
+                       placeholder="Masukkan nombor badan"
+                       autocomplete="username"
+                       maxlength="50"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="tarikhSertai">
+                    TARIKH MENYERTAI ORGANISASI
+                </label>
+                <input type="date"
+                       id="tarikhSertai">
+                <small>
+                    Tarikh ini akan disahkan oleh pentadbir.
+                </small>
+            </div>
+
+        </div>
+
+        <!-- SEKSYEN 02 -->
+        <div class="form-section">
+            <h3>02 — MAKLUMAT PERKHIDMATAN</h3>
+            <p>Nyatakan pangkat, jawatan dan penempatan semasa.</p>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label for="pangkat">
+                    PANGKAT SEMASA
+                    <span class="required">*</span>
+                </label>
+
+                <select id="pangkat" required>
+                    <option value="">-- PILIH PANGKAT --</option>
+                    <option>Konstabel</option>
+                    <option>Lans Koperal</option>
+                    <option>Koperal</option>
+                    <option>Sarjan</option>
+                    <option>Sarjan Mejar</option>
+                    <option>Sub Inspektor</option>
+                    <option>Inspektor</option>
+                    <option>ASP</option>
+                    <option>DSP</option>
+                    <option>Superintenden</option>
+                    <option>ACP</option>
+                    <option>SAC</option>
+                    <option>DCP</option>
+                    <option>CP</option>
+                    <option>IGP</option>
+                    <option>Lain-lain</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="jawatan">JAWATAN / PERANAN</label>
+                <input type="text"
+                       id="jawatan"
+                       placeholder="Masukkan jawatan anggota"
+                       maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <label for="jabatan">
+                    JABATAN
+                    <span class="required">*</span>
+                </label>
+
+                <select id="jabatan" required>
+
+                    <option value="">
+                        -- PILIH JABATAN --
+                    </option>
+
+                    <option value="Jabatan Pengurusan">
+                        Jabatan Pengurusan
+                    </option>
+
+                    <option value="Jabatan Keselamatan Dalam Negeri dan Ketenteraman Awam">
+                        Jabatan Keselamatan Dalam Negeri dan Ketenteraman Awam
+                    </option>
+
+                    <option value="Jabatan Integriti dan Pematuhan Standard">
+                        Jabatan Integriti dan Pematuhan Standard
+                    </option>
+
+                    <option value="Jabatan Pencegahan Jenayah dan Keselamatan Komuniti">
+                        Jabatan Pencegahan Jenayah dan Keselamatan Komuniti
+                    </option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="unit">
+                    UNIT / BAHAGIAN / PASUKAN
+                    <span class="required">*</span>
+                </label>
+
+                <select id="unit" disabled required>
+                    <option value="">
+                        -- PILIH JABATAN DAHULU --
+                    </option>
+                </select>
+
+                <small>
+                    Senarai unit berubah mengikut jabatan.
+                </small>
+            </div>
+
+        </div>
+
+        <!-- SEKSYEN 03 -->
+        <div class="form-section">
+            <h3>03 — MAKLUMAT AKAUN</h3>
+            <p>
+                Sediakan kata laluan untuk log masuk
+                selepas permohonan diluluskan.
+            </p>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label for="password">
+                    KATA LALUAN
+                    <span class="required">*</span>
+                </label>
+
+                <div class="password-field">
+                    <input type="password"
+                           id="password"
+                           placeholder="Minimum 8 aksara"
+                           minlength="8"
+                           autocomplete="new-password"
+                           required>
+
+                    <button type="button"
+                            class="show-password"
+                            data-target="password"
+                            aria-pressed="false">
+                        LIHAT
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">
+                    SAHKAN KATA LALUAN
+                    <span class="required">*</span>
+                </label>
+
+                <div class="password-field">
+                    <input type="password"
+                           id="confirmPassword"
+                           placeholder="Masukkan semula kata laluan"
+                           minlength="8"
+                           autocomplete="new-password"
+                           required>
+
+                    <button type="button"
+                            class="show-password"
+                            data-target="confirmPassword"
+                            aria-pressed="false">
+                        LIHAT
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="password-guide">
+            Kata laluan hendaklah mengandungi
+            sekurang-kurangnya 8 aksara.
+
+            Gunakan gabungan huruf besar, huruf kecil,
+            nombor dan simbol.
+
+            Kata laluan pada kedua-dua ruangan
+            mestilah sepadan.
+        </div>
+
+        <!-- SEKSYEN 04 -->
+        <div class="form-section">
+            <h3>04 — PERAKUAN PEMOHON</h3>
+            <p>Sahkan maklumat sebelum menghantar permohonan.</p>
+        </div>
+
+        <div class="agreement">
+            <label for="agreement">
+
+                <input type="checkbox"
+                       id="agreement"
+                       required>
+
+                <span>
+                    Saya mengesahkan bahawa semua
+                    maklumat yang diberikan adalah
+                    benar dan tepat.
+
+                    Saya memahami bahawa pendaftaran
+                    akaun tertakluk kepada semakan
+                    serta kelulusan pentadbir
+                    Polis Diraja MYMahkota.
+
+                    Saya juga memahami bahawa akaun
+                    belum boleh digunakan sehingga
+                    permohonan diluluskan.
+                </span>
+
+            </label>
+        </div>
+
+        <button type="submit"
+                class="submit-button"
+                id="submitButton">
+            HANTAR PERMOHONAN PENDAFTARAN
+        </button>
+
+    </form>
+
+    <!-- MESEJ -->
+    <div id="formMessage"
+         class="form-message"
+         role="status"
+         aria-live="polite">
+    </div>
+
+    <!-- RUJUKAN -->
+    <div id="referenceCard"
+         class="reference-card">
+
+        <small>NOMBOR RUJUKAN PERMOHONAN</small>
+
+        <strong id="referenceNumber">—</strong>
+
+        <p>
+            Simpan nombor rujukan ini.
+            Permohonan sedang menunggu
+            keputusan pihak pentadbiran.
+        </p>
+
+        <button type="button"
+                id="copyReference"
+                class="copy-button">
+            SALIN NOMBOR RUJUKAN
+        </button>
+
+    </div>
+
+    <a href="anggota.html" class="back-link">
+        ← KEMBALI KE PORTAL ANGGOTA
+    </a>
+
+    <div class="footer-note">
+        POLIS DIRAJA MYMAHKOTA
+        <br>
+        SISTEM PENDAFTARAN ANGGOTA
+    </div>
+
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-brand">
+            <h2>POLIS DIRAJA MYMAHKOTA</h2>
+            <p>
+                BERKHIDMAT DENGAN INTEGRITI,
+                PROFESIONALISME DAN DEDIKASI.
+            </p>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 POLIS DIRAJA MYMAHKOTA</span>
+            <span>PENDAFTARAN ANGGOTA</span>
+        </div>
+
+    </div>
+</footer>
+
+<script>
+"use strict";
+
+/* =========================================
+   KONFIGURASI PORTAL
+========================================= */
+
+const STORE_KEY = "MYMAHKOTA_PORTAL_V1";
+
+const MAIN_ADMIN_ID = "G2002";
+
+const $ = id => document.getElementById(id);
+
+function normalize(value) {
+    return String(value || "")
+        .trim()
+        .toUpperCase();
+}
+
+function today() {
+    const date = new Date();
+
+    return [
+        date.getFullYear(),
+        String(date.getMonth()+1).padStart(2,"0"),
+        String(date.getDate()).padStart(2,"0")
+    ].join("-");
+}
+
+/* =========================================
+   SENARAI JABATAN DAN UNIT
+========================================= */
+
+const departmentUnits = {
+
+    "Jabatan Pengurusan": [
+        "Bahagian Pentadbiran",
+        "Pegawai SLT",
+        "Bahagian Dasar Sumber Manusia",
+        "Bahagian Perkhidmatan dan Perjawatan",
+        "Bahagian Latihan"
+    ],
+
+    "Jabatan Keselamatan Dalam Negeri dan Ketenteraman Awam": [
+        "Bahagian Pengurusan",
+        "Unit Tindakhas (UTK)",
+        "Pasukan Gerakan Udara (PGU)",
+        "69 Komando (VAT 69)",
+        "Pasukan Gerakan Marin (PGM)"
+    ],
+
+    "Jabatan Integriti dan Pematuhan Standard": [
+        "Bahagian Integriti",
+        "Bahagian Pematuhan Standard",
+        "Unit Kaunseling"
+    ],
+
+    "Jabatan Pencegahan Jenayah dan Keselamatan Komuniti": [
+        "Bahagian Pengurusan Dasar / Sumber",
+        "Bahagian Operasi Darat",
+        "Urus Setia",
+        "Pentadbiran",
+        "Sokongan Logistik",
+        "Jurulatih",
+        "Unit MPV",
+        "Unit URB",
+        "Unit BIT Rondaan",
+        "E-Sector"
+    ]
+
+};
+
+/* =========================================
+   STORAN DATA
+========================================= */
+
+function loadDatabase() {
+
+    try {
+
+        const saved = localStorage.getItem(STORE_KEY);
+
+        const db = saved ? JSON.parse(saved) : {};
+
+        if (!db || typeof db !== "object") {
+            return null;
+        }
+
+        if (!Array.isArray(db.members)) {
+            db.members = [];
+        }
+
+        if (!Array.isArray(db.registrations)) {
+            db.registrations = [];
+        }
+
+        if (!Array.isArray(db.logs)) {
+            db.logs = [];
+        }
+
+        if (!db.counters ||
+            typeof db.counters !== "object") {
+            db.counters = {};
+        }
+
+        return db;
+
+    } catch(error) {
+
+        return null;
+
+    }
+
+}
+
+function saveDatabase(db) {
+    localStorage.setItem(
+        STORE_KEY,
+        JSON.stringify(db)
+    );
+}
+
+/* =========================================
+   ELEMEN BORANG
+========================================= */
+
+const form = $("registrationForm");
+
+const message = $("formMessage");
+
+const submitButton = $("submitButton");
+
+const jabatanInput = $("jabatan");
+
+const unitInput = $("unit");
+
+const passwordInput = $("password");
+
+const confirmPasswordInput = $("confirmPassword");
+
+/* =========================================
+   SENARAI UNIT AUTOMATIK
+========================================= */
+
+function updateUnits() {
+
+    const department = jabatanInput.value;
+
+    const units = departmentUnits[department] || [];
+
+    unitInput.replaceChildren();
+
+    const placeholder = document.createElement("option");
+
+    placeholder.value = "";
+
+    placeholder.textContent = department
+        ? "-- PILIH UNIT / BAHAGIAN --"
+        : "-- PILIH JABATAN DAHULU --";
+
+    unitInput.appendChild(placeholder);
+
+    units.forEach(unitName => {
+
+        const option = document.createElement("option");
+
+        option.value = unitName;
+
+        option.textContent = unitName;
+
+        unitInput.appendChild(option);
+
+    });
+
+    unitInput.disabled = units.length === 0;
+}
+
+jabatanInput.addEventListener("change",updateUnits);
+
+updateUnits();
+
+/* =========================================
+   TUNJUK / SEMBUNYI KATA LALUAN
+========================================= */
+
+document.querySelectorAll(".show-password")
+.forEach(button => {
+
+    button.addEventListener("click",() => {
+
+        const input = $(button.dataset.target);
+
+        if (!input) return;
+
+        const hidden = input.type === "password";
+
+        input.type = hidden ? "text" : "password";
+
+        button.textContent = hidden
+            ? "SEMBUNYI"
+            : "LIHAT";
+
+        button.setAttribute(
+            "aria-pressed",
+            String(hidden)
+        );
+
+    });
+
+});
+
+/* =========================================
+   PAPAR MESEJ
+========================================= */
+
+function showMessage(text,type="") {
+
+    message.textContent = text;
+
+    message.className = "form-message " + type;
+
+    message.style.display = "block";
+
+    message.scrollIntoView({
+        behavior:"smooth",
+        block:"nearest"
+    });
+
+}
+
+/* =========================================
+   RUJUKAN PERMOHONAN
+========================================= */
+
+function nextReference(db) {
+
+    const year = new Date().getFullYear();
+
+    const key = "registrations-" + year;
+
+    let highest = Number(db.counters[key] || 0);
+
+    db.registrations.forEach(record => {
+
+        const reference = String(
+            record.rujukan || record.reference || ""
+        );
+
+        const match = reference.match(
+            /-(\d{4})-(\d+)$/
+        );
+
+        if (match && Number(match[1]) === year) {
+            highest = Math.max(
+                highest,
+                Number(match[2])
+            );
+        }
+
+    });
+
+    const next = highest + 1;
+
+    db.counters[key] = next;
+
+    return "PDM-DAFTAR-" + year + "-" +
+        String(next).padStart(5,"0");
+
+}
+
+/* =========================================
+   PENGESAHAN NOMBOR BADAN
+========================================= */
+
+function getNoBadan(record) {
+    return normalize(
+        record.noBadan ||
+        record.idAnggota ||
+        ""
+    );
+}
+
+function checkExistingRegistration(db,noBadan) {
+
+    const member = db.members.find(record =>
+        getNoBadan(record) === noBadan
+    );
+
+    if (member) {
+        return {
+            allowed:false,
+            message:"Nombor badan ini sudah mempunyai rekod anggota."
+        };
+    }
+
+    const existing = db.registrations.find(record =>
+        getNoBadan(record) === noBadan &&
+        ["MENUNGGU","DILULUSKAN"].includes(
+            normalize(record.status)
+        )
+    );
+
+    if (existing) {
+
+        const reference = existing.rujukan ||
+            existing.reference || "—";
+
+        return {
+            allowed:false,
+            message:
+                "Nombor badan ini sudah mempunyai permohonan.\n" +
+                "Status: " + existing.status + "\n" +
+                "Nombor Rujukan: " + reference
+        };
+
+    }
+
+    return {allowed:true};
+
+}
+
+/* =========================================
+   KATA LALUAN
+========================================= */
+
+/*
+  Kata laluan tidak disimpan sebagai teks biasa.
+
+  Format SHA-256 digunakan supaya pengesahan
+  setempat sepadan dengan anggota.html.
+
+  Untuk portal dalam talian, kata laluan mesti
+  disahkan oleh pelayan menggunakan hashing
+  yang sesuai seperti Argon2id atau bcrypt.
+*/
+
+async function hashPassword(password) {
+
+    if (!window.crypto?.subtle) {
+        throw new Error(
+            "Penyimpanan kata laluan memerlukan HTTPS " +
+            "atau localhost. Sila jalankan portal melalui " +
+            "pelayan tempatan."
+        );
+    }
+
+    const bytes = new TextEncoder().encode(password);
+
+    const digest = await crypto.subtle.digest(
+        "SHA-256",
+        bytes
+    );
+
+    return Array.from(
+        new Uint8Array(digest),
+        byte => byte.toString(16).padStart(2,"0")
+    ).join("");
+
+}
+
+/* =========================================
+   HANTAR PERMOHONAN
+========================================= */
+
+form.addEventListener("submit",async function(event) {
+
+    event.preventDefault();
+
+    const nama = $("nama").value.trim();
+
+    const noBadan = normalize(
+        $("idAnggota").value
+    );
+
+    const tarikhMenyertai = $("tarikhSertai").value;
+
+    const pangkat = $("pangkat").value;
+
+    const jawatan = $("jawatan").value.trim();
+
+    const jabatan = jabatanInput.value;
+
+    const unit = unitInput.value;
+
+    const password = passwordInput.value;
+
+    const confirmPassword = confirmPasswordInput.value;
+
+    const agreement = $("agreement").checked;
+
+    /* SEMAK MAKLUMAT */
+
+    if (
+        !nama ||
+        !noBadan ||
+        !pangkat ||
+        !jabatan ||
+        !unit ||
+        !password ||
+        !confirmPassword
+    ) {
+
+        showMessage(
+            "Sila lengkapkan semua maklumat wajib.",
+            "error"
+        );
+
+        return;
+    }
+
+    if (noBadan === MAIN_ADMIN_ID) {
+
+        showMessage(
+            "Nombor badan G2002 dikhaskan untuk Pentadbir Utama. " +
+            "Sila hubungi pihak pentadbiran.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    if (
+        !departmentUnits[jabatan] ||
+        !departmentUnits[jabatan].includes(unit)
+    ) {
+
+        showMessage(
+            "Sila pilih jabatan dan unit yang betul.",
+            "error"
+        );
+
+        return;
+    }
+
+    if (password.length < 8) {
+
+        showMessage(
+            "Kata laluan mesti mempunyai sekurang-kurangnya 8 aksara.",
+            "error"
+        );
+
+        return;
+    }
+
+    if (password !== confirmPassword) {
+
+        showMessage(
+            "Kata laluan dan pengesahan kata laluan tidak sepadan.",
+            "error"
+        );
+
+        return;
+    }
+
+    if (!agreement) {
+
+        showMessage(
+            "Sila tandakan perakuan pemohon.",
+            "error"
+        );
+
+        return;
+    }
+
+    const db = loadDatabase();
+
+    if (!db) {
+
+        showMessage(
+            "Rekod portal tidak dapat dibaca.",
+            "error"
+        );
+
+        return;
+    }
+
+    const eligibility = checkExistingRegistration(
+        db,
+        noBadan
+    );
+
+    if (!eligibility.allowed) {
+
+        showMessage(
+            eligibility.message,
+            "error"
+        );
+
+        return;
+    }
+
+    submitButton.disabled = true;
+
+    submitButton.textContent =
+        "MENYIMPAN PERMOHONAN...";
+
+    try {
+
+        const passwordHash = await hashPassword(
+            password
+        );
+
+        /*
+          BACA SEMULA SEBELUM MENYIMPAN
+          SUPAYA REKOD TERKINI TIDAK
+          DIGANTIKAN SECARA SENGAJA.
+        */
+
+        const latest = loadDatabase();
+
+        if (!latest) {
+            throw new Error(
+                "Gagal membaca rekod portal."
+            );
+        }
+
+        const recheck = checkExistingRegistration(
+            latest,
+            noBadan
+        );
+
+        if (!recheck.allowed) {
+            throw new Error(recheck.message);
+        }
+
+        const rujukan = nextReference(latest);
+
+        const application = {
+
+            id:window.crypto?.randomUUID
+                ? crypto.randomUUID()
+                : "REG-" + Date.now(),
+
+            rujukan:rujukan,
+
+            nama:nama,
+
+            noBadan:noBadan,
+
+            idAnggota:noBadan,
+
+            tarikhMenyertai:tarikhMenyertai,
+
+            pangkat:pangkat,
+
+            jawatan:jawatan,
+
+            jabatan:jabatan,
+
+            unit:unit,
+
+            passwordHash:passwordHash,
+
+            status:"Menunggu",
+
+            tarikh:today(),
+
+            createdAt:new Date().toISOString()
+
+        };
+
+        latest.registrations.push(application);
+
+        latest.logs.unshift({
+
+            id:"LOG-" + Date.now(),
+
+            tarikh:new Date().toISOString(),
+
+            pelaksana:noBadan,
+
+            tindakan:"PERMOHONAN PENDAFTARAN ANGGOTA",
+
+            butiran:
+                rujukan + " — " + nama
+
+        });
+
+        saveDatabase(latest);
+
+        passwordInput.value = "";
+        confirmPasswordInput.value = "";
+
+        form.reset();
+        updateUnits();
+
+        showMessage(
+            "PERMOHONAN PENDAFTARAN BERJAYA DIREKODKAN.\n\n" +
+            "Status: MENUNGGU KELULUSAN.\n\n" +
+            "Pihak pentadbiran akan menyemak " +
+            "maklumat permohonan sebelum " +
+            "akaun diaktifkan.",
+            "success"
+        );
+
+        $("referenceNumber").textContent = rujukan;
+
+        $("referenceCard").style.display = "block";
+
+        $("referenceCard").scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+    } catch(error) {
+
+        showMessage(
+            error.message ||
+            "Permohonan gagal disimpan.",
+            "error"
+        );
+
+    } finally {
+
+        submitButton.disabled = false;
+
+        submitButton.textContent =
+            "HANTAR PERMOHONAN PENDAFTARAN";
+
+    }
+
+});
+
+/* =========================================
+   SALIN NOMBOR RUJUKAN
+========================================= */
+
+$("copyReference").addEventListener("click",async function() {
+
+    const reference = $("referenceNumber").textContent;
+
+    try {
+
+        await navigator.clipboard.writeText(reference);
+
+        showMessage(
+            "Nombor rujukan berjaya disalin.",
+            "success"
+        );
+
+    } catch(error) {
+
+        window.prompt(
+            "Salin nombor rujukan:",
+            reference
+        );
+
+    }
+
+});
+</script>
+
+</body>
+</html>

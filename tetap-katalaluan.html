@@ -1,0 +1,1572 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Tetapkan Kata Laluan | Polis Diraja MYMahkota</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+:root{
+    --bg:#0e1118;
+    --panel:#191e28;
+    --panel2:#222a36;
+    --gold:#d8b76b;
+    --gold-light:#f0d58f;
+    --muted:#abb5c4;
+    --border:#51442e;
+    --white:#f5f5f5;
+    --green:#b5e6c6;
+    --red:#ffb4bb;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--white);
+    font-family:Arial,sans-serif;
+    line-height:1.7;
+}
+
+button,input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+[hidden]{
+    display:none!important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+}
+
+/* HALAMAN UTAMA */
+
+.password-page{
+    min-height:85vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:55px 20px;
+    background:radial-gradient(
+        ellipse at top,
+        #342b1c,
+        #0e1118 70%
+    );
+}
+
+.password-container{
+    width:100%;
+    max-width:570px;
+    padding:38px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-top:4px solid var(--gold);
+    border-radius:10px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+/* KEPALA */
+
+.password-heading{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.password-heading img{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:15px;
+}
+
+.password-heading h2{
+    color:var(--gold);
+    font-size:23px;
+    margin:10px 0;
+    letter-spacing:1px;
+}
+
+.password-heading p{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.8;
+    letter-spacing:1px;
+}
+
+.gold-line{
+    width:70px;
+    height:3px;
+    background:var(--gold);
+    margin:20px auto 0;
+}
+
+/* MAKLUMAN */
+
+.notice{
+    background:#302719;
+    border:1px solid #75603a;
+    border-radius:7px;
+    padding:18px;
+    color:#e8d19d;
+    font-size:12px;
+    line-height:1.9;
+    margin-bottom:27px;
+}
+
+.notice strong{
+    display:block;
+    margin-bottom:8px;
+}
+
+.notice p{
+    margin:0;
+}
+
+/* BORANG */
+
+.section-title{
+    color:var(--gold);
+    font-size:16px;
+    margin:0 0 22px;
+    padding-bottom:13px;
+    border-bottom:1px solid #414753;
+}
+
+.form-group{
+    margin-bottom:22px;
+}
+
+.form-group label{
+    display:block;
+    color:var(--gold);
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.form-group input{
+    width:100%;
+    padding:15px;
+    background:#10141c;
+    border:1px solid #4a5361;
+    border-radius:6px;
+    color:white;
+    font-size:14px;
+}
+
+.form-group input::placeholder{
+    color:#929aaa;
+}
+
+.form-group input:focus{
+    outline:none;
+    border-color:var(--gold);
+    box-shadow:0 0 0 2px rgba(216,183,107,.12);
+}
+
+.form-group small{
+    display:block;
+    color:var(--muted);
+    margin-top:8px;
+    font-size:11px;
+    line-height:1.7;
+}
+
+/* KATA LALUAN */
+
+.password-field{
+    position:relative;
+}
+
+.password-field input{
+    padding-right:110px;
+}
+
+.show-password{
+    position:absolute;
+    right:7px;
+    top:50%;
+    transform:translateY(-50%);
+    padding:10px;
+    background:transparent;
+    border:none;
+    color:var(--gold);
+    font-size:11px;
+    font-weight:bold;
+}
+
+.show-password:hover{
+    color:white;
+}
+
+.password-guide{
+    margin:2px 0 27px;
+    padding:16px;
+    background:var(--panel2);
+    border:1px solid #414753;
+    border-radius:7px;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.9;
+}
+
+.password-rules{
+    margin:12px 0 0;
+    padding-left:20px;
+}
+
+.password-rules li{
+    margin-bottom:5px;
+}
+
+.password-rules li.valid{
+    color:var(--green);
+}
+
+.password-rules li.invalid{
+    color:var(--red);
+}
+
+/* BUTANG */
+
+.submit-button{
+    display:block;
+    width:100%;
+    padding:17px;
+    background:var(--gold);
+    border:0;
+    border-radius:6px;
+    color:#111;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.submit-button:hover{
+    background:var(--gold-light);
+}
+
+.submit-button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.back-link{
+    display:block;
+    color:var(--gold);
+    text-align:center;
+    text-decoration:none;
+    margin-top:25px;
+    font-size:12px;
+}
+
+.back-link:hover{
+    color:white;
+}
+
+.login-link{
+    display:block;
+    width:100%;
+    padding:16px;
+    margin-top:20px;
+    background:var(--gold);
+    color:#111;
+    border-radius:6px;
+    text-decoration:none;
+    text-align:center;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* STATUS */
+
+.form-message{
+    margin-top:22px;
+    padding:17px;
+    background:#302719;
+    border:1px solid #75603a;
+    border-radius:7px;
+    color:#ead49a;
+    font-size:13px;
+    line-height:1.9;
+    white-space:pre-line;
+    overflow-wrap:anywhere;
+}
+
+.form-message.success{
+    background:#193a2b;
+    border-color:#42835d;
+    color:var(--green);
+}
+
+.form-message.error{
+    background:#391f23;
+    border-color:#9a4b52;
+    color:var(--red);
+}
+
+.status-panel{
+    margin-bottom:24px;
+    padding:17px;
+    background:#16212d;
+    border:1px solid #415062;
+    border-radius:8px;
+    font-size:12px;
+}
+
+.status-panel strong{
+    display:block;
+    color:var(--gold);
+    margin-bottom:8px;
+}
+
+.status-panel span{
+    color:var(--muted);
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+    .password-page{
+        padding:30px 14px;
+    }
+
+    .password-container{
+        padding:27px 20px;
+    }
+
+    .password-heading img{
+        width:80px;
+        height:80px;
+    }
+
+    .password-heading h2{
+        font-size:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="header-container">
+
+        <a href="index.html" class="brand">
+            <img
+                src="logo.png"
+                alt="Logo Polis Diraja MYMahkota"
+            >
+
+            <div class="brand-text">
+                <h1>POLIS DIRAJA</h1>
+                <h2>MYMAHKOTA</h2>
+                <span>PEMULIHAN AKAUN</span>
+            </div>
+        </a>
+
+        <div class="header-right">
+            <span class="official-label">
+                SISTEM ANGGOTA
+            </span>
+            <span class="official-dot"></span>
+        </div>
+
+    </div>
+</header>
+
+<!-- HALAMAN UTAMA -->
+<main class="password-page">
+
+<div class="password-container">
+
+    <!-- KEPALA -->
+    <div class="password-heading">
+
+        <img
+            src="logo.png"
+            alt="Logo Polis Diraja MYMahkota"
+        >
+
+        <h2>TETAPKAN KATA LALUAN BAHARU</h2>
+
+        <p>
+            SISTEM PEMULIHAN AKAUN ANGGOTA
+            <br>
+            POLIS DIRAJA MYMAHKOTA
+        </p>
+
+        <div class="gold-line"></div>
+
+    </div>
+
+    <!-- MAKLUMAN -->
+    <div class="notice">
+
+        <strong>
+            PENGESAHAN PEMULIHAN AKAUN
+        </strong>
+
+        <p>
+            Penetapan kata laluan baharu
+            hanya dibenarkan selepas
+            permohonan pemulihan diluluskan
+            dan kod pemulihan yang sah
+            dikeluarkan kepada pemilik akaun.
+
+            Nombor rujukan sahaja tidak
+            membenarkan perubahan kata laluan.
+        </p>
+
+    </div>
+
+    <!-- STATUS PERMOHONAN -->
+    <div
+        class="status-panel"
+        id="statusPanel">
+
+        <strong>STATUS PEMULIHAN AKAUN</strong>
+
+        <span id="currentStatus">
+            Masukkan nombor rujukan
+            dan lengkapkan maklumat.
+        </span>
+
+    </div>
+
+    <!-- BORANG -->
+    <form id="passwordForm">
+
+        <h3 class="section-title">
+            MAKLUMAT PEMULIHAN AKAUN
+        </h3>
+
+        <!-- RUJUKAN -->
+        <div class="form-group">
+
+            <label for="rujukan">
+                NOMBOR RUJUKAN PERMOHONAN *
+            </label>
+
+            <input
+                type="text"
+                id="rujukan"
+                name="rujukan"
+                placeholder="Contoh: PDM-PULIH-2026-00001"
+                maxlength="100"
+                autocomplete="off"
+                required
+            >
+
+            <small>
+                Gunakan nombor rujukan
+                daripada permohonan pemulihan.
+            </small>
+
+        </div>
+
+        <!-- NOMBOR BADAN -->
+        <div class="form-group">
+
+            <label for="memberId">
+                NOMBOR BADAN / ID ANGGOTA *
+            </label>
+
+            <input
+                type="text"
+                id="memberId"
+                name="memberId"
+                placeholder="Masukkan nombor badan anggota"
+                maxlength="50"
+                autocomplete="username"
+                required
+            >
+
+        </div>
+
+        <!-- KOD PEMULIHAN -->
+        <div class="form-group">
+
+            <label for="recoveryCode">
+                KOD PEMULIHAN AKAUN *
+            </label>
+
+            <div class="password-field">
+
+                <input
+                    type="password"
+                    id="recoveryCode"
+                    name="recoveryCode"
+                    placeholder="Masukkan kod pemulihan"
+                    maxlength="150"
+                    autocomplete="off"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="show-password"
+                    data-target="recoveryCode"
+                    aria-label="Tunjukkan kod pemulihan"
+                    aria-pressed="false">
+                    LIHAT
+                </button>
+
+            </div>
+
+            <small>
+                Kod pemulihan hendaklah
+                diperoleh melalui pengesahan
+                identiti oleh pentadbir.
+            </small>
+
+        </div>
+
+        <!-- KATA LALUAN -->
+        <h3 class="section-title">
+            KATA LALUAN BAHARU
+        </h3>
+
+        <div class="form-group">
+
+            <label for="newPassword">
+                KATA LALUAN BAHARU *
+            </label>
+
+            <div class="password-field">
+
+                <input
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    placeholder="Masukkan kata laluan baharu"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="show-password"
+                    data-target="newPassword"
+                    aria-label="Tunjukkan kata laluan"
+                    aria-pressed="false">
+                    LIHAT
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="confirmPassword">
+                SAHKAN KATA LALUAN BAHARU *
+            </label>
+
+            <div class="password-field">
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Masukkan semula kata laluan"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="show-password"
+                    data-target="confirmPassword"
+                    aria-label="Tunjukkan pengesahan kata laluan"
+                    aria-pressed="false">
+                    LIHAT
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- PANDUAN -->
+        <div class="password-guide">
+
+            <strong>PANDUAN KATA LALUAN</strong>
+
+            <ul class="password-rules">
+
+                <li id="ruleLength">
+                    Sekurang-kurangnya 8 aksara.
+                </li>
+
+                <li id="ruleUpper">
+                    Mengandungi huruf besar.
+                </li>
+
+                <li id="ruleLower">
+                    Mengandungi huruf kecil.
+                </li>
+
+                <li id="ruleNumber">
+                    Mengandungi nombor.
+                </li>
+
+                <li id="ruleSymbol">
+                    Mengandungi simbol.
+                </li>
+
+                <li id="ruleMatch">
+                    Pengesahan kata laluan sepadan.
+                </li>
+
+            </ul>
+
+        </div>
+
+        <button
+            type="submit"
+            class="submit-button"
+            id="submitButton">
+            SIMPAN KATA LALUAN BAHARU
+        </button>
+
+    </form>
+
+    <!-- MESEJ -->
+    <div
+        id="formMessage"
+        class="form-message"
+        role="status"
+        aria-live="polite"
+        hidden>
+    </div>
+
+    <!-- SELEPAS BERJAYA -->
+    <a
+        href="anggota.html"
+        id="loginLink"
+        class="login-link"
+        hidden>
+        LOG MASUK KE PORTAL ANGGOTA
+    </a>
+
+    <a
+        href="rujukan-pemulihan.html"
+        class="back-link"
+        id="backLink">
+        ← KEMBALI KE SEMAKAN STATUS
+    </a>
+
+</div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-brand">
+
+            <h2>POLIS DIRAJA MYMAHKOTA</h2>
+
+            <p>
+                BERKHIDMAT DENGAN INTEGRITI,
+                PROFESIONALISME DAN DEDIKASI.
+            </p>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 POLIS DIRAJA MYMAHKOTA
+            </span>
+
+            <span>
+                PEMULIHAN AKAUN ANGGOTA
+            </span>
+
+        </div>
+
+    </div>
+</footer>
+
+<script>
+"use strict";
+
+/* =========================================
+   KONFIGURASI SISTEM
+========================================= */
+
+const STORE_KEY = "MYMAHKOTA_PORTAL_V1";
+
+const MEMBER_SESSION_KEY =
+    "MYMAHKOTA_MEMBER_SESSION";
+
+const $ = id =>
+    document.getElementById(id);
+
+const normalize = value =>
+    String(value ?? "")
+        .trim()
+        .toUpperCase();
+
+/* =========================================
+   ELEMEN
+========================================= */
+
+const form = $("passwordForm");
+const formMessage = $("formMessage");
+const submitButton = $("submitButton");
+const loginLink = $("loginLink");
+
+const rujukanInput = $("rujukan");
+const memberIdInput = $("memberId");
+const recoveryCodeInput = $("recoveryCode");
+
+const newPasswordInput = $("newPassword");
+const confirmPasswordInput = $("confirmPassword");
+
+/* =========================================
+   BACA DATA
+========================================= */
+
+function loadDatabase() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(STORE_KEY);
+
+        const db = saved
+            ? JSON.parse(saved)
+            : {};
+
+        if (
+            !db ||
+            typeof db !== "object" ||
+            Array.isArray(db)
+        ) {
+            return null;
+        }
+
+        if (!Array.isArray(db.members)) {
+            db.members = [];
+        }
+
+        if (!Array.isArray(db.registrations)) {
+            db.registrations = [];
+        }
+
+        if (!Array.isArray(db.recoveries)) {
+            db.recoveries = [];
+        }
+
+        if (!Array.isArray(db.logs)) {
+            db.logs = [];
+        }
+
+        return db;
+
+    } catch(error) {
+
+        return null;
+
+    }
+
+}
+
+function saveDatabase(db) {
+
+    localStorage.setItem(
+        STORE_KEY,
+        JSON.stringify(db)
+    );
+
+}
+
+/* =========================================
+   REKOD AKAUN
+========================================= */
+
+function getMemberId(record) {
+
+    return normalize(
+        record?.noBadan ||
+        record?.idAnggota ||
+        ""
+    );
+
+}
+
+function getReference(record) {
+
+    return normalize(
+        record?.rujukan ||
+        record?.reference ||
+        ""
+    );
+
+}
+
+function findRecovery(db,rujukan) {
+
+    return db.recoveries.find(record =>
+        getReference(record) ===
+        normalize(rujukan)
+    ) || null;
+
+}
+
+function findMember(db,noBadan) {
+
+    return db.members.find(member =>
+        getMemberId(member) ===
+        normalize(noBadan)
+    ) || null;
+
+}
+
+/* =========================================
+   SHA-256 - FORMAT AKAUN SEDIA ADA
+========================================= */
+
+async function sha256(value) {
+
+    if (!window.crypto?.subtle) {
+
+        throw new Error(
+            "Fungsi pengesahan kata laluan " +
+            "tidak tersedia melalui sambungan ini. " +
+            "Gunakan HTTPS atau localhost."
+        );
+
+    }
+
+    const bytes =
+        new TextEncoder().encode(value);
+
+    const digest =
+        await crypto.subtle.digest(
+            "SHA-256",
+            bytes
+        );
+
+    return Array.from(
+        new Uint8Array(digest),
+        byte =>
+            byte.toString(16).padStart(2,"0")
+    ).join("");
+
+}
+
+/* =========================================
+   MESEJ
+========================================= */
+
+function showMessage(text,type="") {
+
+    formMessage.textContent = text;
+
+    formMessage.className =
+        "form-message " + type;
+
+    formMessage.hidden = false;
+
+    formMessage.scrollIntoView({
+        behavior:"smooth",
+        block:"nearest"
+    });
+
+}
+
+/* =========================================
+   LIHAT / SEMBUNYI
+========================================= */
+
+document.querySelectorAll(".show-password")
+.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            const input =
+                $(button.dataset.target);
+
+            if (!input) return;
+
+            const visible =
+                input.type === "password";
+
+            input.type =
+                visible ? "text" : "password";
+
+            button.textContent =
+                visible
+                    ? "SEMBUNYI"
+                    : "LIHAT";
+
+            button.setAttribute(
+                "aria-pressed",
+                String(visible)
+            );
+
+        }
+    );
+
+});
+
+/* =========================================
+   PANDUAN KATA LALUAN
+========================================= */
+
+function passwordChecks(password,confirm) {
+
+    return {
+        length:password.length >= 8,
+        upper:/[A-Z]/.test(password),
+        lower:/[a-z]/.test(password),
+        number:/[0-9]/.test(password),
+        symbol:/[^A-Za-z0-9]/.test(password),
+        match:
+            password.length > 0 &&
+            confirm.length > 0 &&
+            password === confirm
+    };
+
+}
+
+function updatePasswordRules() {
+
+    const password =
+        newPasswordInput.value;
+
+    const confirm =
+        confirmPasswordInput.value;
+
+    const checks =
+        passwordChecks(password,confirm);
+
+    const map = {
+        ruleLength:checks.length,
+        ruleUpper:checks.upper,
+        ruleLower:checks.lower,
+        ruleNumber:checks.number,
+        ruleSymbol:checks.symbol,
+        ruleMatch:checks.match
+    };
+
+    Object.entries(map).forEach(
+        ([elementId,valid]) => {
+
+            const element = $(elementId);
+
+            element.className =
+                valid ? "valid" : "invalid";
+
+        }
+    );
+
+}
+
+newPasswordInput.addEventListener(
+    "input",
+    updatePasswordRules
+);
+
+confirmPasswordInput.addEventListener(
+    "input",
+    updatePasswordRules
+);
+
+updatePasswordRules();
+
+/* =========================================
+   RUJUKAN DARIPADA URL
+========================================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const referenceFromUrl =
+    (params.get("rujukan") || "")
+        .trim()
+        .slice(0,100);
+
+if (referenceFromUrl) {
+
+    rujukanInput.value =
+        referenceFromUrl;
+
+    $("backLink").href =
+        "rujukan-pemulihan.html?rujukan=" +
+        encodeURIComponent(referenceFromUrl);
+
+}
+
+/* =========================================
+   STATUS PERMOHONAN
+========================================= */
+
+function updateRecoveryStatus() {
+
+    const reference =
+        normalize(rujukanInput.value);
+
+    if (!reference) {
+
+        $("currentStatus").textContent =
+            "Masukkan nombor rujukan " +
+            "dan lengkapkan maklumat.";
+
+        return;
+
+    }
+
+    const db = loadDatabase();
+
+    if (!db) {
+
+        $("currentStatus").textContent =
+            "Rekod sistem tidak dapat dibaca.";
+
+        return;
+
+    }
+
+    const recovery =
+        findRecovery(db,reference);
+
+    if (!recovery) {
+
+        $("currentStatus").textContent =
+            "Nombor rujukan tidak ditemui.";
+
+        return;
+
+    }
+
+    const status =
+        normalize(recovery.status);
+
+    if (status === "MENUNGGU") {
+
+        $("currentStatus").textContent =
+            "MENUNGGU KELULUSAN PENTADBIR";
+
+    } else if (status === "DILULUSKAN") {
+
+        $("currentStatus").textContent =
+            "PERMOHONAN DILULUSKAN — " +
+            "KOD PEMULIHAN DIPERLUKAN";
+
+    } else if (status === "DITOLAK") {
+
+        $("currentStatus").textContent =
+            "PERMOHONAN DITOLAK";
+
+    } else if (status === "SELESAI") {
+
+        $("currentStatus").textContent =
+            "PEMULIHAN AKAUN TELAH SELESAI";
+
+    } else {
+
+        $("currentStatus").textContent =
+            "STATUS: " + recovery.status;
+
+    }
+
+}
+
+rujukanInput.addEventListener(
+    "change",
+    updateRecoveryStatus
+);
+
+updateRecoveryStatus();
+
+/* =========================================
+   SEMAK KOD PEMULIHAN
+========================================= */
+
+/*
+  Format yang digunakan:
+
+  db.recoveries[i].recoveryCodeHash
+
+  Nilainya ialah SHA-256 bagi kod pemulihan
+  yang dikeluarkan secara berasingan.
+
+  Hash tersebut tidak dijana oleh halaman awam.
+  Tiada kod lalai atau pintasan kelulusan.
+*/
+
+async function validateRecoveryCode(
+    recovery,
+    enteredCode
+) {
+
+    const storedHash =
+        recovery.recoveryCodeHash;
+
+    if (
+        typeof storedHash !== "string" ||
+        !/^[a-f0-9]{64}$/i.test(storedHash)
+    ) {
+
+        throw new Error(
+            "Kod pemulihan belum dikeluarkan " +
+            "untuk permohonan ini. " +
+            "Sila hubungi pentadbir untuk " +
+            "pengesahan identiti dan pengeluaran kod."
+        );
+
+    }
+
+    const calculatedHash =
+        await sha256(enteredCode);
+
+    return calculatedHash.toLowerCase() ===
+        storedHash.toLowerCase();
+
+}
+
+/* =========================================
+   PROSES SIMPAN KATA LALUAN
+========================================= */
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+        const rujukan =
+            normalize(rujukanInput.value);
+
+        const noBadan =
+            normalize(memberIdInput.value);
+
+        const recoveryCode =
+            recoveryCodeInput.value.trim();
+
+        const newPassword =
+            newPasswordInput.value;
+
+        const confirmPassword =
+            confirmPasswordInput.value;
+
+        loginLink.hidden = true;
+
+        if (
+            !rujukan ||
+            !noBadan ||
+            !recoveryCode ||
+            !newPassword ||
+            !confirmPassword
+        ) {
+
+            showMessage(
+                "Sila lengkapkan semua maklumat.",
+                "error"
+            );
+
+            return;
+
+        }
+
+        const checks =
+            passwordChecks(
+                newPassword,
+                confirmPassword
+            );
+
+        if (
+            !checks.length ||
+            !checks.upper ||
+            !checks.lower ||
+            !checks.number ||
+            !checks.symbol
+        ) {
+
+            showMessage(
+                "Kata laluan baharu mesti mempunyai " +
+                "sekurang-kurangnya 8 aksara, " +
+                "huruf besar, huruf kecil, " +
+                "nombor dan simbol.",
+                "error"
+            );
+
+            return;
+
+        }
+
+        if (!checks.match) {
+
+            showMessage(
+                "Kata laluan baharu dan " +
+                "pengesahan tidak sepadan.",
+                "error"
+            );
+
+            return;
+
+        }
+
+        if (newPassword === recoveryCode) {
+
+            showMessage(
+                "Jangan gunakan kod pemulihan " +
+                "sebagai kata laluan baharu.",
+                "error"
+            );
+
+            return;
+
+        }
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "MENGESAHKAN MAKLUMAT...";
+
+        formMessage.hidden = true;
+
+        try {
+
+            const db = loadDatabase();
+
+            if (!db) {
+
+                throw new Error(
+                    "Rekod sistem tidak dapat dibaca."
+                );
+
+            }
+
+            const recovery =
+                findRecovery(db,rujukan);
+
+            if (!recovery) {
+
+                throw new Error(
+                    "Nombor rujukan " +
+                    "permohonan tidak ditemui."
+                );
+
+            }
+
+            if (
+                getMemberId(recovery) !==
+                noBadan
+            ) {
+
+                throw new Error(
+                    "Nombor badan tidak sepadan " +
+                    "dengan permohonan pemulihan."
+                );
+
+            }
+
+            if (
+                normalize(recovery.status) !==
+                "DILULUSKAN"
+            ) {
+
+                throw new Error(
+                    "Permohonan belum diluluskan " +
+                    "atau sudah selesai. " +
+                    "Sila semak status pemulihan."
+                );
+
+            }
+
+            const member =
+                findMember(db,noBadan);
+
+            if (
+                !member ||
+                normalize(member.status) !==
+                    "AKTIF"
+            ) {
+
+                throw new Error(
+                    "Akaun anggota tidak aktif " +
+                    "atau tidak ditemui."
+                );
+
+            }
+
+            const validCode =
+                await validateRecoveryCode(
+                    recovery,
+                    recoveryCode
+                );
+
+            if (!validCode) {
+
+                throw new Error(
+                    "Kod pemulihan tidak sah."
+                );
+
+            }
+
+            const oldHash =
+                member.passwordHash || "";
+
+            const newHash =
+                await sha256(newPassword);
+
+            if (
+                oldHash &&
+                String(oldHash).toLowerCase() ===
+                    newHash.toLowerCase()
+            ) {
+
+                throw new Error(
+                    "Kata laluan baharu tidak " +
+                    "boleh sama seperti kata laluan lama."
+                );
+
+            }
+
+            /*
+              BACA SEMULA DATA SEBELUM SIMPAN
+              UNTUK MEMASTIKAN STATUS DAN KOD
+              MASIH SAH.
+            */
+
+            const latest =
+                loadDatabase();
+
+            if (!latest) {
+
+                throw new Error(
+                    "Gagal membaca rekod terkini."
+                );
+
+            }
+
+            const latestRecovery =
+                findRecovery(latest,rujukan);
+
+            const latestMember =
+                findMember(latest,noBadan);
+
+            if (
+                !latestRecovery ||
+                !latestMember ||
+                normalize(latestRecovery.status) !==
+                    "DILULUSKAN" ||
+                normalize(latestMember.status) !==
+                    "AKTIF" ||
+                getMemberId(latestRecovery) !==
+                    noBadan
+            ) {
+
+                throw new Error(
+                    "Status akaun atau permohonan " +
+                    "telah berubah. Sila semak semula."
+                );
+
+            }
+
+            const codeStillValid =
+                await validateRecoveryCode(
+                    latestRecovery,
+                    recoveryCode
+                );
+
+            if (!codeStillValid) {
+
+                throw new Error(
+                    "Kod pemulihan tidak lagi sah."
+                );
+
+            }
+
+            /*
+              KEMASKINI KATA LALUAN ANGGOTA
+            */
+
+            latestMember.passwordHash =
+                newHash;
+
+            delete latestMember.password;
+            delete latestMember.kataLaluan;
+            delete latestMember.kataLaluanHash;
+            delete latestMember.hashKataLaluan;
+
+            latestMember.passwordUpdatedAt =
+                new Date().toISOString();
+
+            /*
+              PADAM KELAYAKAN LAMA DARIPADA
+              REGISTRATIONS SUPAYA LOG MASUK
+              TIDAK MENERIMA KATA LALUAN LAMA.
+            */
+
+            latest.registrations.forEach(
+                registration => {
+
+                    if (
+                        getMemberId(registration) ===
+                        noBadan
+                    ) {
+
+                        delete registration.passwordHash;
+                        delete registration.password;
+                        delete registration.kataLaluan;
+                        delete registration.kataLaluanHash;
+                        delete registration.hashKataLaluan;
+
+                    }
+
+                }
+            );
+
+            /*
+              KOD SEKALI GUNA
+            */
+
+            latestRecovery.status =
+                "Selesai";
+
+            latestRecovery.tarikhSelesai =
+                new Date().toISOString();
+
+            latestRecovery.updatedAt =
+                new Date().toISOString();
+
+            delete latestRecovery.recoveryCodeHash;
+            delete latestRecovery.recoveryCode;
+            delete latestRecovery.kodPemulihan;
+
+            /*
+              LOG AKTIVITI
+            */
+
+            latest.logs.unshift({
+
+                id:window.crypto?.randomUUID
+                    ? crypto.randomUUID()
+                    : "LOG-" + Date.now(),
+
+                tarikh:new Date().toISOString(),
+
+                pelaksana:noBadan,
+
+                tindakan:
+                    "PEMULIHAN KATA LALUAN SELESAI",
+
+                butiran:
+                    "Rujukan: " + rujukan +
+                    " | Nombor Badan: " + noBadan
+
+            });
+
+            saveDatabase(latest);
+
+            /*
+              BATALKAN SESI ANGGOTA
+              DALAM TAB INI.
+            */
+
+            sessionStorage.removeItem(
+                MEMBER_SESSION_KEY
+            );
+
+            /*
+              KOSONGKAN BORANG
+            */
+
+            recoveryCodeInput.value = "";
+            newPasswordInput.value = "";
+            confirmPasswordInput.value = "";
+
+            form.reset();
+            form.hidden = true;
+
+            showMessage(
+                "KATA LALUAN BERJAYA DITUKAR.\n\n" +
+                "Kata laluan baharu telah disimpan " +
+                "untuk akaun anggota.\n\n" +
+                "Kod pemulihan telah dibatalkan " +
+                "daripada permohonan ini.\n\n" +
+                "Sila log masuk semula menggunakan " +
+                "kata laluan baharu.",
+                "success"
+            );
+
+            loginLink.hidden = false;
+
+            $("currentStatus").textContent =
+                "PEMULIHAN AKAUN SELESAI";
+
+        } catch(error) {
+
+            showMessage(
+                error.message ||
+                "Proses pertukaran kata laluan gagal.",
+                "error"
+            );
+
+        } finally {
+
+            recoveryCodeInput.value = "";
+            newPasswordInput.value = "";
+            confirmPasswordInput.value = "";
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "SIMPAN KATA LALUAN BAHARU";
+
+        }
+
+    }
+);
+
+/* =========================================
+   MUAT SEMULA STATUS
+========================================= */
+
+window.addEventListener(
+    "storage",
+    function(event) {
+
+        if (event.key === STORE_KEY) {
+            updateRecoveryStatus();
+        }
+
+    }
+);
+
+window.addEventListener(
+    "focus",
+    updateRecoveryStatus
+);
+
+</script>
+
+</body>
+</html>

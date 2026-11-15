@@ -1,0 +1,821 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Portal Anggota | Polis Diraja MYMahkota</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+:root{
+ --bg:#0e1118;
+ --panel:#191e28;
+ --gold:#d8b76b;
+ --gold-light:#f0d58f;
+ --border:#51442e;
+ --text:#f5f5f5;
+ --muted:#abb5c4;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Arial,sans-serif
+}
+button,input{font:inherit}
+[hidden]{display:none!important}
+
+.member-page{
+ min-height:85vh;padding:55px 18px;
+ display:flex;align-items:center;justify-content:center;
+ background:radial-gradient(ellipse at top,#342b1c,#0e1118 70%)
+}
+.member-container{
+ width:100%;max-width:530px;background:var(--panel);
+ border:1px solid var(--border);border-top:4px solid var(--gold);
+ border-radius:10px;padding:38px;
+ box-shadow:0 20px 60px rgba(0,0,0,.45)
+}
+.member-heading{text-align:center;margin-bottom:30px}
+.member-heading img{
+ width:90px;height:90px;object-fit:contain;margin-bottom:15px
+}
+.member-heading h2{
+ color:var(--gold);font-size:24px;letter-spacing:1px;margin:8px 0
+}
+.member-heading p{
+ color:var(--muted);font-size:12px;
+ letter-spacing:1px;line-height:1.8
+}
+.gold-line{
+ width:70px;height:3px;background:var(--gold);margin:20px auto 0
+}
+.account-tabs{
+ display:grid;grid-template-columns:1fr 1fr;
+ background:#10141c;border:1px solid #45402f;
+ border-radius:7px;padding:5px;gap:5px;margin-bottom:28px
+}
+.account-tab{
+ border:0;border-radius:5px;padding:14px 10px;
+ background:transparent;color:#abb5c4;
+ font-size:12px;font-weight:bold;cursor:pointer
+}
+.account-tab.active{background:var(--gold);color:#111}
+.account-tab:hover:not(.active){color:var(--gold)}
+.panel-heading{margin-bottom:25px}
+.panel-heading h3{
+ color:var(--gold);font-size:18px;margin:0 0 8px
+}
+.panel-heading p{
+ color:var(--muted);font-size:12px;line-height:1.8;margin:0
+}
+.form-group{margin-bottom:21px}
+.form-group label{
+ display:block;color:var(--gold);font-size:12px;
+ font-weight:bold;margin-bottom:10px
+}
+.form-group input{
+ width:100%;background:#10141c;
+ border:1px solid #4a5361;border-radius:6px;
+ padding:15px;color:white;font-size:14px;outline:none
+}
+.form-group input::placeholder{color:#929aaa}
+.form-group input:focus{
+ border-color:var(--gold);
+ box-shadow:0 0 0 2px rgba(216,183,107,.12)
+}
+.password-field{position:relative}
+.password-field input{padding-right:105px}
+.show-password{
+ position:absolute;right:7px;top:50%;
+ transform:translateY(-50%);border:0;background:transparent;
+ color:var(--gold);font-size:11px;font-weight:bold;
+ padding:10px;cursor:pointer
+}
+.forgot-row{text-align:right;margin:0 0 24px}
+.forgot-row a{
+ color:var(--gold);font-size:12px;
+ font-weight:bold;text-decoration:none
+}
+.primary-button{
+ width:100%;padding:16px;background:var(--gold);
+ color:#111;border:0;border-radius:6px;
+ font-size:12px;letter-spacing:1px;font-weight:bold;cursor:pointer
+}
+.primary-button:hover{background:var(--gold-light)}
+.primary-button:disabled{opacity:.6;cursor:not-allowed}
+.secondary-button{
+ display:block;width:100%;padding:15px;
+ border:1px solid var(--gold);border-radius:6px;
+ background:transparent;color:var(--gold);
+ text-align:center;text-decoration:none;
+ font-size:12px;font-weight:bold;letter-spacing:1px
+}
+.secondary-button:hover{background:var(--gold);color:#111}
+.registration-info{display:grid;gap:12px;margin:24px 0}
+.registration-step{
+ display:flex;gap:13px;align-items:flex-start;
+ padding:15px;background:#222a36;
+ border:1px solid #3c4654;border-radius:7px
+}
+.step-number{
+ display:flex;align-items:center;justify-content:center;
+ min-width:30px;height:30px;border-radius:50%;
+ background:#44371e;color:var(--gold);
+ font-size:12px;font-weight:bold
+}
+.step-text strong{
+ display:block;color:#f0deb3;font-size:12px;margin-bottom:5px
+}
+.step-text p{
+ margin:0;color:var(--muted);font-size:12px;line-height:1.7
+}
+.registration-notice{
+ background:#302719;border:1px solid #75603a;
+ border-radius:6px;color:#e8d19d;padding:15px;
+ font-size:12px;line-height:1.8;margin:22px 0
+}
+.form-message{
+ display:none;margin-top:20px;padding:16px;
+ background:#302719;border:1px solid #75603a;
+ border-radius:6px;color:#ead49a;
+ font-size:13px;line-height:1.8
+}
+.form-message.success{
+ background:#193a2b;border-color:#42835d;color:#b5e6c6
+}
+.form-message.error{
+ background:#391f23;border-color:#9a4b52;color:#ffb4bb
+}
+.member-bottom{
+ border-top:1px solid #414753;
+ margin-top:30px;padding-top:22px;text-align:center
+}
+.member-bottom p{
+ font-size:11px;line-height:1.8;color:var(--muted)
+}
+.back-link{
+ display:inline-block;margin-top:18px;
+ color:var(--gold);text-decoration:none;font-size:12px
+}
+.account-tab:focus-visible,
+.primary-button:focus-visible,
+.secondary-button:focus-visible,
+.show-password:focus-visible,
+a:focus-visible{
+ outline:2px solid var(--gold);outline-offset:3px
+}
+@media(max-width:600px){
+ .member-page{padding:30px 14px}
+ .member-container{padding:27px 20px}
+ .member-heading img{width:80px;height:80px}
+ .member-heading h2{font-size:20px}
+ .account-tab{font-size:11px;padding:13px 5px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+ <div class="header-container">
+  <a href="index.html" class="brand">
+   <img src="logo.png" alt="Logo Polis Diraja MYMahkota">
+   <div class="brand-text">
+    <h1>POLIS DIRAJA</h1>
+    <h2>MYMAHKOTA</h2>
+    <span>PORTAL ANGGOTA</span>
+   </div>
+  </a>
+  <div class="header-right">
+   <span class="official-label">SISTEM ANGGOTA</span>
+   <span class="official-dot"></span>
+  </div>
+ </div>
+</header>
+
+<!-- PORTAL ANGGOTA -->
+<main class="member-page">
+<div class="member-container">
+
+ <div class="member-heading">
+  <img src="logo.png" alt="Logo Polis Diraja MYMahkota">
+  <h2>PORTAL ANGGOTA</h2>
+  <p>
+   SISTEM PENGURUSAN ANGGOTA
+   <br>POLIS DIRAJA MYMAHKOTA
+  </p>
+  <div class="gold-line"></div>
+ </div>
+
+ <!-- TAB -->
+ <div class="account-tabs" role="group" aria-label="Pilihan akaun">
+
+  <button
+   type="button"
+   class="account-tab active"
+   id="loginTab"
+   aria-pressed="true">
+   LOG MASUK
+  </button>
+
+  <button
+   type="button"
+   class="account-tab"
+   id="registerTab"
+   aria-pressed="false">
+   DAFTAR AKAUN
+  </button>
+
+ </div>
+
+ <!-- LOG MASUK -->
+ <section id="loginPanel">
+
+  <div class="panel-heading">
+   <h3>Log Masuk Anggota</h3>
+   <p>
+    Masukkan nama penuh, nombor badan dan
+    kata laluan akaun yang telah diluluskan.
+   </p>
+  </div>
+
+  <form id="loginForm">
+
+   <div class="form-group">
+    <label for="namaAnggota">NAMA PENUH ANGGOTA</label>
+    <input
+     type="text"
+     id="namaAnggota"
+     placeholder="Masukkan nama penuh"
+     maxlength="100"
+     autocomplete="name"
+     required>
+   </div>
+
+   <div class="form-group">
+    <label for="idAnggota">NOMBOR BADAN / ID ANGGOTA</label>
+    <input
+     type="text"
+     id="idAnggota"
+     placeholder="Masukkan nombor badan"
+     maxlength="50"
+     autocomplete="username"
+     required>
+   </div>
+
+   <div class="form-group">
+    <label for="password">KATA LALUAN</label>
+    <div class="password-field">
+     <input
+      type="password"
+      id="password"
+      placeholder="Masukkan kata laluan"
+      autocomplete="current-password"
+      required>
+
+     <button
+      type="button"
+      id="togglePassword"
+      class="show-password"
+      aria-pressed="false">
+      LIHAT
+     </button>
+    </div>
+   </div>
+
+   <div class="forgot-row">
+    <a href="lupa-katalaluan.html">
+     LUPA KATA LALUAN?
+    </a>
+   </div>
+
+   <button
+    type="submit"
+    class="primary-button"
+    id="loginButton">
+    LOG MASUK KE DASHBOARD
+   </button>
+
+  </form>
+
+  <div
+   class="form-message"
+   id="loginMessage"
+   role="status"
+   aria-live="polite">
+  </div>
+
+ </section>
+
+ <!-- DAFTAR -->
+ <section id="registerPanel" hidden>
+
+  <div class="panel-heading">
+   <h3>Pendaftaran Akaun Anggota</h3>
+   <p>
+    Anggota yang belum mempunyai akaun boleh
+    mengemukakan permohonan pendaftaran.
+   </p>
+  </div>
+
+  <div class="registration-info">
+
+   <div class="registration-step">
+    <span class="step-number">01</span>
+    <div class="step-text">
+     <strong>ISI BORANG PENDAFTARAN</strong>
+     <p>
+      Lengkapkan nama, nombor badan, pangkat,
+      jabatan, unit dan maklumat akaun.
+     </p>
+    </div>
+   </div>
+
+   <div class="registration-step">
+    <span class="step-number">02</span>
+    <div class="step-text">
+     <strong>SEMAKAN PENTADBIR</strong>
+     <p>
+      Permohonan akan dihantar ke bahagian
+      Kelulusan Pendaftaran dalam Panel Pentadbiran.
+     </p>
+    </div>
+   </div>
+
+   <div class="registration-step">
+    <span class="step-number">03</span>
+    <div class="step-text">
+     <strong>KELULUSAN AKAUN</strong>
+     <p>
+      Selepas diluluskan, anggota boleh log
+      masuk dan melihat rekod perkhidmatan.
+     </p>
+    </div>
+   </div>
+
+  </div>
+
+  <a href="pendaftaran.html" class="secondary-button">
+   BUKA BORANG PENDAFTARAN
+  </a>
+
+  <div class="registration-notice">
+   <strong>MAKLUMAN PENTADBIRAN</strong>
+   <p>
+    Setiap permohonan tertakluk kepada semakan
+    identiti, status anggota dan keputusan pentadbir.
+   </p>
+  </div>
+
+  <button
+   type="button"
+   id="returnLogin"
+   class="secondary-button">
+   KEMBALI KE LOG MASUK
+  </button>
+
+ </section>
+
+ <div class="member-bottom">
+  <p>
+   AKSES PORTAL ANGGOTA
+   <br>POLIS DIRAJA MYMAHKOTA
+  </p>
+  <p>
+   Hubungi pihak pentadbiran sekiranya
+   menghadapi masalah akaun.
+  </p>
+  <a href="index.html" class="back-link">
+   ← KEMBALI KE PORTAL UTAMA
+  </a>
+ </div>
+
+</div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+ <div class="footer-container">
+  <div class="footer-brand">
+   <h2>POLIS DIRAJA MYMAHKOTA</h2>
+   <p>
+    BERKHIDMAT DENGAN INTEGRITI,
+    PROFESIONALISME DAN DEDIKASI.
+   </p>
+  </div>
+
+  <div class="footer-bottom">
+   <span>© 2026 POLIS DIRAJA MYMAHKOTA</span>
+   <span>PORTAL ANGGOTA</span>
+  </div>
+ </div>
+</footer>
+
+<script>
+"use strict";
+
+/* =========================================
+   SAMBUNGAN REKOD PORTAL
+========================================= */
+
+const STORE_KEY = "MYMAHKOTA_PORTAL_V1";
+const SESSION_KEY = "MYMAHKOTA_MEMBER_SESSION";
+
+const $ = id => document.getElementById(id);
+
+const normalize = value =>
+ String(value ?? "")
+  .trim()
+  .replace(/\s+/g," ")
+  .toUpperCase();
+
+function readDatabase(){
+ try{
+  const saved=localStorage.getItem(STORE_KEY);
+  const db=saved?JSON.parse(saved):{};
+
+  if(!db||typeof db!=="object"){
+   return null;
+  }
+
+  if(!Array.isArray(db.members))db.members=[];
+  if(!Array.isArray(db.registrations))db.registrations=[];
+
+  return db;
+ }catch(error){
+  return null;
+ }
+}
+
+function memberNumber(record){
+ return normalize(
+  record?.noBadan ||
+  record?.idAnggota ||
+  ""
+ );
+}
+
+function findMember(db,noBadan){
+ return db.members.find(member=>
+  memberNumber(member)===noBadan
+ )||null;
+}
+
+function findRegistration(db,noBadan){
+ return db.registrations.find(record=>
+  memberNumber(record)===noBadan &&
+  normalize(record.status)==="DILULUSKAN"
+ )||null;
+}
+
+/* =========================================
+   PAPAR MESEJ
+========================================= */
+
+function showMessage(message,type="error"){
+ const box=$("loginMessage");
+
+ box.textContent=message;
+ box.className="form-message "+type;
+ box.style.display="block";
+}
+
+/* =========================================
+   TAB AKAUN
+========================================= */
+
+function showPanel(name){
+ const login=name==="login";
+
+ $("loginPanel").hidden=!login;
+ $("registerPanel").hidden=login;
+
+ $("loginTab").classList.toggle("active",login);
+ $("registerTab").classList.toggle("active",!login);
+
+ $("loginTab").setAttribute("aria-pressed",String(login));
+ $("registerTab").setAttribute("aria-pressed",String(!login));
+
+ $("loginMessage").style.display="none";
+}
+
+$("loginTab").addEventListener("click",()=>{
+ showPanel("login");
+});
+
+$("registerTab").addEventListener("click",()=>{
+ showPanel("register");
+});
+
+$("returnLogin").addEventListener("click",()=>{
+ showPanel("login");
+});
+
+/* =========================================
+   LIHAT KATA LALUAN
+========================================= */
+
+$("togglePassword").addEventListener("click",function(){
+ const input=$("password");
+ const visible=input.type==="password";
+
+ input.type=visible?"text":"password";
+ this.textContent=visible?"SEMBUNYI":"LIHAT";
+ this.setAttribute("aria-pressed",String(visible));
+});
+
+/* =========================================
+   PENGESAHAN KATA LALUAN
+========================================= */
+
+/*
+  Sokong rekod akaun setempat yang sudah
+  menyimpan passwordHash SHA-256 atau
+  kata laluan daripada borang pendaftaran.
+
+  Pengesahan pelayan digunakan apabila
+  MYMAHKOTA_API_URL telah disambungkan.
+*/
+
+async function sha256(value){
+ if(!window.crypto?.subtle){
+  throw new Error(
+   "Pengesahan kata laluan memerlukan sambungan HTTPS atau localhost."
+  );
+ }
+
+ const bytes=new TextEncoder().encode(value);
+ const digest=await crypto.subtle.digest("SHA-256",bytes);
+
+ return Array.from(
+  new Uint8Array(digest),
+  x=>x.toString(16).padStart(2,"0")
+ ).join("");
+}
+
+async function verifyLocalPassword(member,registration,password){
+
+ const sources=[member,registration].filter(Boolean);
+
+ for(const record of sources){
+
+  const storedHash =
+   record.passwordHash ||
+   record.kataLaluanHash ||
+   record.hashKataLaluan;
+
+  if(storedHash){
+
+   const calculated=await sha256(password);
+
+   if(calculated.toLowerCase()===
+      String(storedHash).toLowerCase()){
+    return true;
+   }
+
+   continue;
+  }
+
+  const existingPassword =
+   record.password ||
+   record.kataLaluan;
+
+  if(typeof existingPassword==="string" &&
+     existingPassword===password){
+   return true;
+  }
+
+ }
+
+ return false;
+}
+
+/* =========================================
+   SESI ANGGOTA
+========================================= */
+
+function saveMemberSession(member){
+
+ sessionStorage.setItem(
+  SESSION_KEY,
+  JSON.stringify({
+   noBadan:memberNumber(member),
+   nama:member.nama||"",
+   loginAt:Date.now()
+  })
+ );
+
+}
+
+/* =========================================
+   LOG MASUK MELALUI PELAYAN
+========================================= */
+
+async function loginWithServer(nama,noBadan,password){
+
+ const base=window.MYMAHKOTA_API_URL;
+
+ const response=await fetch(
+  String(base).replace(/\/$/,"")+
+  "/akaun/log-masuk",
+  {
+   method:"POST",
+   credentials:"include",
+   headers:{
+    "Content-Type":"application/json",
+    "Accept":"application/json"
+   },
+   body:JSON.stringify({
+    nama,
+    idAnggota:noBadan,
+    password
+   })
+  }
+ );
+
+ if(!response.ok){
+
+  if(response.status===403){
+   throw new Error(
+    "Akaun belum diluluskan atau akses telah disekat."
+   );
+  }
+
+  if(response.status===429){
+   throw new Error(
+    "Terlalu banyak percubaan log masuk."
+   );
+  }
+
+  throw new Error(
+   "Log masuk gagal. Semak maklumat akaun."
+  );
+ }
+
+ /*
+  Sesi pelayan disahkan oleh API.
+  Dashboard tempatan masih membaca profil
+  menggunakan nombor badan daripada storan.
+ */
+
+ const db=readDatabase();
+ const member=db&&findMember(db,noBadan);
+
+ if(!member){
+  throw new Error(
+   "Log masuk pelayan berjaya tetapi profil anggota belum disegerakkan ke portal."
+  );
+ }
+
+ if(normalize(member.status)!=="AKTIF"){
+  throw new Error(
+   "Status anggota tidak aktif."
+  );
+ }
+
+ saveMemberSession(member);
+}
+
+/* =========================================
+   LOG MASUK SETEMPAT
+========================================= */
+
+async function loginLocally(nama,noBadan,password){
+
+ const db=readDatabase();
+
+ if(!db){
+  throw new Error(
+   "Rekod sistem tidak dapat dibaca."
+  );
+ }
+
+ const member=findMember(db,noBadan);
+
+ if(!member){
+  throw new Error(
+   "Nombor badan tidak dijumpai dalam Senarai Anggota."
+  );
+ }
+
+ if(normalize(member.nama)!==nama){
+  throw new Error(
+   "Nama penuh tidak sepadan dengan rekod anggota."
+  );
+ }
+
+ if(normalize(member.status)!=="AKTIF"){
+  throw new Error(
+   "Akaun anggota tidak aktif, digantung atau telah ditamatkan."
+  );
+ }
+
+ const registration=findRegistration(db,noBadan);
+
+ const hasStoredCredential=[member,registration]
+  .filter(Boolean)
+  .some(record=>
+   record.passwordHash ||
+   record.kataLaluanHash ||
+   record.hashKataLaluan ||
+   record.password ||
+   record.kataLaluan
+  );
+
+ if(!hasStoredCredential){
+  throw new Error(
+   "Kata laluan akaun belum disambungkan kepada rekod pendaftaran. " +
+   "Sila hubungi pentadbir atau lengkapkan tetapan akaun."
+  );
+ }
+
+ const valid=await verifyLocalPassword(
+  member,registration,password
+ );
+
+ if(!valid){
+  throw new Error(
+   "Kata laluan tidak betul."
+  );
+ }
+
+ saveMemberSession(member);
+}
+
+/* =========================================
+   BORANG LOG MASUK
+========================================= */
+
+$("loginForm").addEventListener("submit",async function(event){
+
+ event.preventDefault();
+
+ const nama=normalize($("namaAnggota").value);
+ const noBadan=normalize($("idAnggota").value);
+ const password=$("password").value;
+
+ if(!nama||!noBadan||!password){
+  showMessage("Sila lengkapkan maklumat log masuk.");
+  return;
+ }
+
+ const button=$("loginButton");
+
+ button.disabled=true;
+ button.textContent="MENGESAHKAN AKAUN...";
+ $("loginMessage").style.display="none";
+
+ try{
+
+  if(window.MYMAHKOTA_API_URL){
+
+   await loginWithServer(
+    nama,noBadan,password
+   );
+
+  }else{
+
+   await loginLocally(
+    nama,noBadan,password
+   );
+
+  }
+
+  $("password").value="";
+
+  showMessage(
+   "Log masuk berjaya. Membuka Dashboard Anggota...",
+   "success"
+  );
+
+  window.location.assign("dashboard.html");
+
+ }catch(error){
+
+  showMessage(
+   error.message ||
+   "Log masuk tidak berjaya.",
+   "error"
+  );
+
+ }finally{
+
+  button.disabled=false;
+  button.textContent="LOG MASUK KE DASHBOARD";
+
+ }
+
+});
+
+/* =========================================
+   PAPARAN PERMULAAN
+========================================= */
+
+showPanel("login");
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1179 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Profil Anggota | Polis Diraja MYMahkota</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+:root{
+    --bg:#0d1118;
+    --panel:#1b2432;
+    --panel-dark:#141c28;
+    --gold:#d8b76b;
+    --gold-light:#f0d58f;
+    --text:#f5f5f5;
+    --muted:#abb5c4;
+    --border:#3b4758;
+    --green:#a4e7bf;
+    --red:#f0aaaa;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    line-height:1.7;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    cursor:pointer;
+    font:inherit;
+}
+
+[hidden]{
+    display:none!important;
+}
+
+/* HEADER */
+
+.member-header{
+    background:#151c27;
+    border-bottom:2px solid var(--gold);
+}
+
+.header-inner{
+    max-width:1250px;
+    margin:auto;
+    padding:22px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:17px;
+}
+
+.brand img{
+    width:70px;
+    height:70px;
+    object-fit:contain;
+}
+
+.brand h1{
+    margin:0;
+    color:var(--gold);
+    font-size:19px;
+    letter-spacing:1px;
+}
+
+.brand p{
+    margin:5px 0 0;
+    font-size:11px;
+    letter-spacing:2px;
+    color:var(--muted);
+}
+
+.header-badge{
+    color:var(--gold);
+    font-size:11px;
+    font-weight:bold;
+    border:1px solid #76623b;
+    border-radius:20px;
+    padding:10px 16px;
+}
+
+/* NAVIGATION */
+
+.member-nav{
+    background:#212a38;
+    border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+    max-width:1250px;
+    margin:auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:5px;
+    padding:10px;
+}
+
+.nav-inner a{
+    padding:11px 17px;
+    border-radius:6px;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:.5px;
+}
+
+.nav-inner a:hover,
+.nav-inner a.active{
+    background:#3a3121;
+    color:var(--gold);
+}
+
+/* MAIN */
+
+.member-page{
+    min-height:75vh;
+    background:
+        radial-gradient(
+            ellipse at top,
+            #2b261d 0,
+            #0d1118 55%
+        );
+}
+
+.container{
+    width:100%;
+    max-width:1250px;
+    margin:auto;
+    padding:35px 20px 60px;
+}
+
+.page-heading{
+    margin-bottom:28px;
+}
+
+.page-heading small{
+    color:var(--gold);
+    font-size:11px;
+    letter-spacing:3px;
+}
+
+.page-heading h2{
+    font-size:32px;
+    margin:10px 0;
+    color:white;
+}
+
+.page-heading p{
+    font-size:13px;
+    color:var(--muted);
+}
+
+.gold-line{
+    width:70px;
+    height:3px;
+    background:var(--gold);
+    margin-top:18px;
+}
+
+/* PROFIL UTAMA */
+
+.profile-card{
+    display:grid;
+    grid-template-columns:190px 1fr;
+    gap:25px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-top:4px solid var(--gold);
+    border-radius:11px;
+    padding:30px;
+    margin-bottom:25px;
+}
+
+.profile-avatar{
+    width:160px;
+    height:160px;
+    border:2px solid var(--gold);
+    border-radius:50%;
+    background:#202c3b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    margin:auto;
+}
+
+.profile-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:25px;
+}
+
+.profile-main h3{
+    margin:7px 0;
+    font-size:25px;
+    color:var(--gold);
+    overflow-wrap:anywhere;
+}
+
+.profile-main .rank{
+    display:block;
+    margin-bottom:9px;
+    font-size:13px;
+    color:#e8e8e8;
+}
+
+.profile-id{
+    display:inline-block;
+    padding:8px 13px;
+    background:#293447;
+    color:var(--gold-light);
+    border:1px solid #5b503a;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.status{
+    display:inline-block;
+    margin:12px 0 0;
+    padding:7px 14px;
+    border-radius:20px;
+    background:#20412f;
+    color:var(--green);
+    font-size:11px;
+    font-weight:bold;
+}
+
+.status.inactive{
+    background:#472c32;
+    color:var(--red);
+}
+
+.profile-note{
+    margin-top:15px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* GRID MAKLUMAT */
+
+.section{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:24px;
+    margin-bottom:22px;
+}
+
+.section-title{
+    margin:0 0 20px;
+    padding-bottom:13px;
+    color:var(--gold);
+    font-size:16px;
+    border-bottom:1px solid var(--border);
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+}
+
+.info-item{
+    background:var(--panel-dark);
+    border:1px solid var(--border);
+    border-radius:7px;
+    padding:16px;
+}
+
+.info-item small{
+    display:block;
+    margin-bottom:9px;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.info-item strong{
+    color:#f0e5c7;
+    font-size:13px;
+    font-weight:normal;
+    overflow-wrap:anywhere;
+}
+
+/* JADUAL REKOD */
+
+.table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--border);
+    border-radius:7px;
+}
+
+table{
+    width:100%;
+    min-width:550px;
+    border-collapse:collapse;
+}
+
+th{
+    background:#2a3647;
+    color:var(--gold);
+    text-align:left;
+    padding:13px;
+    font-size:11px;
+}
+
+td{
+    padding:13px;
+    border-top:1px solid var(--border);
+    font-size:12px;
+    color:#e6e6e6;
+    vertical-align:top;
+    overflow-wrap:anywhere;
+}
+
+.empty{
+    text-align:center;
+    padding:23px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* NOTIS */
+
+.notice{
+    background:#302719;
+    color:#ead49a;
+    border:1px solid #75603a;
+    border-radius:7px;
+    padding:17px;
+    margin-bottom:24px;
+    font-size:12px;
+}
+
+.notice.error{
+    background:#391f23;
+    border-color:#9a4b52;
+    color:#ffb4bb;
+}
+
+/* BUTANG */
+
+.button-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:22px;
+}
+
+.btn{
+    display:inline-block;
+    border:1px solid var(--gold);
+    border-radius:6px;
+    background:var(--gold);
+    color:#111;
+    padding:12px 17px;
+    font-size:11px;
+    font-weight:bold;
+    text-align:center;
+}
+
+.btn.secondary{
+    color:var(--gold);
+    background:transparent;
+}
+
+.btn:hover{
+    filter:brightness(1.12);
+}
+
+/* FOOTER */
+
+.member-footer{
+    border-top:1px solid var(--border);
+    padding:26px 20px;
+    color:var(--muted);
+    text-align:center;
+    font-size:11px;
+}
+
+/* MOBILE */
+
+@media(max-width:750px){
+    .header-inner{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .brand{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .nav-inner{
+        justify-content:center;
+    }
+
+    .profile-card{
+        grid-template-columns:1fr;
+        text-align:center;
+        padding:23px 17px;
+    }
+
+    .profile-main h3{
+        font-size:21px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        padding:25px 14px 45px;
+    }
+
+    .page-heading h2{
+        font-size:25px;
+    }
+
+    .section{
+        padding:18px;
+    }
+
+    .button-row{
+        justify-content:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="member-header">
+
+    <div class="header-inner">
+
+        <a href="dashboard.html" class="brand">
+
+            <img
+                src="logo.png"
+                alt="Logo Polis Diraja MYMahkota"
+            >
+
+            <div>
+                <h1>POLIS DIRAJA MYMAHKOTA</h1>
+                <p>PORTAL PENGURUSAN ANGGOTA</p>
+            </div>
+
+        </a>
+
+        <span class="header-badge">
+            PROFIL RASMI ANGGOTA
+        </span>
+
+    </div>
+
+</header>
+
+<!-- NAVIGATION -->
+<nav class="member-nav">
+
+    <div class="nav-inner">
+
+        <a href="dashboard.html">
+            DASHBOARD
+        </a>
+
+        <a href="profil-anggota.html" class="active">
+            PROFIL SAYA
+        </a>
+
+        <a href="index.html">
+            PORTAL UTAMA
+        </a>
+
+        <a href="anggota.html" id="logoutLink">
+            LOG KELUAR
+        </a>
+
+    </div>
+
+</nav>
+
+<main class="member-page">
+
+<div class="container">
+
+    <!-- HEADING -->
+    <div class="page-heading">
+
+        <small>REKOD PERIBADI ANGGOTA</small>
+
+        <h2>PROFIL ANGGOTA</h2>
+
+        <p>
+            Maklumat rasmi, sijil, kemahiran,
+            prestasi dan sejarah perkhidmatan.
+        </p>
+
+        <div class="gold-line"></div>
+
+    </div>
+
+    <!-- NOTIS -->
+    <div class="notice" id="notice">
+        Maklumat profil ini dikemaskini
+        berdasarkan rekod pentadbiran organisasi.
+    </div>
+
+    <!-- PROFIL -->
+    <section class="profile-card">
+
+        <div class="profile-avatar">
+            <img
+                src="logo.png"
+                alt="Lambang Polis Diraja MYMahkota"
+            >
+        </div>
+
+        <div class="profile-main">
+
+            <span class="profile-id" id="profileId">
+                —
+            </span>
+
+            <h3 id="profileName">
+                Memuatkan Profil...
+            </h3>
+
+            <span class="rank" id="profileRank">
+                —
+            </span>
+
+            <span class="status" id="profileStatus">
+                —
+            </span>
+
+            <p class="profile-note">
+                Profil ini disambungkan dengan
+                rekod Panel Pentadbiran.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- MAKLUMAT PERKHIDMATAN -->
+    <section class="section">
+
+        <h3 class="section-title">
+            MAKLUMAT PERKHIDMATAN ANGGOTA
+        </h3>
+
+        <div class="info-grid">
+
+            <div class="info-item">
+                <small>NAMA PENUH</small>
+                <strong id="infoName">—</strong>
+            </div>
+
+            <div class="info-item">
+                <small>NOMBOR BADAN</small>
+                <strong id="infoId">—</strong>
+            </div>
+
+            <div class="info-item">
+                <small>PANGKAT</small>
+                <strong id="infoRank">—</strong>
+            </div>
+
+            <div class="info-item">
+                <small>JAWATAN</small>
+                <strong id="infoPosition">—</strong>
+            </div>
+
+            <div class="info-item">
+                <small>JABATAN</small>
+                <strong id="infoDepartment">—</strong>
+            </div>
+
+            <div class="info-item">
+                <small>UNIT / BAHAGIAN</small>
+                <strong id="infoUnit">—</strong>
+            </div>
+
+            <div class="info-item">
+                <small>TARIKH MENYERTAI</small>
+                <strong id="infoJoinDate">—</strong>
+            </div>
+
+            <div class="info-item">
+                <small>STATUS PERKHIDMATAN</small>
+                <strong id="infoStatus">—</strong>
+            </div>
+
+        </div>
+
+        <div class="button-row">
+            <a href="dashboard.html" class="btn">
+                KEMBALI KE DASHBOARD
+            </a>
+        </div>
+
+    </section>
+
+    <!-- SIJIL -->
+    <section class="section">
+
+        <h3 class="section-title">
+            SIJIL DAN PENGIKTIRAFAN
+        </h3>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>NOMBOR RUJUKAN</th>
+                        <th>NAMA SIJIL</th>
+                        <th>TARIKH</th>
+                        <th>STATUS</th>
+                    </tr>
+                </thead>
+                <tbody id="certificateRows"></tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- DOKUMEN -->
+    <section class="section">
+
+        <h3 class="section-title">
+            DOKUMEN ANGGOTA
+        </h3>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>RUJUKAN</th>
+                        <th>TAJUK DOKUMEN</th>
+                        <th>JENIS</th>
+                        <th>TARIKH</th>
+                    </tr>
+                </thead>
+                <tbody id="documentRows"></tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- KEMAHIRAN -->
+    <section class="section">
+
+        <h3 class="section-title">
+            KEMAHIRAN DAN KEPAKARAN
+        </h3>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>RUJUKAN</th>
+                        <th>KEMAHIRAN</th>
+                        <th>KATEGORI</th>
+                        <th>TAHAP</th>
+                    </tr>
+                </thead>
+                <tbody id="skillRows"></tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- PRESTASI -->
+    <section class="section">
+
+        <h3 class="section-title">
+            PRESTASI DAN KEHADIRAN
+        </h3>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>TEMPOH</th>
+                        <th>JAM BERTUGAS</th>
+                        <th>SASARAN</th>
+                        <th>MARKAH</th>
+                        <th>KOD</th>
+                    </tr>
+                </thead>
+                <tbody id="performanceRows"></tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- PERKHIDMATAN -->
+    <section class="section">
+
+        <h3 class="section-title">
+            SEJARAH PERKHIDMATAN
+        </h3>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>TARIKH</th>
+                        <th>JENIS REKOD</th>
+                        <th>TAJUK</th>
+                        <th>KETERANGAN</th>
+                    </tr>
+                </thead>
+                <tbody id="serviceRows"></tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- MAKLUMAN -->
+    <div class="notice">
+        Sebarang pembetulan pangkat, jawatan,
+        jabatan, unit atau maklumat perkhidmatan
+        hendaklah dibuat melalui pihak pentadbiran.
+        Anggota tidak dibenarkan mengubah
+        rekod rasmi sendiri melalui halaman ini.
+    </div>
+
+</div>
+
+</main>
+
+<footer class="member-footer">
+    POLIS DIRAJA MYMAHKOTA
+    <p>© 2026 SISTEM PENGURUSAN ANGGOTA</p>
+</footer>
+
+<script>
+"use strict";
+
+/* ======================================
+   KONFIGURASI SISTEM
+====================================== */
+
+const STORE_KEY =
+    "MYMAHKOTA_PORTAL_V1";
+
+const SESSION_KEY =
+    "MYMAHKOTA_MEMBER_SESSION";
+
+const $ = id =>
+    document.getElementById(id);
+
+function normalize(value){
+    return String(value ?? "")
+        .trim()
+        .toUpperCase();
+}
+
+function escapeHTML(value){
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+}
+
+function list(value){
+    return Array.isArray(value) ? value : [];
+}
+
+/* ======================================
+   BACA SESSION ANGGOTA
+====================================== */
+
+function readSession(){
+
+    try{
+        return JSON.parse(
+            sessionStorage.getItem(
+                SESSION_KEY
+            ) || "null"
+        );
+    }catch(error){
+        return null;
+    }
+
+}
+
+/* ======================================
+   BACA REKOD PORTAL
+====================================== */
+
+function readDatabase(){
+
+    try{
+
+        const data = JSON.parse(
+            localStorage.getItem(
+                STORE_KEY
+            ) || "{}"
+        );
+
+        return data &&
+            typeof data === "object" &&
+            !Array.isArray(data)
+            ? data : {};
+
+    }catch(error){
+        return {};
+    }
+
+}
+
+/* ======================================
+   NOMBOR BADAN
+====================================== */
+
+function getMemberId(record){
+
+    return normalize(
+        record?.noBadan ||
+        record?.idAnggota ||
+        ""
+    );
+
+}
+
+/* ======================================
+   KESELAMATAN SESSION
+====================================== */
+
+function redirectLogin(){
+
+    sessionStorage.removeItem(
+        SESSION_KEY
+    );
+
+    window.location.replace(
+        "anggota.html"
+    );
+
+}
+
+function checkMember(){
+
+    const session = readSession();
+    const db = readDatabase();
+
+    if(!session || !session.noBadan){
+        redirectLogin();
+        return null;
+    }
+
+    const memberId = normalize(
+        session.noBadan
+    );
+
+    const member = list(
+        db.members
+    ).find(record =>
+        getMemberId(record) === memberId
+    );
+
+    if(
+        !member ||
+        normalize(member.status) !== "AKTIF"
+    ){
+        redirectLogin();
+        return null;
+    }
+
+    return {
+        member,
+        db
+    };
+
+}
+
+/* ======================================
+   SET NILAI
+====================================== */
+
+function setText(id,value){
+
+    $(id).textContent =
+        value || "—";
+
+}
+
+/* ======================================
+   PAPAR JADUAL
+====================================== */
+
+function renderRows(
+    elementId,
+    records,
+    fields
+){
+
+    const target = $(elementId);
+
+    if(!records.length){
+
+        target.innerHTML =
+            '<tr><td colspan="' +
+            fields.length +
+            '" class="empty">' +
+            'Belum ada rekod.' +
+            '</td></tr>';
+
+        return;
+    }
+
+    target.innerHTML = records.map(
+        record => {
+
+            const cells = fields.map(
+                field => {
+
+                    const value =
+                        record[field] ?? "—";
+
+                    return (
+                        "<td>" +
+                        escapeHTML(value) +
+                        "</td>"
+                    );
+
+                }
+            ).join("");
+
+            return "<tr>" +
+                cells +
+                "</tr>";
+
+        }
+    ).join("");
+
+}
+
+/* ======================================
+   PAPAR PROFIL ANGGOTA
+====================================== */
+
+function loadProfile(){
+
+    const result = checkMember();
+
+    if(!result){
+        return;
+    }
+
+    const {member,db} = result;
+
+    const memberId =
+        getMemberId(member);
+
+    /* PROFIL UTAMA */
+
+    setText(
+        "profileId",
+        memberId
+    );
+
+    setText(
+        "profileName",
+        member.nama
+    );
+
+    setText(
+        "profileRank",
+        member.pangkat
+    );
+
+    setText(
+        "profileStatus",
+        member.status
+    );
+
+    $("profileStatus").classList.toggle(
+        "inactive",
+        normalize(member.status) !== "AKTIF"
+    );
+
+    /* MAKLUMAT ANGGOTA */
+
+    const fields = {
+        infoName:member.nama,
+        infoId:memberId,
+        infoRank:member.pangkat,
+        infoPosition:member.jawatan,
+        infoDepartment:member.jabatan,
+        infoUnit:member.unit,
+        infoJoinDate:member.tarikhMenyertai,
+        infoStatus:member.status
+    };
+
+    Object.entries(fields).forEach(
+        ([element,value]) => {
+            setText(element,value);
+        }
+    );
+
+    /* REKOD PENTADBIRAN */
+
+    const recordsFor = module =>
+        list(db[module]).filter(
+            record =>
+                getMemberId(record) ===
+                memberId
+        );
+
+    /* SIJIL */
+
+    renderRows(
+        "certificateRows",
+        recordsFor("certificates"),
+        [
+            "rujukan",
+            "nama",
+            "tarikh",
+            "status"
+        ]
+    );
+
+    /* DOKUMEN */
+
+    renderRows(
+        "documentRows",
+        recordsFor("documents"),
+        [
+            "rujukan",
+            "tajuk",
+            "jenis",
+            "tarikh"
+        ]
+    );
+
+    /* KEMAHIRAN */
+
+    renderRows(
+        "skillRows",
+        recordsFor("skills"),
+        [
+            "rujukan",
+            "nama",
+            "kategori",
+            "tahap"
+        ]
+    );
+
+    /* PRESTASI */
+
+    renderRows(
+        "performanceRows",
+        recordsFor("performance"),
+        [
+            "tempoh",
+            "jam",
+            "sasaran",
+            "markah",
+            "kod"
+        ]
+    );
+
+    /* SEJARAH PERKHIDMATAN */
+
+    renderRows(
+        "serviceRows",
+        recordsFor("serviceRecords"),
+        [
+            "tarikh",
+            "jenis",
+            "tajuk",
+            "keterangan"
+        ]
+    );
+
+}
+
+/* ======================================
+   LOG KELUAR
+====================================== */
+
+$("logoutLink").addEventListener(
+    "click",
+    function(event){
+
+        event.preventDefault();
+
+        if(
+            !confirm(
+                "Adakah anda mahu log keluar?"
+            )
+        ){
+            return;
+        }
+
+        sessionStorage.removeItem(
+            SESSION_KEY
+        );
+
+        window.location.href =
+            "anggota.html";
+
+    }
+);
+
+/* ======================================
+   PENGESANAN PERUBAHAN
+====================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(event.key === STORE_KEY){
+            loadProfile();
+        }
+
+    }
+);
+
+window.addEventListener(
+    "focus",
+    loadProfile
+);
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(!document.hidden){
+            loadProfile();
+        }
+
+    }
+);
+
+/* ======================================
+   MULAKAN SISTEM
+====================================== */
+
+loadProfile();
+
+</script>
+
+</body>
+</html>

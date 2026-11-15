@@ -1,0 +1,1486 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Direktori Jabatan | Polis Diraja MYMahkota</title>
+
+<style>
+:root {
+  --bg: #0c1017;
+  --panel: #191f2a;
+  --panel2: #232b38;
+  --gold: #dbba70;
+  --gold-dark: #aa8845;
+  --white: #f6f6f6;
+  --muted: #b7c0cd;
+  --line: #465064;
+  --green: #8ad5a2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--white);
+  background: var(--bg);
+  line-height: 1.65;
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+header {
+  background: #171c26;
+  border-bottom: 3px solid var(--gold-dark);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.logo {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+
+.brand h1 {
+  color: var(--gold);
+  margin: 0;
+  font-size: 23px;
+  letter-spacing: 1px;
+}
+
+.brand p {
+  color: var(--muted);
+  margin: 3px 0;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+nav {
+  padding: 16px;
+  text-align: center;
+  background: #202632;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--gold);
+}
+
+.hero {
+  text-align: center;
+  padding: 65px 22px;
+  background:
+    radial-gradient(
+      ellipse at top,
+      #453720,
+      transparent 75%
+    ),
+    #10141c;
+  border-bottom: 1px solid #4b4030;
+}
+
+.hero-label {
+  color: var(--gold);
+  letter-spacing: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.hero h2 {
+  margin: 14px 0;
+  font-size: clamp(30px, 5vw, 44px);
+}
+
+.hero p {
+  max-width: 700px;
+  margin: auto;
+  color: var(--muted);
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 45px 20px;
+}
+
+.section-title {
+  padding-left: 16px;
+  border-left: 4px solid var(--gold);
+  margin: 0 0 25px;
+  font-size: 24px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  color: var(--gold);
+  font-size: 27px;
+}
+
+.stat span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.search {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #6a5838;
+  border-radius: 9px;
+  background: var(--panel);
+  color: white;
+  margin-bottom: 28px;
+}
+
+.department {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--gold-dark);
+  border-radius: 12px;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+.department-header {
+  padding: 28px;
+}
+
+.department-number {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  font-weight: bold;
+}
+
+.department h3 {
+  margin: 12px 0;
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+.description {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.director-info {
+  background: var(--panel2);
+  border-left: 3px solid var(--gold);
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.director-info small {
+  display: block;
+  color: var(--gold);
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.director-info strong {
+  font-size: 15px;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0 28px 25px;
+}
+
+.action-buttons button {
+  border: 1px solid var(--gold-dark);
+  background: #2a2a27;
+  color: var(--gold);
+  padding: 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.action-buttons button:hover {
+  background: var(--gold);
+  color: #111;
+}
+
+.content-panel {
+  display: none;
+  border-top: 1px solid var(--line);
+  padding: 28px;
+}
+
+.content-panel.open {
+  display: block;
+}
+
+.panel-heading {
+  color: var(--gold);
+  margin-top: 0;
+  font-size: 19px;
+}
+
+.duty-list {
+  padding-left: 22px;
+  color: #d7dce4;
+  font-size: 14px;
+}
+
+.duty-list li {
+  margin-bottom: 10px;
+}
+
+.unit-duty {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin-top: 14px;
+  padding: 18px;
+}
+
+.unit-duty h5 {
+  margin: 0 0 10px;
+  color: var(--gold);
+  font-size: 15px;
+}
+
+.unit-duty p {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* CARTA ORGANISASI */
+
+.org-chart {
+  text-align: center;
+  padding-top: 15px;
+}
+
+.chart-title {
+  color: var(--gold);
+  margin-bottom: 30px;
+  font-size: 19px;
+}
+
+.org-box {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 17px 14px;
+  text-align: center;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.org-box.director {
+  background: linear-gradient(
+    145deg,
+    #dfc47e,
+    #b38e42
+  );
+  border: 2px solid #ead59f;
+  color: #171717;
+  max-width: 420px;
+  margin: auto;
+}
+
+.org-box.deputy {
+  border: 2px solid var(--gold-dark);
+  max-width: 420px;
+  margin: auto;
+}
+
+.org-role {
+  display: block;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.org-name {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.org-box.director .org-role {
+  color: #483817;
+}
+
+.org-box:not(.director) .org-role {
+  color: var(--gold);
+}
+
+.org-box.empty .org-name {
+  color: #b2b8c2;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.org-connector {
+  width: 2px;
+  height: 27px;
+  background: var(--gold-dark);
+  margin: auto;
+}
+
+.org-children {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 22px 15px;
+  position: relative;
+  padding-top: 20px;
+}
+
+.org-child {
+  position: relative;
+  padding-top: 20px;
+}
+
+.org-child::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background: var(--gold-dark);
+  transform: translateX(-50%);
+}
+
+.org-children::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 2px;
+  height: 20px;
+  margin: auto;
+  background: var(--gold-dark);
+}
+
+.org-box.unit-box {
+  min-height: 125px;
+  height: 100%;
+}
+
+.org-box.unit-box .org-name {
+  font-size: 13px;
+}
+
+.org-unit-label {
+  display: block;
+  font-size: 12px;
+  color: #e0e4eb;
+  margin-bottom: 11px;
+  font-weight: bold;
+}
+
+.org-status {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 3px 9px;
+  background: #263d33;
+  color: var(--green);
+  border-radius: 20px;
+  font-size: 10px;
+}
+
+.org-status.vacant {
+  color: #d4b9a0;
+  background: #403327;
+}
+
+.chart-note {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 30px;
+}
+
+.no-result {
+  display: none;
+  text-align: center;
+  color: var(--muted);
+  padding: 30px;
+}
+
+footer {
+  background: #171c26;
+  border-top: 2px solid var(--gold-dark);
+  padding: 35px 20px;
+  text-align: center;
+}
+
+footer strong {
+  color: var(--gold);
+}
+
+footer p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 650px) {
+  .header-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .brand h1 {
+    font-size: 19px;
+  }
+
+  .hero {
+    padding: 45px 20px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .department-header,
+  .content-panel {
+    padding: 20px;
+  }
+
+  .action-buttons {
+    grid-template-columns: 1fr;
+    padding: 0 20px 20px;
+  }
+
+  .org-children {
+    grid-template-columns: 1fr;
+    padding-top: 0;
+    gap: 10px;
+  }
+
+  .org-children::before {
+    display: none;
+  }
+
+  .org-child {
+    padding-top: 16px;
+  }
+
+  .org-child::before {
+    height: 16px;
+  }
+
+  .org-box.unit-box {
+    min-height: auto;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .search, nav, .action-buttons {
+    display: none;
+  }
+
+  .department {
+    break-inside: avoid;
+  }
+
+  .content-panel.open {
+    display: block;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <img
+      src="logo.png"
+      class="logo"
+      alt="Logo Polis Diraja MYMahkota"
+    >
+
+    <div class="brand">
+      <h1>POLIS DIRAJA MYMAHKOTA</h1>
+      <p>PORTAL RASMI ORGANISASI</p>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html">UTAMA</a>
+  <a href="direktori.html" class="active">
+    DIREKTORI JABATAN
+  </a>
+</nav>
+
+<section class="hero">
+  <span class="hero-label">
+    STRUKTUR PENTADBIRAN
+  </span>
+
+  <h2>Direktori Jabatan</h2>
+
+  <p>
+    Struktur organisasi, barisan kepimpinan,
+    ketua bahagian, ketua unit serta
+    bidang tanggungjawab jabatan
+    Polis Diraja MYMahkota.
+  </p>
+</section>
+
+<main class="container">
+
+  <h2 class="section-title">
+    Organisasi dan Kepimpinan Jabatan
+  </h2>
+
+  <div class="stats">
+    <div class="stat">
+      <strong id="totalDept">4</strong>
+      <span>JABATAN</span>
+    </div>
+
+    <div class="stat">
+      <strong id="totalUnits">23</strong>
+      <span>BAHAGIAN / UNIT / PASUKAN</span>
+    </div>
+
+    <div class="stat">
+      <strong id="totalFilled">0</strong>
+      <span>JAWATAN KETUA BERISI</span>
+    </div>
+  </div>
+
+  <input
+    class="search"
+    id="search"
+    type="search"
+    placeholder="Cari jabatan, nama ketua atau unit..."
+    aria-label="Carian direktori"
+  >
+
+  <div id="departmentList"></div>
+
+  <p class="no-result" id="noResult">
+    Tiada maklumat yang sepadan.
+  </p>
+
+</main>
+
+<footer>
+  <strong>POLIS DIRAJA MYMAHKOTA</strong>
+  <p>Direktori Jabatan & Carta Organisasi</p>
+  <p>&copy; 2026 Polis Diraja MYMahkota</p>
+</footer>
+
+<script>
+
+// ========================================
+// DATA RASMI DIREKTORI RP MYMAHKOTA
+// ========================================
+
+const departments = [
+
+  // JABATAN 1
+  {
+    name: "Jabatan Pengurusan",
+
+    director:
+      "Tan Sri Panglima Garang Qiqi Bin Abdul Samad",
+
+    deputy: null,
+
+    description:
+      "Mengurus hal ehwal pentadbiran, " +
+      "sumber manusia, pembangunan anggota, " +
+      "perjawatan dan latihan organisasi.",
+
+    duties: [
+      "Menyelaras pentadbiran keseluruhan organisasi.",
+      "Merancang dasar pengurusan sumber manusia.",
+      "Mengurus pelantikan, pertukaran dan perjawatan.",
+      "Menyelaraskan program latihan anggota.",
+      "Memantau prestasi dan keperluan anggota.",
+      "Menyediakan rekod dan laporan pentadbiran.",
+      "Memastikan pelaksanaan arahan pengurusan tertinggi."
+    ],
+
+    units: [
+      {
+        name: "Bahagian Pentadbiran",
+        role: "Ketua Bahagian",
+        leader:
+          "Tan Sri Panglima Garang Qiqi Bin Abdul Samad",
+        duties: [
+          "Menyelaras urusan pentadbiran harian.",
+          "Mengurus dokumen dan surat rasmi.",
+          "Menyediakan laporan serta rekod jabatan.",
+          "Menyelaras urusan mesyuarat.",
+          "Memastikan perjalanan pentadbiran teratur."
+        ]
+      },
+
+      {
+        name: "Pegawai SLT",
+        role: "Pegawai SLT",
+        leader:
+          "Tan Sri Panglima Garang Qiqi Bin Abdul Samad",
+        duties: [
+          "Menyelaras urusan kepimpinan tertinggi.",
+          "Mewakili kepimpinan apabila diberi kuasa.",
+          "Memantau pelaksanaan arahan organisasi.",
+          "Menyokong kesinambungan pentadbiran.",
+          "Melaksanakan tugas pemangkuan tertakluk kepada prosedur organisasi."
+        ]
+      },
+
+      {
+        name: "Bahagian Dasar Sumber Manusia",
+        role: "Ketua Bahagian",
+        leader: null,
+        duties: [
+          "Merancang dasar sumber manusia.",
+          "Mengurus keperluan penempatan anggota.",
+          "Memantau rekod keanggotaan.",
+          "Menyelaras perancangan tenaga kerja.",
+          "Menyediakan cadangan pembangunan anggota."
+        ]
+      },
+
+      {
+        name: "Bahagian Perkhidmatan dan Perjawatan",
+        role: "Ketua Bahagian",
+        leader: null,
+        duties: [
+          "Mengurus pelantikan anggota.",
+          "Menyelaras urusan kenaikan pangkat.",
+          "Mengurus pertukaran dan penempatan.",
+          "Merekod kekosongan jawatan.",
+          "Mengurus dokumentasi perkhidmatan."
+        ]
+      },
+
+      {
+        name: "Bahagian Latihan",
+        role: "Ketua Bahagian",
+        leader: "Nana Binti Mohd Rafi",
+        duties: [
+          "Merancang program latihan anggota.",
+          "Menyelaras latihan asas dan lanjutan.",
+          "Memantau kehadiran latihan.",
+          "Menilai pencapaian dan kemahiran anggota.",
+          "Menyediakan laporan latihan."
+        ]
+      }
+    ]
+  },
+
+  // JABATAN 2
+  {
+    name:
+      "Jabatan Keselamatan Dalam Negeri " +
+      "dan Ketenteraman Awam",
+
+    director:
+      "Datuk Shah Al-Muizudin Bin Rayqal Imran",
+
+    deputy:
+      "Izz Alam Shah Bin Datuk Shah Al-Muizudin",
+
+    description:
+      "Bertanggungjawab terhadap keselamatan " +
+      "dalam negeri, ketenteraman awam, " +
+      "penyelarasan pasukan khusus serta " +
+      "kesiapsiagaan operasi.",
+
+    duties: [
+      "Menyelaras pengurusan ketenteraman awam.",
+      "Memantau kesiapsiagaan pasukan operasi.",
+      "Menyelaras keperluan operasi darat, udara dan marin.",
+      "Mengurus penugasan pasukan khusus.",
+      "Memastikan keselamatan anggota ketika bertugas.",
+      "Menyediakan laporan operasi jabatan.",
+      "Memastikan tugasan mematuhi prosedur dan arahan organisasi."
+    ],
+
+    units: [
+      {
+        name: "Bahagian Pengurusan",
+        role: "Ketua Bahagian",
+        leader:
+          "Muhammad Naufal Bin Qamarul",
+        duties: [
+          "Mengurus pentadbiran jabatan.",
+          "Menyusun jadual kehadiran dan penugasan.",
+          "Menyediakan laporan pengurusan.",
+          "Mengurus rekod anggota.",
+          "Menyelaras arahan pengarah jabatan."
+        ]
+      },
+
+      {
+        name: "Unit Tindakhas (UTK)",
+        role: "Komander",
+        leader:
+          "Komander Awisy Bin Datuk Shah Al-Muizudin",
+        duties: [
+          "Memastikan kesiapsiagaan unit.",
+          "Menyelaras latihan anggota unit.",
+          "Mengurus kelengkapan keselamatan.",
+          "Menyokong tugasan khusus yang diluluskan.",
+          "Melaporkan pelaksanaan tugasan kepada jabatan."
+        ]
+      },
+
+      {
+        name: "Pasukan Gerakan Udara (PGU)",
+        role: "Komander",
+        leader: null,
+        duties: [
+          "Menyelaras sokongan operasi udara.",
+          "Memantau kesiapsiagaan pasukan.",
+          "Mengurus rekod penerbangan.",
+          "Menyelaras penyelenggaraan kelengkapan.",
+          "Membantu tugasan kecemasan yang diluluskan."
+        ]
+      },
+
+      {
+        name: "69 Komando (VAT 69)",
+        role: "Komander",
+        leader: null,
+        duties: [
+          "Mengekalkan kesiapsiagaan pasukan.",
+          "Menyelaras latihan keselamatan.",
+          "Mengurus rekod kelayakan anggota.",
+          "Menyokong penugasan khusus yang diluluskan.",
+          "Memastikan pematuhan disiplin dan prosedur."
+        ]
+      },
+
+      {
+        name: "Pasukan Gerakan Marin (PGM)",
+        role: "Komander",
+        leader: null,
+        duties: [
+          "Menyelaras rondaan keselamatan perairan.",
+          "Memantau kesiapsiagaan aset marin.",
+          "Menyokong operasi bantuan kecemasan.",
+          "Mengurus rekod penugasan marin.",
+          "Memastikan prosedur keselamatan dipatuhi."
+        ]
+      }
+    ]
+  },
+
+  // JABATAN 3
+  {
+    name:
+      "Jabatan Integriti dan Pematuhan Standard",
+
+    director:
+      "Dato' Sri Muhammad Ilham Bin Musa",
+
+    deputy: null,
+
+    description:
+      "Mengurus integriti, pematuhan standard, " +
+      "tatakelakuan, profesionalisme " +
+      "serta kesejahteraan anggota.",
+
+    duties: [
+      "Memperkukuh integriti organisasi.",
+      "Memantau pematuhan standard perkhidmatan.",
+      "Menyelaras pengendalian aduan berkaitan integriti.",
+      "Merekod dan menilai ketidakpatuhan prosedur.",
+      "Mencadangkan tindakan pembetulan.",
+      "Menyokong program kesejahteraan anggota.",
+      "Menyediakan laporan kepada pengurusan tertinggi."
+    ],
+
+    units: [
+      {
+        name: "Bahagian Integriti",
+        role: "Ketua Bahagian",
+        leader: null,
+        duties: [
+          "Menerima dan merekod aduan integriti.",
+          "Menyelaras semakan awal aduan.",
+          "Memantau tatakelakuan anggota.",
+          "Menggalakkan budaya amanah.",
+          "Menyediakan laporan penemuan melalui saluran rasmi."
+        ]
+      },
+
+      {
+        name: "Bahagian Pematuhan Standard",
+        role: "Ketua Bahagian",
+        leader: null,
+        duties: [
+          "Memantau pematuhan prosedur organisasi.",
+          "Menjalankan pemeriksaan pentadbiran.",
+          "Merekod penemuan ketidakpatuhan.",
+          "Mencadangkan penambahbaikan standard.",
+          "Memantau pelaksanaan tindakan pembetulan."
+        ]
+      },
+
+      {
+        name: "Unit Kaunseling",
+        role: "Ketua Unit",
+        leader: null,
+        duties: [
+          "Menyelaras sokongan kesejahteraan anggota.",
+          "Menyediakan program pembangunan diri.",
+          "Membantu pengurusan tekanan berkaitan tugas.",
+          "Memastikan kerahsiaan sesi kaunseling mengikut dasar.",
+          "Menyelaraskan rujukan kepada pihak berkelayakan apabila perlu."
+        ]
+      }
+    ]
+  },
+
+  // JABATAN 4
+  {
+    name:
+      "Jabatan Pencegahan Jenayah " +
+      "dan Keselamatan Komuniti",
+
+    director:
+      "Datuk Kai Bin Muhammad Haikal",
+
+    deputy: null,
+
+    description:
+      "Mengurus aktiviti pencegahan jenayah, " +
+      "rondaan keselamatan, pengurusan operasi " +
+      "darat serta hubungan komuniti.",
+
+    duties: [
+      "Merancang program pencegahan jenayah.",
+      "Menyelaras rondaan mengikut kawasan.",
+      "Meningkatkan hubungan dengan komuniti.",
+      "Mengurus sumber dan logistik rondaan.",
+      "Menyediakan jadual penugasan anggota.",
+      "Memantau pelaksanaan rondaan.",
+      "Menyediakan laporan prestasi operasi.",
+      "Menggalakkan latihan dan pembangunan anggota."
+    ],
+
+    units: [
+      {
+        name: "Bahagian Pengurusan Dasar / Sumber",
+        role: "Ketua Bahagian",
+        leader:
+          "Nat Aika Tachibana Binti Katsuki Haruto",
+        duties: [
+          "Menyelaras dasar dan perancangan jabatan.",
+          "Mengurus keperluan sumber manusia.",
+          "Memantau rekod anggota.",
+          "Menyediakan laporan sumber.",
+          "Mencadangkan penambahbaikan pentadbiran."
+        ]
+      },
+
+      {
+        name: "Bahagian Operasi Darat",
+        role: "Ketua Bahagian",
+        leader:
+          "Nana Binti Mohd Rafi",
+        duties: [
+          "Menyelaras penugasan operasi darat.",
+          "Mengurus jadual unit rondaan.",
+          "Memantau laporan penugasan.",
+          "Menyelaras keperluan sokongan operasi.",
+          "Menilai keberkesanan rondaan."
+        ]
+      },
+
+      {
+        name: "Urus Setia",
+        role: "Ketua Urus Setia",
+        leader: null,
+        duties: [
+          "Mengurus dokumentasi jabatan.",
+          "Menyediakan minit mesyuarat.",
+          "Mengurus surat-menyurat.",
+          "Menyampaikan arahan pentadbiran.",
+          "Merekod keputusan mesyuarat."
+        ]
+      },
+
+      {
+        name: "Pentadbiran",
+        role: "Ketua Pentadbiran",
+        leader:
+          "Nat Aika Tachibana Binti Katsuki Haruto",
+        duties: [
+          "Mengurus pentadbiran harian.",
+          "Memantau kehadiran anggota.",
+          "Mengurus rekod cuti.",
+          "Menyelaras jadual pentadbiran.",
+          "Menyediakan laporan pengurusan."
+        ]
+      },
+
+      {
+        name: "Sokongan Logistik",
+        role: "Ketua Sokongan Logistik",
+        leader: null,
+        duties: [
+          "Mengurus inventori jabatan.",
+          "Memantau aset dan kelengkapan.",
+          "Merekod pengeluaran peralatan.",
+          "Menyelaras penyelenggaraan.",
+          "Menyediakan laporan keperluan logistik."
+        ]
+      },
+
+      {
+        name: "Jurulatih",
+        role: "Ketua Jurulatih",
+        leader: null,
+        duties: [
+          "Merancang latihan anggota.",
+          "Membimbing anggota baharu.",
+          "Menilai pencapaian latihan.",
+          "Merekod kehadiran latihan.",
+          "Mencadangkan program peningkatan kemahiran."
+        ]
+      },
+
+      {
+        name: "Unit MPV",
+        role: "Ketua Unit",
+        leader: null,
+        duties: [
+          "Menyelaras rondaan kenderaan.",
+          "Menyediakan jadual MPV.",
+          "Memantau laporan rondaan.",
+          "Memastikan keselamatan kenderaan.",
+          "Merekod aktiviti penugasan."
+        ]
+      },
+
+      {
+        name: "Unit URB",
+        role: "Ketua Unit",
+        leader: null,
+        duties: [
+          "Menyelaras rondaan bermotosikal.",
+          "Memantau kesiapsiagaan anggota.",
+          "Mengurus jadual rondaan.",
+          "Menyemak laporan penugasan.",
+          "Memastikan prosedur keselamatan dipatuhi."
+        ]
+      },
+
+      {
+        name: "Unit BIT Rondaan",
+        role: "Ketua Unit",
+        leader: null,
+        duties: [
+          "Menyelaras penugasan rondaan unit.",
+          "Memantau liputan kawasan rondaan.",
+          "Merekod pemerhatian keselamatan.",
+          "Menyediakan laporan aktiviti.",
+          "Menyelaraskan kerjasama dengan unit lain."
+        ]
+      },
+
+      {
+        name: "E-Sector",
+        role: "Ketua E-Sector",
+        leader: null,
+        duties: [
+          "Menyelaras pembahagian sektor rondaan.",
+          "Mengurus rekod penugasan sektor.",
+          "Memantau laporan aktiviti sektor.",
+          "Menyediakan ringkasan prestasi.",
+          "Mencadangkan penambahbaikan liputan rondaan."
+        ]
+      }
+    ]
+  }
+];
+
+// ========================================
+// FUNGSI BANTUAN
+// ========================================
+
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+
+  if (className) {
+    node.className = className;
+  }
+
+  if (text !== undefined) {
+    node.textContent = text;
+  }
+
+  return node;
+}
+
+function makeList(items) {
+  const list = el("ul", "duty-list");
+
+  items.forEach(function(item) {
+    list.appendChild(el("li", "", item));
+  });
+
+  return list;
+}
+
+function isVacant(name) {
+  return !name ||
+    ["tiada", "belum dilantik", "kosong"].includes(
+      String(name).trim().toLowerCase()
+    );
+}
+
+// ========================================
+// CARTA ORGANISASI
+// ========================================
+
+function createOrgBox(role, name, type) {
+  const empty = isVacant(name);
+
+  const box = el(
+    "div",
+    "org-box " + (type || "") + (empty ? " empty" : "")
+  );
+
+  box.appendChild(
+    el("span", "org-role", role)
+  );
+
+  box.appendChild(
+    el(
+      "span",
+      "org-name",
+      empty ? "Belum Dilantik" : name
+    )
+  );
+
+  return box;
+}
+
+function createOrgChart(dept) {
+  const chart = el("div", "org-chart");
+
+  chart.appendChild(
+    el("h4", "chart-title", "CARTA ORGANISASI JABATAN")
+  );
+
+  // Pengarah jabatan
+  chart.appendChild(
+    createOrgBox(
+      "PENGARAH JABATAN",
+      dept.director,
+      "director"
+    )
+  );
+
+  // Timbalan pengarah jika ada
+  if (dept.deputy && !isVacant(dept.deputy)) {
+    chart.appendChild(
+      el("div", "org-connector")
+    );
+
+    chart.appendChild(
+      createOrgBox(
+        "TIMBALAN PENGARAH",
+        dept.deputy,
+        "deputy"
+      )
+    );
+  }
+
+  // Bahagian, unit dan pasukan
+  const children = el("div", "org-children");
+
+  dept.units.forEach(function(unit) {
+    const item = el("div", "org-child");
+
+    const box = el(
+      "div",
+      "org-box unit-box" +
+        (isVacant(unit.leader) ? " empty" : "")
+    );
+
+    box.appendChild(
+      el("span", "org-unit-label", unit.name)
+    );
+
+    box.appendChild(
+      el("span", "org-role", unit.role)
+    );
+
+    box.appendChild(
+      el(
+        "span",
+        "org-name",
+        isVacant(unit.leader)
+          ? "Belum Dilantik"
+          : unit.leader
+      )
+    );
+
+    const status = el(
+      "span",
+      "org-status" +
+        (isVacant(unit.leader) ? " vacant" : ""),
+      isVacant(unit.leader)
+        ? "JAWATAN BELUM DIISI"
+        : "KETUA"
+    );
+
+    box.appendChild(status);
+    item.appendChild(box);
+    children.appendChild(item);
+  });
+
+  chart.appendChild(children);
+
+  chart.appendChild(
+    el(
+      "p",
+      "chart-note",
+      "Carta menunjukkan jawatan kepimpinan. " +
+      "Senarai anggota bawahan tidak dipaparkan."
+    )
+  );
+
+  return chart;
+}
+
+// ========================================
+// BIDANG TANGGUNGJAWAB
+// ========================================
+
+function createResponsibilities(dept) {
+  const wrapper = el("div");
+
+  wrapper.appendChild(
+    el(
+      "h4",
+      "panel-heading",
+      "BIDANG TANGGUNGJAWAB JABATAN"
+    )
+  );
+
+  wrapper.appendChild(makeList(dept.duties));
+
+  wrapper.appendChild(
+    el(
+      "h4",
+      "panel-heading",
+      "TANGGUNGJAWAB BAHAGIAN & UNIT"
+    )
+  );
+
+  dept.units.forEach(function(unit) {
+    const section = el("div", "unit-duty");
+
+    section.appendChild(
+      el("h5", "", unit.name)
+    );
+
+    section.appendChild(
+      el(
+        "p",
+        "",
+        "Ketua: " +
+          (isVacant(unit.leader)
+            ? "Belum Dilantik"
+            : unit.leader)
+      )
+    );
+
+    section.appendChild(makeList(unit.duties));
+
+    wrapper.appendChild(section);
+  });
+
+  return wrapper;
+}
+
+// ========================================
+// KAD JABATAN
+// ========================================
+
+function createDepartment(dept, index) {
+  const card = el("article", "department");
+  const head = el("div", "department-header");
+
+  head.appendChild(
+    el(
+      "span",
+      "department-number",
+      "JABATAN " + String(index + 1).padStart(2, "0")
+    )
+  );
+
+  head.appendChild(el("h3", "", dept.name));
+
+  head.appendChild(
+    el("p", "description", dept.description)
+  );
+
+  const director = el("div", "director-info");
+
+  director.appendChild(
+    el("small", "", "PENGARAH JABATAN")
+  );
+
+  director.appendChild(
+    el("strong", "", dept.director)
+  );
+
+  head.appendChild(director);
+
+  if (dept.deputy && !isVacant(dept.deputy)) {
+    const deputy = el("div", "director-info");
+
+    deputy.appendChild(
+      el("small", "", "TIMBALAN PENGARAH")
+    );
+
+    deputy.appendChild(
+      el("strong", "", dept.deputy)
+    );
+
+    head.appendChild(deputy);
+  }
+
+  card.appendChild(head);
+
+  const actions = el("div", "action-buttons");
+
+  const chartBtn = el(
+    "button",
+    "",
+    "LIHAT CARTA ORGANISASI"
+  );
+
+  const dutyBtn = el(
+    "button",
+    "",
+    "BIDANG TANGGUNGJAWAB"
+  );
+
+  chartBtn.type = "button";
+  dutyBtn.type = "button";
+
+  chartBtn.setAttribute("aria-expanded", "false");
+  dutyBtn.setAttribute("aria-expanded", "false");
+
+  actions.appendChild(chartBtn);
+  actions.appendChild(dutyBtn);
+
+  card.appendChild(actions);
+
+  const chartPanel = el("div", "content-panel");
+  const dutyPanel = el("div", "content-panel");
+
+  chartPanel.appendChild(createOrgChart(dept));
+  dutyPanel.appendChild(createResponsibilities(dept));
+
+  chartBtn.addEventListener("click", function() {
+    const open = chartPanel.classList.toggle("open");
+
+    chartBtn.setAttribute(
+      "aria-expanded",
+      String(open)
+    );
+
+    if (open) {
+      dutyPanel.classList.remove("open");
+      dutyBtn.setAttribute("aria-expanded", "false");
+    }
+
+    chartBtn.textContent = open
+      ? "TUTUP CARTA ORGANISASI"
+      : "LIHAT CARTA ORGANISASI";
+
+    dutyBtn.textContent = "BIDANG TANGGUNGJAWAB";
+  });
+
+  dutyBtn.addEventListener("click", function() {
+    const open = dutyPanel.classList.toggle("open");
+
+    dutyBtn.setAttribute(
+      "aria-expanded",
+      String(open)
+    );
+
+    if (open) {
+      chartPanel.classList.remove("open");
+      chartBtn.setAttribute("aria-expanded", "false");
+    }
+
+    dutyBtn.textContent = open
+      ? "TUTUP BIDANG TANGGUNGJAWAB"
+      : "BIDANG TANGGUNGJAWAB";
+
+    chartBtn.textContent = "LIHAT CARTA ORGANISASI";
+  });
+
+  card.appendChild(chartPanel);
+  card.appendChild(dutyPanel);
+
+  return card;
+}
+
+// ========================================
+// CARIAN DAN PAPARAN
+// ========================================
+
+const departmentList =
+  document.getElementById("departmentList");
+
+const search =
+  document.getElementById("search");
+
+function render() {
+  const keyword = search.value
+    .trim()
+    .toLocaleLowerCase("ms");
+
+  departmentList.replaceChildren();
+
+  let found = 0;
+
+  departments.forEach(function(dept, index) {
+    const content = [
+      dept.name,
+      dept.director,
+      dept.deputy || "",
+      dept.description,
+      ...dept.duties,
+      ...dept.units.flatMap(function(unit) {
+        return [
+          unit.name,
+          unit.role,
+          unit.leader || "",
+          ...unit.duties
+        ];
+      })
+    ].join(" ").toLocaleLowerCase("ms");
+
+    if (content.includes(keyword)) {
+      departmentList.appendChild(
+        createDepartment(dept, index)
+      );
+
+      found++;
+    }
+  });
+
+  document.getElementById("noResult")
+    .style.display = found ? "none" : "block";
+}
+
+// ========================================
+// STATISTIK
+// ========================================
+
+function updateStats() {
+  const totalUnits = departments.reduce(
+    function(sum, dept) {
+      return sum + dept.units.length;
+    },
+    0
+  );
+
+  const filled = departments.reduce(
+    function(sum, dept) {
+      return sum + dept.units.filter(function(unit) {
+        return !isVacant(unit.leader);
+      }).length;
+    },
+    0
+  );
+
+  document.getElementById("totalDept")
+    .textContent = departments.length;
+
+  document.getElementById("totalUnits")
+    .textContent = totalUnits;
+
+  document.getElementById("totalFilled")
+    .textContent = filled;
+}
+
+search.addEventListener("input", render);
+
+updateStats();
+render();
+
+</script>
+</body>
+</html>

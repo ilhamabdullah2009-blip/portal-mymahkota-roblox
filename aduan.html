@@ -1,0 +1,903 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#111111">
+<title>Aduan Awam | Polis Diraja MYMahkota</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+.complaint-page {
+    background: #f3f3f3;
+    min-height: 100vh;
+    padding: 65px 20px;
+}
+
+.complaint-container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.complaint-heading {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.complaint-heading h2 {
+    color: #171717;
+    font-size: 32px;
+    margin: 15px 0;
+}
+
+.complaint-heading p {
+    color: #666;
+    line-height: 1.8;
+}
+
+.complaint-card {
+    background: white;
+    padding: 40px;
+    border-top: 5px solid #b9974b;
+    box-shadow: 0 8px 30px rgba(0,0,0,.07);
+}
+
+.notice {
+    background: #fff8e8;
+    border-left: 4px solid #b9974b;
+    padding: 16px;
+    margin-bottom: 28px;
+    color: #66552e;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.form-section-title {
+    color: #98783c;
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    border-bottom: 1px solid #e8e1d3;
+    padding-bottom: 12px;
+    margin: 30px 0 22px;
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 9px;
+    font-size: 14px;
+}
+
+.form-group label span {
+    color: #b9974b;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+    font-family: inherit;
+    font-size: 14px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #b9974b;
+    background: white;
+}
+
+.form-group textarea {
+    min-height: 155px;
+    resize: vertical;
+}
+
+.form-help {
+    font-size: 11px;
+    color: #777;
+    margin-top: 7px;
+    line-height: 1.6;
+}
+
+.submit-complaint {
+    width: 100%;
+    padding: 17px;
+    background: #b9974b;
+    color: white;
+    border: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 3px;
+    transition: .3s;
+}
+
+.submit-complaint:hover {
+    background: #927335;
+}
+
+.submit-complaint:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 25px;
+    color: #927335;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* SUCCESS */
+
+.result-box {
+    display: none;
+    background: #fff;
+    border-top: 5px solid #39865b;
+    padding: 35px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 30px #0000000d;
+    text-align: center;
+}
+
+.result-icon {
+    width: 65px;
+    height: 65px;
+    background: #e4f5e9;
+    color: #27804c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    font-size: 30px;
+}
+
+.result-box h3 {
+    color: #287a48;
+    margin-bottom: 12px;
+}
+
+.reference-number {
+    background: #f5f1e7;
+    padding: 16px;
+    margin: 20px 0;
+    color: #876b34;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    overflow-wrap: anywhere;
+}
+
+.copy-reference {
+    border: 1px solid #b9974b;
+    background: white;
+    color: #927335;
+    padding: 10px 18px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* STATUS CHECK */
+
+.status-section {
+    background: white;
+    padding: 30px;
+    margin-top: 35px;
+    border-top: 4px solid #333;
+    box-shadow: 0 5px 20px #0000000a;
+}
+
+.status-section h3 {
+    color: #222;
+    margin-top: 0;
+}
+
+.status-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.status-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 13px;
+    border: 1px solid #ddd;
+}
+
+.status-form button {
+    background: #222;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.status-result {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f7f7f7;
+    border-left: 4px solid #b9974b;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #fff0cc;
+    color: #856326;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.status-badge.selesai {
+    background: #dff3e5;
+    color: #237543;
+}
+
+.status-badge.ditolak {
+    background: #f9dddd;
+    color: #a12d2d;
+}
+
+.status-badge.siasatan {
+    background: #e1eaff;
+    color: #345c9b;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+@media(max-width:600px) {
+    .complaint-page {
+        padding: 40px 12px;
+    }
+
+    .complaint-card {
+        padding: 22px 17px;
+    }
+
+    .complaint-heading h2 {
+        font-size: 25px;
+    }
+
+    .status-section {
+        padding: 22px 17px;
+    }
+
+    .status-form {
+        flex-direction: column;
+    }
+
+    .status-form button {
+        padding: 14px;
+    }
+
+    .result-box {
+        padding: 25px 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="site-header">
+    <div class="header-container">
+
+        <a href="index.html" class="brand">
+            <img src="logo.png" alt="Logo Polis Diraja MYMahkota">
+
+            <div class="brand-text">
+                <h1>POLIS DIRAJA</h1>
+                <h2>MYMAHKOTA</h2>
+                <span>PORTAL RASMI</span>
+            </div>
+        </a>
+
+        <div class="header-right">
+            <span class="official-label">ADUAN AWAM</span>
+            <span class="official-dot"></span>
+        </div>
+
+    </div>
+</header>
+
+<!-- BORANG ADUAN -->
+
+<main class="complaint-page">
+
+<div class="complaint-container">
+
+    <div class="complaint-heading">
+
+        <div class="section-label">
+            PERKHIDMATAN ORANG AWAM
+        </div>
+
+        <h2>ADUAN AWAM</h2>
+
+        <div class="gold-divider"></div>
+
+        <p>
+            Salurkan aduan, laporan atau maklumat kepada
+            Polis Diraja MYMahkota melalui sistem aduan rasmi.
+        </p>
+
+    </div>
+
+    <!-- KEJAYAAN -->
+
+    <div class="result-box" id="successBox">
+
+        <div class="result-icon">✓</div>
+
+        <h3>ADUAN BERJAYA DIREKODKAN</h3>
+
+        <p>
+            Aduan anda telah direkodkan dalam storan pelayar ini.
+        </p>
+
+        <div class="reference-number" id="referenceNumber"></div>
+
+        <button class="copy-reference"
+                type="button"
+                id="copyReference">
+            SALIN NOMBOR RUJUKAN
+        </button>
+
+        <p class="form-help">
+            Sila simpan nombor rujukan ini untuk semakan status.
+        </p>
+
+    </div>
+
+    <!-- FORM -->
+
+    <form class="complaint-card" id="complaintForm">
+
+        <div class="notice">
+            <strong>PERHATIAN:</strong>
+            Portal ini merupakan platform simulasi Roleplay MYMahkota.
+            Jangan masukkan maklumat peribadi sebenar atau maklumat sensitif.
+            Setiap aduan akan direkodkan untuk tujuan pengurusan.
+        </div>
+
+        <div class="form-section-title">
+            BAHAGIAN A — MAKLUMAT PENGADU
+        </div>
+
+        <div class="form-group">
+            <label>Nama Pengadu <span>*</span></label>
+            <input type="text"
+                   name="nama"
+                   placeholder="Masukkan nama pengadu"
+                   maxlength="100"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Nama Discord <span>*</span></label>
+            <input type="text"
+                   name="discord"
+                   placeholder="Contoh: qiqi_xx2"
+                   maxlength="100"
+                   required>
+        </div>
+
+        <div class="form-section-title">
+            BAHAGIAN B — BUTIRAN ADUAN
+        </div>
+
+        <div class="form-group">
+            <label>Kategori Aduan <span>*</span></label>
+
+            <select name="kategori" required>
+                <option value="">-- Pilih Kategori --</option>
+                <option value="Jenayah">Jenayah</option>
+                <option value="Kemalangan">Kemalangan</option>
+                <option value="Salah Laku Anggota">Salah Laku Anggota</option>
+                <option value="Gangguan Awam">Gangguan Awam</option>
+                <option value="Salah Guna Kuasa">Salah Guna Kuasa</option>
+                <option value="Perkhidmatan">Perkhidmatan</option>
+                <option value="Lain-lain">Lain-lain</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Tarikh Kejadian <span>*</span></label>
+            <input type="date" name="tarikh" required>
+        </div>
+
+        <div class="form-group">
+            <label>Tempat Kejadian <span>*</span></label>
+            <input type="text"
+                   name="tempat"
+                   placeholder="Masukkan lokasi kejadian"
+                   maxlength="200"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Nama Individu Terlibat</label>
+            <input type="text"
+                   name="individu"
+                   placeholder="Jika berkaitan"
+                   maxlength="150">
+        </div>
+
+        <div class="form-group">
+            <label>Bukti Aduan</label>
+
+            <input type="file"
+                   id="bukti"
+                   name="bukti"
+                   accept="image/png,image/jpeg,application/pdf">
+
+            <div class="form-help">
+                Format PNG, JPG atau PDF. Maksimum 1 MB untuk simpanan sementara.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Butiran Aduan <span>*</span></label>
+
+            <textarea name="butiran"
+                      placeholder="Terangkan aduan anda dengan lengkap..."
+                      maxlength="5000"
+                      required></textarea>
+        </div>
+
+        <div class="notice">
+            Dengan menghantar borang ini, anda mengesahkan
+            bahawa maklumat yang diberikan adalah benar
+            berdasarkan pengetahuan anda dalam konteks MYMahkota.
+        </div>
+
+        <button type="submit"
+                class="submit-complaint"
+                id="submitButton">
+            HANTAR ADUAN
+        </button>
+
+    </form>
+
+    <!-- SEMAK STATUS -->
+
+    <section class="status-section">
+
+        <h3>SEMAKAN STATUS ADUAN</h3>
+
+        <p>
+            Masukkan nombor rujukan untuk melihat status
+            aduan yang telah direkodkan pada pelayar ini.
+        </p>
+
+        <form class="status-form" id="statusForm">
+
+            <input type="text"
+                   id="statusReference"
+                   placeholder="Contoh: MYM-20261115-123456"
+                   required>
+
+            <button type="submit">
+                SEMAK STATUS
+            </button>
+
+        </form>
+
+        <div class="status-result" id="statusResult"></div>
+
+    </section>
+
+    <a href="index.html" class="back-link">
+        ← KEMBALI KE LAMAN UTAMA
+    </a>
+
+</div>
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-brand">
+            <h2>POLIS DIRAJA MYMAHKOTA</h2>
+            <p>
+                BERKHIDMAT DENGAN INTEGRITI,
+                PROFESIONALISME DAN DEDIKASI.
+            </p>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 POLIS DIRAJA MYMAHKOTA</span>
+            <span>PORTAL ADUAN AWAM</span>
+        </div>
+
+    </div>
+</footer>
+
+<!-- SISTEM ADUAN -->
+
+<script>
+
+"use strict";
+
+/*
+ * KUNCI SIMPANAN SEMENTARA
+ * Akan diselaraskan dengan sistem pentadbir
+ * apabila backend dikemaskini.
+ */
+
+const COMPLAINT_STORAGE_KEY = "mymahkota_complaints_v1";
+
+/* DAPATKAN REKOD */
+
+function getComplaints() {
+
+    try {
+        const data = localStorage.getItem(COMPLAINT_STORAGE_KEY);
+
+        return data ? JSON.parse(data) : [];
+
+    } catch (error) {
+
+        console.error("Ralat membaca rekod:", error);
+
+        return [];
+
+    }
+
+}
+
+/* SIMPAN REKOD */
+
+function saveComplaints(records) {
+
+    localStorage.setItem(
+        COMPLAINT_STORAGE_KEY,
+        JSON.stringify(records)
+    );
+
+}
+
+/* JANA NOMBOR RUJUKAN */
+
+function generateReference() {
+
+    const date = new Date();
+
+    const year = date.getFullYear();
+
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+
+    const day = String(date.getDate()).padStart(2, "0");
+
+    const random = Math.floor(100000 + Math.random() * 900000);
+
+    return `MYM-${year}${month}${day}-${random}`;
+
+}
+
+/* FORMAT TARIKH */
+
+function formatDate(date) {
+
+    return new Date(date).toLocaleString("ms-MY", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+}
+
+/* BACA BUKTI */
+
+function readEvidence(file) {
+
+    return new Promise((resolve, reject) => {
+
+        if (!file) {
+            resolve(null);
+            return;
+        }
+
+        const allowedTypes = [
+            "image/png",
+            "image/jpeg",
+            "application/pdf"
+        ];
+
+        if (!allowedTypes.includes(file.type)) {
+            reject(new Error("Format fail tidak dibenarkan."));
+            return;
+        }
+
+        if (file.size > 1024 * 1024) {
+            reject(new Error("Fail bukti melebihi had 1 MB."));
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function() {
+
+            resolve({
+                name: file.name,
+                type: file.type,
+                size: file.size,
+                data: reader.result
+            });
+
+        };
+
+        reader.onerror = function() {
+            reject(new Error("Fail bukti gagal dibaca."));
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+/* HANTAR ADUAN */
+
+const complaintForm = document.getElementById("complaintForm");
+
+const submitButton = document.getElementById("submitButton");
+
+const successBox = document.getElementById("successBox");
+
+const referenceNumber = document.getElementById("referenceNumber");
+
+let latestReference = "";
+
+complaintForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    submitButton.disabled = true;
+    submitButton.textContent = "SEDANG MEMPROSES...";
+
+    try {
+
+        const formData = new FormData(complaintForm);
+
+        const evidenceFile = document.getElementById("bukti").files[0];
+
+        const evidence = await readEvidence(evidenceFile);
+
+        const record = {
+
+            id: generateReference(),
+
+            reference: "",
+
+            nama: formData.get("nama").trim(),
+
+            discord: formData.get("discord").trim(),
+
+            kategori: formData.get("kategori"),
+
+            tarikhKejadian: formData.get("tarikh"),
+
+            tempat: formData.get("tempat").trim(),
+
+            individu: formData.get("individu").trim(),
+
+            butiran: formData.get("butiran").trim(),
+
+            bukti: evidence,
+
+            tarikhHantar: new Date().toISOString(),
+
+            status: "Menunggu Semakan",
+
+            catatanPentadbir: "",
+
+            pegawaiBertugas: "",
+
+            sejarahTindakan: [
+                {
+                    tindakan: "Aduan diterima",
+                    tarikh: new Date().toISOString(),
+                    pegawai: "Sistem"
+                }
+            ]
+
+        };
+
+        record.reference = record.id;
+
+        const records = getComplaints();
+
+        records.push(record);
+
+        saveComplaints(records);
+
+        latestReference = record.reference;
+
+        referenceNumber.textContent = record.reference;
+
+        successBox.style.display = "block";
+
+        successBox.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        complaintForm.reset();
+
+        /*
+         * Pemberitahuan untuk tab lain
+         * pada origin/pelayar yang sama.
+         */
+
+        window.dispatchEvent(
+            new CustomEvent("mymahkotaComplaintSubmitted", {
+                detail: {
+                    reference: record.reference
+                }
+            })
+        );
+
+        submitButton.textContent = "ADUAN BERJAYA DIREKODKAN";
+
+    } catch (error) {
+
+        alert(
+            "Aduan gagal direkodkan.\n\n" + error.message
+        );
+
+        submitButton.textContent = "HANTAR ADUAN";
+
+    } finally {
+
+        submitButton.disabled = false;
+
+    }
+
+});
+
+/* SALIN NOMBOR RUJUKAN */
+
+document.getElementById("copyReference")
+.addEventListener("click", async function() {
+
+    if (!latestReference) return;
+
+    try {
+
+        await navigator.clipboard.writeText(latestReference);
+
+        alert("Nombor rujukan berjaya disalin.");
+
+    } catch (error) {
+
+        alert("Nombor rujukan: " + latestReference);
+
+    }
+
+});
+
+/* SEMAK STATUS */
+
+document.getElementById("statusForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const reference = document.getElementById("statusReference")
+        .value.trim().toUpperCase();
+
+    const result = document.getElementById("statusResult");
+
+    const records = getComplaints();
+
+    const record = records.find(item =>
+        item.reference.toUpperCase() === reference
+    );
+
+    result.style.display = "block";
+
+    if (!record) {
+
+        result.innerHTML =
+            "<strong>REKOD TIDAK DIJUMPAI</strong><br>" +
+            "Sila pastikan nombor rujukan yang dimasukkan adalah betul.";
+
+        return;
+
+    }
+
+    const status = record.status || "Menunggu Semakan";
+
+    let badgeClass = "";
+
+    if (status.toLowerCase().includes("selesai")) {
+        badgeClass = "selesai";
+    } else if (status.toLowerCase().includes("tolak")) {
+        badgeClass = "ditolak";
+    } else if (status.toLowerCase().includes("siasatan")) {
+        badgeClass = "siasatan";
+    }
+
+    result.innerHTML = `
+        <strong>REKOD ADUAN DIJUMPAI</strong><br><br>
+
+        Nombor Rujukan:<br>
+        <strong>${escapeHTML(record.reference)}</strong><br><br>
+
+        Kategori:<br>
+        ${escapeHTML(record.kategori)}<br><br>
+
+        Tarikh Dihantar:<br>
+        ${escapeHTML(formatDate(record.tarikhHantar))}<br><br>
+
+        Status Semasa:<br>
+        <span class="status-badge ${badgeClass}">
+            ${escapeHTML(status)}
+        </span><br><br>
+
+        Maklum Balas Pentadbir:<br>
+        ${escapeHTML(record.catatanPentadbir || "Belum ada maklum balas daripada pihak pentadbir.")}
+    `;
+
+});
+
+/* KESELAMATAN PAPARAN TEKS */
+
+function escapeHTML(value) {
+
+    return String(value ?? "").replace(/[&<>"']/g, function(char) {
+
+        const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        };
+
+        return entities[char];
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

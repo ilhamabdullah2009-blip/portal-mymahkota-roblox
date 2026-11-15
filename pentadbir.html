@@ -1,0 +1,3030 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#0d1118">
+<title>Panel Pentadbiran | Polis Diraja MYMahkota</title>
+
+<style>
+:root{
+ --bg:#0d1118;
+ --sidebar:#141c28;
+ --panel:#1c2635;
+ --panel2:#273449;
+ --gold:#d8b76b;
+ --gold2:#a98a4e;
+ --text:#f5f5f5;
+ --muted:#aab5c4;
+ --border:#374456;
+ --green:#94ddb0;
+ --red:#f0aaaa;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Arial,sans-serif;line-height:1.6
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+[hidden]{display:none!important}
+button:focus-visible,a:focus-visible,
+input:focus-visible,select:focus-visible,
+textarea:focus-visible{
+ outline:2px solid var(--gold);outline-offset:2px
+}
+.sidebar{
+ position:fixed;inset:0 auto 0 0;width:275px;
+ background:var(--sidebar);border-right:1px solid var(--border);
+ z-index:40;overflow-y:auto;padding:20px 14px
+}
+.brand{
+ text-align:center;padding:14px 7px 23px;
+ border-bottom:1px solid var(--border)
+}
+.brand img{width:78px;height:78px;object-fit:contain}
+.brand h2{font-size:14px;color:var(--gold);margin:11px 0 5px}
+.brand p{font-size:10px;letter-spacing:2px;color:var(--muted)}
+.menu-title{
+ margin:24px 10px 9px;font-size:10px;color:var(--gold2);
+ letter-spacing:2px;font-weight:bold
+}
+.nav-btn{
+ display:block;width:100%;padding:12px;margin:3px 0;
+ border:1px solid transparent;border-radius:7px;
+ background:transparent;color:#cbd3df;
+ font-size:12px;text-align:left
+}
+.nav-btn:hover,.nav-btn.active{
+ background:#352d20;color:var(--gold);border-color:#665535
+}
+.logout{
+ width:100%;background:#823942;color:#fff;border:0;
+ padding:13px;border-radius:6px;margin-top:20px;
+ font-weight:bold;font-size:11px
+}
+.main{margin-left:275px;min-width:0}
+.topbar{
+ display:flex;justify-content:space-between;align-items:center;
+ background:#161f2c;border-bottom:1px solid var(--border);
+ min-height:78px;padding:14px 27px;gap:15px
+}
+.topbar h1{margin:0;font-size:19px}
+.topbar p{margin:5px 0;color:var(--muted);font-size:11px}
+.admin-chip{
+ color:var(--gold);border:1px solid #665535;
+ padding:9px 15px;border-radius:20px;text-align:right;font-size:11px
+}
+.admin-chip small{display:block;color:var(--muted)}
+.mobile-menu{
+ display:none;background:transparent;border:1px solid var(--border);
+ border-radius:6px;color:var(--gold);padding:8px 12px
+}
+.content{max-width:1500px;margin:auto;padding:27px}
+.page-head{margin-bottom:23px}
+.page-head small{
+ color:var(--gold);letter-spacing:2px;font-size:10px
+}
+.page-head h2{font-size:27px;margin:8px 0}
+.page-head p{font-size:12px;color:var(--muted)}
+.gold-line{
+ width:65px;height:3px;background:var(--gold);margin-top:13px
+}
+.notice{
+ background:#30291b;color:#edd6a2;border:1px solid #77623e;
+ padding:15px;border-radius:8px;margin-bottom:22px;
+ font-size:12px;white-space:pre-line
+}
+.notice.success{
+ background:#1c4030;color:#b9edca;border-color:#477b59
+}
+.notice.error{
+ background:#48282d;color:#ffc0c0;border-color:#91505a
+}
+.stats{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:15px;margin-bottom:22px
+}
+.stat{
+ background:var(--panel);border:1px solid var(--border);
+ border-top:3px solid var(--gold2);
+ border-radius:8px;padding:20px
+}
+.stat small{font-size:11px;color:var(--muted)}
+.stat strong{
+ display:block;font-size:28px;color:var(--gold);margin-top:8px
+}
+.card{
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:9px;padding:22px;margin-bottom:20px
+}
+.card h3{margin:0 0 15px;font-size:16px}
+.card p{font-size:12px;color:var(--muted)}
+.quick-grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px
+}
+.quick-card{
+ background:var(--panel);border:1px solid var(--border);
+ border-top:3px solid var(--gold);
+ border-radius:9px;padding:20px
+}
+.quick-card h3{color:var(--gold);font-size:15px;margin:0 0 9px}
+.quick-card p{font-size:12px;color:var(--muted);min-height:43px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:17px}
+.btn{
+ border:0;border-radius:6px;padding:11px 15px;
+ background:var(--gold);color:#111;font-size:11px;font-weight:bold
+}
+.btn:hover{filter:brightness(1.12)}
+.btn.secondary{
+ background:transparent;color:var(--gold);border:1px solid var(--gold2)
+}
+.btn.danger{background:#873b43;color:white}
+.btn.success{background:#256947;color:white}
+.btn.small{font-size:10px;padding:8px 10px}
+.search{
+ width:100%;max-width:430px;background:#101722;color:white;
+ border:1px solid var(--border);border-radius:6px;padding:12px
+}
+.table-wrap{
+ overflow-x:auto;border:1px solid var(--border);border-radius:7px
+}
+table{width:100%;min-width:700px;border-collapse:collapse}
+th{
+ background:#293648;color:var(--gold);
+ font-size:11px;padding:13px;text-align:left
+}
+td{
+ padding:12px;border-top:1px solid var(--border);
+ font-size:12px;vertical-align:top;overflow-wrap:anywhere
+}
+td button{margin:2px}
+.empty{text-align:center;color:var(--muted);padding:24px;font-size:12px}
+.badge{
+ display:inline-block;border-radius:20px;padding:5px 10px;
+ background:#354255;color:white;font-size:10px
+}
+.badge.green{background:#214832;color:#a4e7bf}
+.badge.red{background:#492a30;color:#f4b0b0}
+.badge.gold{background:#493b23;color:#f1d48d}
+.form-grid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px
+}
+.field.full{grid-column:1/-1}
+.field{margin-bottom:13px}
+.field label{
+ display:block;color:var(--gold);font-size:11px;
+ font-weight:bold;margin-bottom:9px
+}
+.field input,.field select,.field textarea{
+ width:100%;background:#101722;color:white;
+ border:1px solid var(--border);border-radius:6px;padding:13px
+}
+.field textarea{min-height:125px;resize:vertical}
+.field input[readonly]{background:#293446;color:#f0d994}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.record{
+ background:#141d2b;border:1px solid var(--border);
+ border-left:3px solid var(--gold);
+ padding:17px;border-radius:7px;margin-bottom:12px
+}
+.record h4{color:var(--gold);margin:8px 0}
+.record p{white-space:pre-wrap;overflow-wrap:anywhere}
+.guide{
+ background:#131b27;border-left:3px solid var(--gold);
+ color:var(--muted);padding:15px;font-size:12px;margin-top:17px
+}
+.template-grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px
+}
+.template-btn{
+ background:#293649;color:white;border:1px solid #506074;
+ border-radius:7px;padding:15px;text-align:left;font-size:12px
+}
+.template-btn:hover{border-color:var(--gold);color:var(--gold)}
+.preview{
+ background:#f8f6ed;color:#17212c;border-radius:8px;padding:24px;
+ min-height:180px;white-space:pre-wrap;
+ overflow-wrap:anywhere;font:15px/1.8 Georgia,serif
+}
+.modal-layer{
+ position:fixed;inset:0;background:#000c;z-index:100;
+ display:flex;align-items:center;justify-content:center;padding:15px
+}
+.modal{
+ width:100%;max-width:850px;max-height:92vh;overflow-y:auto;
+ background:var(--panel);border:1px solid var(--gold);
+ border-top:4px solid var(--gold);
+ border-radius:10px;padding:25px
+}
+.modal h2{color:var(--gold);font-size:20px;margin:0 0 12px}
+.modal p{color:var(--muted);font-size:12px}
+.recovery-panel{
+ border:1px solid #75603a;background:#201f23;
+ border-radius:8px;padding:18px;margin-top:20px
+}
+.recovery-code{
+ background:#101722;border:1px dashed var(--gold);
+ color:#f3d68c;padding:18px;border-radius:7px;text-align:center;
+ font-size:clamp(16px,4vw,25px);
+ font-weight:bold;letter-spacing:2px;
+ overflow-wrap:anywhere;user-select:all
+}
+.verify-check{
+ display:flex;gap:12px;align-items:flex-start;
+ color:#e5d5af;font-size:12px;line-height:1.8;margin:18px 0
+}
+.verify-check input{margin-top:5px;accent-color:var(--gold)}
+.footer{
+ text-align:center;border-top:1px solid var(--border);
+ color:var(--muted);padding:23px;font-size:10px
+}
+.overlay{display:none}
+.alert-dot{
+ display:inline-flex;min-width:21px;min-height:21px;
+ justify-content:center;align-items:center;margin-left:7px;
+ padding:2px 6px;border-radius:20px;
+ background:#a53d44;color:#fff;font-size:10px;font-weight:800
+}
+.complaint-detail{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:12px;margin:15px 0
+}
+.complaint-detail>div{
+ background:#111a27;border:1px solid #39495a;
+ border-radius:7px;padding:12px;overflow-wrap:anywhere
+}
+.complaint-detail small{
+ display:block;font-size:10px;color:var(--gold);margin-bottom:5px
+}
+.complaint-detail span{
+ font-size:12px;white-space:pre-wrap
+}
+.complaint-detail .wide{grid-column:1/-1}
+.complaint-history{
+ max-height:165px;overflow:auto;background:#121b28;
+ border:1px solid #39495a;border-radius:7px;
+ padding:12px;font-size:12px;white-space:pre-wrap
+}
+@media(max-width:1150px){
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .quick-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:850px){
+ .sidebar{transform:translateX(-100%);transition:.25s}
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0}
+ .mobile-menu{display:block}
+ .overlay.show{
+  display:block;position:fixed;inset:0;background:#000b;z-index:30
+ }
+ .content{padding:19px 14px}
+ .topbar{padding:14px}
+}
+@media(max-width:600px){
+ .stats,.quick-grid,.form-grid,.template-grid{
+  grid-template-columns:1fr
+ }
+ .field.full{grid-column:auto}
+ .admin-chip{display:none}
+ .card,.modal{padding:17px}
+ .page-head h2{font-size:23px}
+ .complaint-detail{grid-template-columns:1fr}
+ .complaint-detail .wide{grid-column:auto}
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+ <div class="brand">
+  <img src="logo.png" alt="Logo Polis Diraja MYMahkota">
+  <h2>POLIS DIRAJA MYMAHKOTA</h2>
+  <p>PANEL PENTADBIRAN</p>
+ </div>
+
+ <div class="menu-title">PUSAT KAWALAN</div>
+ <button class="nav-btn active" data-view="utama">▦ Ringkasan Utama</button>
+
+ <div class="menu-title">KELULUSAN & AKAUN</div>
+ <button class="nav-btn" data-view="registrations">
+  ✓ Kelulusan Pendaftaran
+ </button>
+ <button class="nav-btn" data-view="adminRequests">
+  ★ Kelulusan Pentadbiran
+  <span class="alert-dot" id="adminRequestNavCount" hidden>0</span>
+ </button>
+ <button class="nav-btn" data-view="admins">♙ Senarai Pentadbir / KICK</button>
+ <button class="nav-btn" data-view="recoveries">◇ Pemulihan Akaun / Kod Pemulihan</button>
+
+ <div class="menu-title">PENGURUSAN ANGGOTA</div>
+ <button class="nav-btn" data-view="members">♙ Senarai Anggota / KICK</button>
+ <button class="nav-btn" data-view="fail">▣ Fail Peribadi Anggota</button>
+ <button class="nav-btn" data-view="certificates">▧ Sijil Anggota</button>
+ <button class="nav-btn" data-view="documents">▤ Dokumen Anggota</button>
+ <button class="nav-btn" data-view="skills">✦ Kemahiran & Kepakaran</button>
+ <button class="nav-btn" data-view="performance">▥ Prestasi & Kehadiran</button>
+ <button class="nav-btn" data-view="serviceRecords">◷ Rekod Perkhidmatan</button>
+ <button class="nav-btn" data-view="departments">▣ Jabatan</button>
+ <button class="nav-btn" data-view="units">▤ Unit & Bahagian</button>
+
+ <div class="menu-title">PENERBITAN RASMI</div>
+ <button class="nav-btn" data-view="pengumuman">▣ BUAT PENGUMUMAN</button>
+ <button class="nav-btn" data-view="announcements">▥ Senarai Pengumuman</button>
+ <button class="nav-btn" data-view="letters">✉ Surat Rasmi</button>
+ <button class="nav-btn" data-view="complaints">
+  ! Aduan Awam
+  <span class="alert-dot" id="complaintNavCount" hidden>0</span>
+ </button>
+
+ <div class="menu-title">PENGURUSAN SISTEM</div>
+ <button class="nav-btn" data-view="tetapan">⚙ Tetapan Portal</button>
+ <button class="nav-btn" data-view="sandaran">▧ Sandaran & Log Aktiviti</button>
+
+ <button class="logout" id="logoutBtn">LOG KELUAR PENTADBIR</button>
+
+ <div style="border-top:1px solid var(--border);margin-top:20px;padding-top:15px">
+  <a class="nav-btn" href="dashboard.html">← Dashboard Anggota</a>
+  <a class="nav-btn" href="index.html">← Portal Utama</a>
+ </div>
+</aside>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="main">
+<header class="topbar">
+ <div style="display:flex;align-items:center;gap:12px">
+  <button class="mobile-menu" id="menuToggle">☰</button>
+  <div>
+   <h1 id="topTitle">Ringkasan Utama</h1>
+   <p>SISTEM PENGURUSAN PENTADBIRAN</p>
+  </div>
+ </div>
+ <div class="admin-chip">
+  <strong id="adminName">PENTADBIR</strong>
+  <small id="adminId">—</small>
+ </div>
+</header>
+
+<main class="content">
+<div class="notice" id="notice">
+ Selamat datang ke Panel Pentadbiran Polis Diraja MYMahkota.
+</div>
+
+<!-- RINGKASAN UTAMA -->
+<section class="view" id="view-utama">
+ <div class="page-head">
+  <small>PUSAT KAWALAN</small>
+  <h2>Ringkasan Pentadbiran</h2>
+  <p>Maklumat keseluruhan anggota, pentadbir, permohonan dan aduan awam.</p>
+  <div class="gold-line"></div>
+ </div>
+ <div class="stats">
+  <div class="stat"><small>JUMLAH ANGGOTA</small><strong id="countMembers">0</strong></div>
+  <div class="stat"><small>PENDAFTARAN MENUNGGU</small><strong id="countRegistrations">0</strong></div>
+  <div class="stat"><small>PENTADBIR AKTIF</small><strong id="countAdmins">0</strong></div>
+  <div class="stat"><small>PERMOHONAN PENTADBIR</small><strong id="countAdminRequests">0</strong></div>
+  <div class="stat"><small>ANGGOTA DITAMATKAN</small><strong id="countKicked">0</strong></div>
+  <div class="stat"><small>PEMULIHAN MENUNGGU</small><strong id="countRecoveries">0</strong></div>
+  <div class="stat"><small>SIJIL ANGGOTA</small><strong id="countCertificates">0</strong></div>
+  <div class="stat"><small>PENGUMUMAN RASMI</small><strong id="countAnnouncements">0</strong></div>
+  <div class="stat"><small>ADUAN MENUNGGU</small><strong id="countComplaints">0</strong></div>
+ </div>
+
+ <div class="quick-grid" id="quickGrid"></div>
+
+ <div class="card" style="margin-top:22px">
+  <h3>Kuasa dan Tanggungjawab Pentadbiran</h3>
+  <p>
+   Pentadbir yang diluluskan boleh mengurus rekod anggota,
+   kelulusan, sijil, dokumen, pengumuman rasmi serta aduan awam.
+  </p>
+  <div class="guide">
+   Tindakan KICK memerlukan sebab.
+   Sejarah perkhidmatan dikekalkan.
+   Pentadbir Utama G2002 dilindungi daripada KICK biasa.
+  </div>
+ </div>
+</section>
+
+<!-- REKOD UMUM -->
+<section class="view" id="view-rekod" hidden>
+ <div class="page-head">
+  <small>PENGURUSAN REKOD</small>
+  <h2 id="recordHeading">Senarai Rekod</h2>
+  <p>Urus maklumat dan rekod organisasi.</p>
+  <div class="gold-line"></div>
+ </div>
+ <div class="card">
+  <div class="toolbar">
+   <button class="btn" id="addRecordBtn">+ TAMBAH REKOD</button>
+   <button class="btn secondary" id="refreshBtn">MUAT SEMULA</button>
+  </div>
+  <input class="search" id="recordSearch"
+         placeholder="Cari nama, nombor badan atau rujukan">
+  <div class="table-wrap" style="margin-top:17px">
+   <table>
+    <thead id="recordHead"></thead>
+    <tbody id="recordBody"></tbody>
+   </table>
+  </div>
+  <div class="guide" id="recordGuide">
+   Semua tindakan penting disimpan dalam Log Aktiviti.
+  </div>
+ </div>
+</section>
+
+<!-- FAIL PERIBADI -->
+<section class="view" id="view-fail" hidden>
+ <div class="page-head">
+  <small>REKOD KERJAYA</small>
+  <h2>Fail Peribadi Anggota</h2>
+  <p>Profil, sijil, dokumen, kemahiran, prestasi dan rekod perkhidmatan.</p>
+  <div class="gold-line"></div>
+ </div>
+ <div class="card">
+  <div class="field">
+   <label>PILIH ANGGOTA</label>
+   <select id="fileMemberSelect"></select>
+  </div>
+  <div id="fileContent"></div>
+ </div>
+</section>
+
+<!-- PENGUMUMAN -->
+<section class="view" id="view-pengumuman" hidden>
+ <div class="page-head">
+  <small>BAHAGIAN PENERBITAN</small>
+  <h2>BUAT PENGUMUMAN RASMI</h2>
+  <p>Cipta, pratonton, simpan dan terbitkan pengumuman rasmi.</p>
+  <div class="gold-line"></div>
+ </div>
+
+ <div class="card">
+  <h3>Pilih Jenis Pengumuman</h3>
+  <div class="template-grid">
+   <button class="template-btn" data-template="umum">PENGUMUMAN UMUM</button>
+   <button class="template-btn" data-template="arahan">ARAHAN PENTADBIRAN</button>
+   <button class="template-btn" data-template="mesyuarat">NOTIS MESYUARAT</button>
+   <button class="template-btn" data-template="anggota">MAKLUMAN ANGGOTA</button>
+   <button class="template-btn" data-template="awam">HEBAHAN AWAM</button>
+   <button class="template-btn" data-template="perkhidmatan">NOTIS PERKHIDMATAN</button>
+  </div>
+ </div>
+
+ <div class="card">
+  <h3 id="announcementFormTitle">Borang Pengumuman Baharu</h3>
+  <form id="announcementForm">
+   <div class="form-grid">
+    <div class="field">
+     <label>NOMBOR RUJUKAN AUTOMATIK</label>
+     <input id="aRujukan" readonly>
+    </div>
+    <div class="field">
+     <label>TARIKH</label>
+     <input id="aTarikh" type="date" required>
+    </div>
+    <div class="field">
+     <label>KATEGORI</label>
+     <select id="aKategori">
+      <option>Pengumuman Umum</option>
+      <option>Arahan Pentadbiran</option>
+      <option>Notis Mesyuarat</option>
+      <option>Makluman Anggota</option>
+      <option>Hebahan Awam</option>
+      <option>Notis Perkhidmatan</option>
+     </select>
+    </div>
+    <div class="field">
+     <label>KEPADA</label>
+     <input id="aKepada" required>
+    </div>
+    <div class="field full">
+     <label>TAJUK</label>
+     <input id="aTajuk" required>
+    </div>
+    <div class="field full">
+     <label>PERKARA</label>
+     <input id="aPerkara">
+    </div>
+    <div class="field full">
+     <label>KANDUNGAN PENGUMUMAN</label>
+     <textarea id="aKandungan" required></textarea>
+    </div>
+    <div class="field full">
+     <label>ARAHAN / TINDAKAN</label>
+     <textarea id="aArahan"></textarea>
+    </div>
+    <div class="field">
+     <label>PEGAWAI PENGELUAR</label>
+     <input id="aPengeluar">
+    </div>
+    <div class="field">
+     <label>JAWATAN PEGAWAI</label>
+     <input id="aJawatan">
+    </div>
+    <div class="field">
+     <label>STATUS</label>
+     <select id="aStatus">
+      <option>Draf</option>
+      <option>Diterbitkan</option>
+      <option>Ditutup</option>
+     </select>
+    </div>
+   </div>
+   <div class="actions">
+    <button class="btn secondary" type="button" id="previewBtn">PRATONTON</button>
+    <button class="btn" type="submit">SIMPAN PENGUMUMAN</button>
+    <button class="btn success" type="button" id="publishBtn">TERBITKAN</button>
+    <button class="btn secondary" type="button" id="resetAnnouncementBtn">KOSONGKAN</button>
+   </div>
+  </form>
+ </div>
+
+ <div class="card">
+  <h3>Pratonton Pengumuman</h3>
+  <div class="preview" id="announcementPreview">
+   Isi borang untuk melihat pratonton.
+  </div>
+  <div class="actions">
+   <button class="btn secondary" id="copyAnnouncementBtn">SALIN TEKS</button>
+   <button class="btn secondary" id="printAnnouncementBtn">CETAK / SIMPAN PDF</button>
+  </div>
+ </div>
+</section>
+
+<!-- TETAPAN -->
+<section class="view" id="view-tetapan" hidden>
+ <div class="page-head">
+  <small>PENGURUSAN SISTEM</small>
+  <h2>Tetapan Portal</h2>
+  <div class="gold-line"></div>
+ </div>
+ <div class="card">
+  <form id="settingsForm">
+   <div class="field"><label>NAMA ORGANISASI</label><input name="title" required></div>
+   <div class="field"><label>MOTO ORGANISASI</label><input name="slogan"></div>
+   <div class="field"><label>PENERANGAN PORTAL</label><textarea name="description"></textarea></div>
+   <div class="field"><label>MAKLUMAN PORTAL</label><textarea name="notice"></textarea></div>
+   <button class="btn">SIMPAN TETAPAN</button>
+  </form>
+ </div>
+</section>
+
+<!-- SANDARAN -->
+<section class="view" id="view-sandaran" hidden>
+ <div class="page-head">
+  <small>REKOD SISTEM</small>
+  <h2>Sandaran & Log Aktiviti</h2>
+  <div class="gold-line"></div>
+ </div>
+
+ <div class="card">
+  <h3>Sandaran Data</h3>
+  <div class="toolbar">
+   <button class="btn" id="exportBtn">EKSPORT DATA JSON</button>
+   <button class="btn secondary" id="importBtn">IMPORT DATA JSON</button>
+   <input type="file" id="importFile" accept=".json,application/json" hidden>
+  </div>
+  <div class="guide">
+   Eksport sandaran sebelum import.
+   Import akan menggantikan rekod sedia ada.
+   Simpan fail sandaran di tempat selamat.
+  </div>
+ </div>
+
+ <div class="card">
+  <h3>Sejarah Aktiviti Pentadbiran</h3>
+  <div class="table-wrap">
+   <table>
+    <thead>
+     <tr>
+      <th>TARIKH</th>
+      <th>PELAKSANA</th>
+      <th>TINDAKAN</th>
+      <th>BUTIRAN</th>
+     </tr>
+    </thead>
+    <tbody id="logRows"></tbody>
+   </table>
+  </div>
+ </div>
+</section>
+
+</main>
+
+<footer class="footer">
+ POLIS DIRAJA MYMAHKOTA · SISTEM PENGURUSAN PENTADBIRAN
+ <p>© 2026 POLIS DIRAJA MYMAHKOTA</p>
+</footer>
+</div>
+
+<!-- MODAL TAMBAH REKOD -->
+<div class="modal-layer" id="formLayer" hidden>
+ <div class="modal" role="dialog" aria-modal="true">
+  <h2 id="formTitle">Borang Rekod</h2>
+  <p>Lengkapkan maklumat rekod.</p>
+  <form id="recordForm">
+   <div class="form-grid" id="formFields"></div>
+   <div class="actions">
+    <button class="btn" type="submit">SIMPAN REKOD</button>
+    <button class="btn secondary" type="button" id="closeFormBtn">BATAL</button>
+   </div>
+  </form>
+ </div>
+</div>
+
+<!-- MODAL KICK -->
+<div class="modal-layer" id="kickLayer" hidden>
+ <div class="modal" role="dialog" aria-modal="true">
+  <h2 id="kickTitle">TINDAKAN KICK</h2>
+  <p>Sebab tindakan wajib diisi dan disimpan dalam rekod.</p>
+  <form id="kickForm">
+   <div class="field">
+    <label>NOMBOR BADAN</label>
+    <input id="kickId" readonly>
+   </div>
+   <div class="field">
+    <label>JENIS TINDAKAN</label>
+    <select id="kickAction"></select>
+   </div>
+   <div class="field">
+    <label>SEBAB TINDAKAN</label>
+    <textarea id="kickReason" required></textarea>
+   </div>
+   <div class="field">
+    <label>PEGAWAI PELAKSANA</label>
+    <input id="kickOfficer" readonly>
+   </div>
+   <div class="actions">
+    <button class="btn danger" type="submit">SAHKAN TINDAKAN</button>
+    <button class="btn secondary" type="button" id="closeKickBtn">BATAL</button>
+   </div>
+  </form>
+ </div>
+</div>
+
+<!-- MODAL PEMULIHAN AKAUN -->
+<div class="modal-layer" id="recoveryLayer" hidden>
+ <div class="modal" role="dialog" aria-modal="true">
+  <h2>PEMULIHAN AKAUN ANGGOTA</h2>
+  <p>Semak identiti pemohon sebelum menjana kod.</p>
+
+  <div class="form-grid">
+   <div class="field"><label>NOMBOR RUJUKAN</label><input id="recoveryReference" readonly></div>
+   <div class="field"><label>NOMBOR BADAN</label><input id="recoveryMemberId" readonly></div>
+   <div class="field"><label>NAMA PEMOHON</label><input id="recoveryName" readonly></div>
+   <div class="field"><label>STATUS PERMOHONAN</label><input id="recoveryStatus" readonly></div>
+  </div>
+
+  <form id="recoveryForm">
+   <div class="field">
+    <label>KAEDAH PENGESAHAN IDENTITI</label>
+    <select id="recoveryMethod" required>
+     <option value="">-- PILIH KAEDAH --</option>
+     <option>Pengesahan secara bersemuka</option>
+     <option>Pengesahan melalui saluran komunikasi berdaftar</option>
+     <option>Pengesahan melalui prosedur dalaman</option>
+    </select>
+   </div>
+   <div class="field">
+    <label>CATATAN PENGESAHAN</label>
+    <textarea id="recoveryVerificationNote" required></textarea>
+   </div>
+   <label class="verify-check">
+    <input type="checkbox" id="recoveryVerified" required>
+    <span>Saya mengesahkan identiti pemohon telah disemak dan tindakan ini dibenarkan.</span>
+   </label>
+   <div class="actions">
+    <button class="btn success" id="generateRecoveryBtn" type="submit">
+     SAHKAN, LULUSKAN & JANA KOD
+    </button>
+    <button class="btn secondary" id="closeRecoveryBtn" type="button">TUTUP</button>
+   </div>
+  </form>
+
+  <div class="recovery-panel" id="recoveryResult" hidden>
+   <h3>KOD PEMULIHAN DIJANA</h3>
+   <div class="recovery-code" id="generatedRecoveryCode">—</div>
+   <p>Kod hanya dipaparkan sekali. Berikan kepada pemilik akaun melalui saluran persendirian.</p>
+   <div class="actions">
+    <button class="btn" type="button" id="copyRecoveryCode">SALIN KOD</button>
+    <button class="btn secondary" type="button" id="finishRecoveryBtn">SELESAI</button>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- MODAL PERMOHONAN PENTADBIR -->
+<div class="modal-layer" id="adminRequestLayer" hidden>
+ <div class="modal" role="dialog" aria-modal="true">
+  <h2>BUTIRAN PERMOHONAN PENTADBIR</h2>
+  <p>Semak maklumat dan alasan permohonan sebelum mengambil tindakan.</p>
+  <div class="complaint-detail" id="adminRequestDetails"></div>
+  <div class="actions" id="adminRequestActions"></div>
+  <div class="actions">
+   <button class="btn secondary" type="button" id="closeAdminRequestBtn">TUTUP</button>
+  </div>
+ </div>
+</div>
+
+<!-- MODAL ADUAN AWAM -->
+<div class="modal-layer" id="complaintLayer" hidden>
+ <div class="modal" role="dialog" aria-modal="true">
+  <h2>BUTIRAN ADUAN AWAM</h2>
+  <p>Semak bukti, tetapkan tindakan dan berikan maklum balas kepada pengadu.</p>
+
+  <div class="complaint-detail" id="complaintDetails"></div>
+
+  <div class="card" style="padding:17px">
+   <h3>Bukti Aduan</h3>
+   <div id="complaintEvidence"></div>
+  </div>
+
+  <form id="complaintActionForm">
+   <div class="form-grid">
+    <div class="field">
+     <label>STATUS ADUAN</label>
+     <select id="complaintStatus" required>
+      <option>Menunggu Semakan</option>
+      <option>Dalam Tindakan</option>
+      <option>Dalam Siasatan</option>
+      <option>Selesai</option>
+      <option>Ditolak</option>
+     </select>
+    </div>
+    <div class="field">
+     <label>PEGAWAI BERTUGAS</label>
+     <input id="complaintOfficer" readonly>
+    </div>
+    <div class="field full">
+     <label>CATATAN TINDAKAN DALAMAN</label>
+     <textarea id="complaintActionNote"
+       placeholder="Catat tindakan yang diambil oleh pentadbir..."></textarea>
+    </div>
+    <div class="field full">
+     <label>MAKLUM BALAS KEPADA PENGADU</label>
+     <textarea id="complaintResponse"
+       placeholder="Maklum balas ini boleh dilihat melalui semakan status aduan."></textarea>
+    </div>
+   </div>
+   <h3>Sejarah Tindakan</h3>
+   <div class="complaint-history" id="complaintHistory">
+    Tiada tindakan direkodkan.
+   </div>
+   <div class="actions">
+    <button type="submit" class="btn success">SIMPAN TINDAKAN</button>
+    <button type="button" class="btn secondary" id="closeComplaintBtn">TUTUP</button>
+   </div>
+  </form>
+ </div>
+</div>
+
+<script>
+"use strict";
+
+/* ==================================================
+   KONFIGURASI
+================================================== */
+
+const STORE_KEY="MYMAHKOTA_PORTAL_V1";
+const SESSION_KEY="MYMAHKOTA_ADMIN_SESSION";
+const COMPLAINT_KEY="mymahkota_complaints_v1";
+
+const MAIN_ADMIN_ID="G2002";
+const MAIN_ADMIN_NAME="Dato' Sri Muhammad Ilham Bin Musa";
+
+const $=id=>document.getElementById(id);
+const norm=v=>String(v??"").trim().toUpperCase();
+const list=v=>Array.isArray(v)?v:[];
+
+function esc(v){
+ return String(v??"")
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#39;");
+}
+
+function today(){
+ const d=new Date();
+ return d.getFullYear()+"-"+
+  String(d.getMonth()+1).padStart(2,"0")+"-"+
+  String(d.getDate()).padStart(2,"0");
+}
+
+function now(){return new Date().toISOString()}
+
+function uid(){
+ if(window.crypto?.randomUUID)return crypto.randomUUID();
+ return "REC-"+Date.now()+"-"+Math.random().toString(36).slice(2,9);
+}
+
+function readJSON(key,fallback){
+ try{
+  const v=JSON.parse(localStorage.getItem(key)||"null");
+  return v??fallback;
+ }catch{return fallback}
+}
+
+function readStore(){
+ const obj=readJSON(STORE_KEY,{});
+ return obj&&typeof obj==="object"&&!Array.isArray(obj)?obj:{};
+}
+
+function readSession(){
+ try{return JSON.parse(sessionStorage.getItem(SESSION_KEY)||"null")}
+ catch{return null}
+}
+
+const MODULES=[
+ "registrations","adminRequests","admins","recoveries",
+ "members","certificates","documents","skills",
+ "performance","serviceRecords","departments","units",
+ "announcements","letters","complaints","logs"
+];
+
+const PREFIXES={
+ registrations:"PDM-DAFTAR",
+ adminRequests:"PDM-ADMIN",
+ recoveries:"PDM-PULIH",
+ members:"PDM-ANG",
+ certificates:"PDM-SIJIL",
+ documents:"PDM-DOK",
+ skills:"PDM-KMH",
+ performance:"PDM-PRS",
+ serviceRecords:"PDM-RKD",
+ departments:"PDM-JAB",
+ units:"PDM-UNIT",
+ announcements:"PDM-PGM",
+ letters:"PDM-SURAT",
+ complaints:"PDM-ADUAN"
+};
+
+function loadData(){
+ const saved=readStore();
+ const result={
+  ...saved,
+  counters:saved.counters&&typeof saved.counters==="object"
+   ?saved.counters:{},
+  settings:{
+   title:"Polis Diraja MYMahkota",
+   slogan:"Berkhidmat Dengan Integriti",
+   description:"",
+   notice:"",
+   ...(saved.settings||{})
+  }
+ };
+ MODULES.forEach(k=>result[k]=list(saved[k]));
+ return result;
+}
+
+let db=loadData();
+let currentModule="members";
+let currentView="utama";
+let formModule=null;
+let editingId=null;
+let selectedMember="";
+let kickTarget=null;
+let recoveryTarget=null;
+let complaintTarget=null;
+let adminRequestTarget=null;
+let editingAnnouncement=null;
+let displayedRecoveryCode="";
+
+const session=readSession();
+
+function getRecordId(r){return String(r?.id||r?.uid||r?.reference||"")}
+function getNoBadan(r){return norm(r?.noBadan||r?.idAnggota||"")}
+function getAdminNoBadan(r){return norm(r?.noBadan||r?.idPentadbir||"")}
+function isActive(s){return norm(s)==="AKTIF"}
+function pending(s){return norm(s)==="MENUNGGU"}
+function findMember(id){return db.members.find(m=>getNoBadan(m)===norm(id))||null}
+function findAdmin(id){return db.admins.find(a=>getAdminNoBadan(a)===norm(id))||null}
+
+function hasAccess(s,store){
+ if(!s?.noBadan)return false;
+ const id=norm(s.noBadan);
+ const members=list(store.members);
+ const admins=list(store.admins);
+ const member=members.find(m=>getNoBadan(m)===id);
+
+ if(member&&!isActive(member.status))return false;
+
+ /* Keserasian sistem asal. Belum selamat untuk pelancaran awam. */
+ if(id===MAIN_ADMIN_ID)return true;
+ if(!member)return false;
+
+ return admins.some(a=>
+  getAdminNoBadan(a)===id&&isActive(a.status)
+ );
+}
+
+function checkSession(){
+ const valid=hasAccess(readSession(),readStore());
+ if(!valid){
+  sessionStorage.removeItem(SESSION_KEY);
+  location.replace("login-pentadbir.html");
+ }
+ return valid;
+}
+
+function notify(message,type=""){
+ $("notice").className="notice "+type;
+ $("notice").textContent=message;
+}
+
+function addLog(action,details){
+ db.logs.unshift({
+  id:uid(),
+  tarikh:now(),
+  pelaksana:session?.noBadan||"",
+  namaPelaksana:session?.nama||"",
+  tindakan:action,
+  butiran:details
+ });
+ if(db.logs.length>1000)db.logs.length=1000;
+}
+
+function saveData(){
+ if(!checkSession())return false;
+ try{
+  localStorage.setItem(STORE_KEY,JSON.stringify(db));
+  refreshAll();
+  return true;
+ }catch{
+  notify("Gagal menyimpan data. Semak storan pelayar.","error");
+  return false;
+ }
+}
+
+function nextReference(module,commit=false){
+ const year=new Date().getFullYear();
+ const key=module+"-"+year;
+ let high=Number(db.counters[key]||0);
+
+ list(db[module]).forEach(r=>{
+  const ref=String(r.rujukan||r.reference||"");
+  const m=ref.match(/-(\d{4})-(\d+)$/);
+  if(m&&Number(m[1])===year)high=Math.max(high,Number(m[2]));
+ });
+
+ const next=high+1;
+ if(commit)db.counters[key]=next;
+
+ return (PREFIXES[module]||"PDM-REF")+
+  "-"+year+"-"+String(next).padStart(5,"0");
+}
+
+/* ==================================================
+   ADUAN AWAM - STORAN DIKONGSI
+================================================== */
+
+function readPublicComplaints(){
+ const records=readJSON(COMPLAINT_KEY,[]);
+ return Array.isArray(records)?records:[];
+}
+
+function savePublicComplaints(records){
+ try{
+  localStorage.setItem(COMPLAINT_KEY,JSON.stringify(records));
+  return true;
+ }catch{
+  notify("Gagal menyimpan tindakan aduan.","error");
+  return false;
+ }
+}
+
+function isPublicComplaint(record){
+ return record?.__complaintSource==="public";
+}
+
+function mergeComplaints(){
+ const own=list(db.complaints).map(r=>({...r,__complaintSource:"internal"}));
+ const publicRecords=readPublicComplaints().map(r=>({
+  ...r,
+  __complaintSource:"public",
+  rujukan:r.reference||r.rujukan||r.id,
+  tajuk:r.tajuk||r.kategori||"Aduan Awam",
+  keterangan:r.butiran||r.keterangan||"",
+  status:r.status||"Menunggu Semakan"
+ }));
+
+ const ids=new Set(publicRecords.map(r=>String(r.rujukan)));
+ return [
+  ...publicRecords,
+  ...own.filter(r=>!ids.has(String(r.rujukan||r.reference)))
+ ];
+}
+
+function complaintPending(status){
+ return [
+  "MENUNGGU","MENUNGGU SEMAKAN"
+ ].includes(norm(status));
+}
+
+function findComplaint(id,source){
+ if(source==="public"){
+  return readPublicComplaints().find(r=>
+   String(r.id||r.reference)===String(id)
+  )||null;
+ }
+ return db.complaints.find(r=>getRecordId(r)===id)||null;
+}
+
+function complaintIdentifier(record){
+ return String(record.reference||record.rujukan||record.id||"");
+}
+
+function closeComplaint(){
+ $("complaintLayer").hidden=true;
+ complaintTarget=null;
+ $("complaintEvidence").textContent="";
+}
+
+function detailCell(label,value,wide=false){
+ return `<div class="${wide?"wide":""}">
+  <small>${esc(label)}</small>
+  <span>${esc(value||"—")}</span>
+ </div>`;
+}
+
+function openComplaint(id,source){
+ if(!checkSession())return;
+
+ const record=findComplaint(id,source);
+ if(!record){
+  alert("Rekod aduan tidak dijumpai.");
+  return;
+ }
+
+ complaintTarget={id,source};
+
+ $("complaintDetails").innerHTML=[
+  detailCell("NOMBOR RUJUKAN",complaintIdentifier(record)),
+  detailCell("STATUS",record.status),
+  detailCell("NAMA PENGADU",record.nama),
+  detailCell("DISCORD",record.discord),
+  detailCell("KATEGORI",record.kategori||record.tajuk),
+  detailCell("TARIKH KEJADIAN",record.tarikhKejadian||record.tarikh),
+  detailCell("TEMPAT KEJADIAN",record.tempat),
+  detailCell("INDIVIDU TERLIBAT",record.individu),
+  detailCell("TARIKH HANTAR",record.tarikhHantar||record.createdAt),
+  detailCell("BUTIRAN ADUAN",record.butiran||record.keterangan,true)
+ ].join("");
+
+ $("complaintStatus").value=
+  ["Menunggu Semakan","Dalam Tindakan","Dalam Siasatan",
+   "Selesai","Ditolak"].includes(record.status)
+  ?record.status:"Menunggu Semakan";
+
+ $("complaintOfficer").value=
+  (session?.noBadan||"")+" — "+(session?.nama||"");
+
+ $("complaintActionNote").value=record.tindakan||"";
+ $("complaintResponse").value=record.catatanPentadbir||"";
+
+ const evidence=$("complaintEvidence");
+ evidence.textContent="";
+
+ if(record.bukti?.data){
+  const b=record.bukti;
+  const name=document.createElement("p");
+  name.textContent="Fail: "+(b.name||"Lampiran");
+  evidence.appendChild(name);
+
+  if(/^data:image\/(png|jpeg);base64,/.test(b.data)){
+   const img=document.createElement("img");
+   img.src=b.data;
+   img.alt="Bukti aduan";
+   img.style.cssText="max-width:100%;max-height:300px;object-fit:contain;border:1px solid #506074";
+   evidence.appendChild(img);
+  }
+
+  const link=document.createElement("a");
+  link.className="btn secondary";
+  link.style.display="inline-block";
+  link.textContent="BUKA LAMPIRAN";
+  link.href=b.data;
+  link.download=b.name||"bukti";
+  evidence.appendChild(link);
+ }else{
+  evidence.textContent="Tiada bukti dilampirkan.";
+ }
+
+ drawComplaintHistory(record);
+ $("complaintLayer").hidden=false;
+}
+
+function drawComplaintHistory(record){
+ const items=list(record.sejarahTindakan);
+ $("complaintHistory").textContent=items.length
+  ?items.map(h=>
+    (h.tarikh||"")+" | "+(h.pegawai||"Sistem")+
+    "\n"+(h.tindakan||h.status||"")+
+    (h.catatan?"\n"+h.catatan:"")
+   ).join("\n\n")
+  :"Tiada tindakan direkodkan.";
+}
+
+$("closeComplaintBtn").onclick=closeComplaint;
+$("complaintLayer").onclick=e=>{
+ if(e.target===$("complaintLayer"))closeComplaint();
+};
+
+$("complaintActionForm").onsubmit=e=>{
+ e.preventDefault();
+ if(!checkSession()||!complaintTarget)return;
+
+ const {id,source}=complaintTarget;
+ const status=$("complaintStatus").value;
+ const note=$("complaintActionNote").value.trim();
+ const response=$("complaintResponse").value.trim();
+
+ if(status==="Ditolak"&&!response){
+  alert("Maklum balas penolakan wajib diisi.");
+  return;
+ }
+
+ if(!confirm("Simpan tindakan dan status aduan ini?"))return;
+
+ let record;
+
+ if(source==="public"){
+  const all=readPublicComplaints();
+  record=all.find(r=>
+   String(r.id||r.reference)===String(id)
+  );
+  if(!record){
+   alert("Aduan tidak dijumpai.");return;
+  }
+
+  record.status=status;
+  record.tindakan=note;
+  record.catatanPentadbir=response;
+  record.pegawaiBertugas=session.noBadan;
+  record.tarikhTindakan=now();
+  record.updatedAt=now();
+
+  if(!Array.isArray(record.sejarahTindakan))
+   record.sejarahTindakan=[];
+
+  record.sejarahTindakan.push({
+   tarikh:now(),
+   pegawai:session.noBadan,
+   tindakan:"Status dikemaskini: "+status,
+   catatan:note
+  });
+
+  if(!savePublicComplaints(all))return;
+ }else{
+  record=db.complaints.find(r=>getRecordId(r)===id);
+  if(!record)return;
+
+  record.status=status;
+  record.tindakan=note;
+  record.catatanPentadbir=response;
+  record.pegawaiBertugas=session.noBadan;
+  record.tarikhTindakan=now();
+  record.updatedAt=now();
+
+  if(!Array.isArray(record.sejarahTindakan))
+   record.sejarahTindakan=[];
+
+  record.sejarahTindakan.push({
+   tarikh:now(),
+   pegawai:session.noBadan,
+   tindakan:"Status dikemaskini: "+status,
+   catatan:note
+  });
+ }
+
+ addLog(
+  "TINDAKAN ADUAN AWAM",
+  complaintIdentifier(record)+" | "+status
+ );
+
+ if(saveData()){
+  closeComplaint();
+  notify("Status dan tindakan aduan berjaya disimpan.","success");
+ }
+};
+
+/* ==================================================
+   SKEMA REKOD
+================================================== */
+
+const F=(key,label,type="text",required=false)=>({
+ key,label,type,required
+});
+
+const SCHEMA={
+ registrations:{
+  title:"Kelulusan Pendaftaran",
+  fields:[
+   F("rujukan","Nombor Rujukan","auto"),
+   F("nama","Nama Penuh","text",true),
+   F("noBadan","Nombor Badan","text",true),
+   F("pangkat","Pangkat"),F("jawatan","Jawatan"),
+   F("jabatan","Jabatan"),F("unit","Unit / Bahagian"),
+   F("tarikhMenyertai","Tarikh Menyertai","date")
+  ]
+ },
+ adminRequests:{
+  title:"Kelulusan Pentadbiran",
+  fields:[
+   F("rujukan","Nombor Rujukan","auto"),
+   F("noBadan","Nombor Badan","member",true),
+   F("nama","Nama Pemohon","text",true),
+   F("tujuan","Tujuan Permohonan","textarea",true),
+   F("sebab","Justifikasi Permohonan","textarea")
+  ]
+ },
+ recoveries:{
+  title:"Pemulihan Akaun",
+  fields:[
+   F("rujukan","Nombor Rujukan","auto"),
+   F("noBadan","Nombor Badan","text",true),
+   F("nama","Nama Pemohon","text",true),
+   F("catatan","Maklumat Pemulihan","textarea")
+  ]
+ },
+ members:{
+  title:"Pengurusan Anggota",
+  fields:[
+   F("rujukan","Rujukan Profil","auto"),
+   F("nama","Nama Penuh","text",true),
+   F("noBadan","Nombor Badan","text",true),
+   F("pangkat","Pangkat"),F("jawatan","Jawatan"),
+   F("jabatan","Jabatan"),F("unit","Unit / Bahagian"),
+   F("tarikhMenyertai","Tarikh Menyertai","date"),
+   F("status","Status Perkhidmatan","memberStatus"),
+   F("catatan","Catatan Profil","textarea")
+  ]
+ },
+ certificates:{
+  title:"Sijil Anggota",
+  fields:[
+   F("rujukan","Nombor Sijil","auto"),
+   F("noBadan","Anggota","member",true),
+   F("nama","Nama Sijil","text",true),
+   F("jenis","Jenis Sijil"),F("pengeluar","Pihak Pengeluar"),
+   F("tarikh","Tarikh","date"),
+   F("status","Status Sijil","certificateStatus"),
+   F("url","Pautan Sijil","url"),
+   F("keterangan","Keterangan","textarea")
+  ]
+ },
+ documents:{
+  title:"Dokumen Anggota",
+  fields:[
+   F("rujukan","Nombor Dokumen","auto"),
+   F("noBadan","Anggota","member",true),
+   F("tajuk","Tajuk Dokumen","text",true),
+   F("jenis","Jenis Dokumen"),F("pengeluar","Pihak Pengeluar"),
+   F("tarikh","Tarikh","date"),F("url","Pautan Dokumen","url"),
+   F("keterangan","Keterangan","textarea")
+  ]
+ },
+ skills:{
+  title:"Kemahiran & Kepakaran",
+  fields:[
+   F("rujukan","Nombor Rujukan","auto"),
+   F("noBadan","Anggota","member",true),
+   F("nama","Nama Kemahiran","text",true),
+   F("kategori","Kategori","skillCategory"),
+   F("tahap","Tahap Penguasaan","skillLevel"),
+   F("tarikh","Tarikh","date"),
+   F("pengeluar","Pegawai Pengesah"),
+   F("keterangan","Catatan","textarea")
+  ]
+ },
+ performance:{
+  title:"Prestasi & Kehadiran",
+  fields:[
+   F("rujukan","Nombor Rujukan","auto"),
+   F("noBadan","Anggota","member",true),
+   F("tempoh","Tempoh Penilaian","text",true),
+   F("jam","Jam Bertugas","number",true),
+   F("sasaran","Sasaran Jam","number",true),
+   F("markah","Markah Prestasi","score"),
+   F("kod","Kod Prestasi","performanceCode"),
+   F("catatan","Catatan","textarea")
+  ]
+ },
+ serviceRecords:{
+  title:"Rekod Perkhidmatan",
+  fields:[
+   F("rujukan","Nombor Rujukan","auto"),
+   F("noBadan","Anggota","member",true),
+   F("jenis","Jenis Rekod","recordType",true),
+   F("tarikh","Tarikh","date"),
+   F("tajuk","Tajuk Rekod","text",true),
+   F("pangkatLama","Pangkat Lama"),
+   F("pangkatBaharu","Pangkat Baharu"),
+   F("pegawaiPelulus","Pegawai Pelulus"),
+   F("status","Status"),
+   F("keterangan","Keterangan","textarea")
+  ]
+ },
+ departments:{
+  title:"Jabatan",
+  fields:[
+   F("rujukan","Nombor Rujukan","auto"),
+   F("nama","Nama Jabatan","text",true),
+   F("pengarah","Pengarah Jabatan"),
+   F("keterangan","Keterangan","textarea")
+  ]
+ },
+ units:{
+  title:"Unit & Bahagian",
+  fields:[
+   F("rujukan","Nombor Rujukan","auto"),
+   F("nama","Nama Unit / Bahagian","text",true),
+   F("jenis","Jenis","unitType"),
+   F("jabatan","Jabatan Induk"),
+   F("ketua","Ketua / Komander"),
+   F("keterangan","Keterangan","textarea")
+  ]
+ },
+ letters:{
+  title:"Surat Rasmi",
+  fields:[
+   F("rujukan","Nombor Rujukan","auto"),
+   F("tarikh","Tarikh","date"),
+   F("kepada","Penerima","text",true),
+   F("tajuk","Perkara","text",true),
+   F("kandungan","Isi Surat","textarea",true),
+   F("pengeluar","Pegawai Pengeluar"),
+   F("jawatan","Jawatan"),
+   F("status","Status","publicationStatus")
+  ]
+ },
+ complaints:{
+  title:"Aduan Awam",
+  fields:[
+   F("rujukan","Nombor Rujukan","auto"),
+   F("nama","Nama Pengadu","text",true),
+   F("discord","Nama Discord"),
+   F("kategori","Kategori Aduan"),
+   F("tarikh","Tarikh","date"),
+   F("tempat","Tempat Kejadian"),
+   F("tajuk","Tajuk Aduan","text",true),
+   F("keterangan","Butiran Aduan","textarea"),
+   F("tindakan","Tindakan","textarea"),
+   F("status","Status","complaintStatus")
+  ]
+ }
+};
+
+const CHOICES={
+ memberStatus:[
+  "Aktif","Bercuti","Tidak Aktif","Digantung","Tamat Perkhidmatan"
+ ],
+ certificateStatus:[
+  "Menunggu Pengesahan","Disahkan","Dibatalkan"
+ ],
+ skillCategory:["Kemahiran","Kepakaran"],
+ skillLevel:["Asas","Pertengahan","Mahir","Pakar"],
+ performanceCode:["Hijau","Kuning","Merah"],
+ recordType:[
+  "Kenaikan Pangkat","Amaran","Disiplin","Anugerah",
+  "Penghargaan","Latihan","Kursus","Penempatan",
+  "Sijil","Kelayakan","Kemahiran","Kepakaran","Lain-lain"
+ ],
+ unitType:["Unit","Bahagian"],
+ publicationStatus:["Draf","Diterbitkan","Ditutup"],
+ complaintStatus:[
+  "Menunggu Semakan","Dalam Tindakan","Dalam Siasatan",
+  "Selesai","Ditolak"
+ ]
+};
+
+const COLUMNS={
+ registrations:["rujukan","nama","noBadan","status"],
+ adminRequests:["rujukan","nama","noBadan","status"],
+ admins:["nama","noBadan","peranan","status"],
+ recoveries:["rujukan","nama","noBadan","status"],
+ members:["nama","noBadan","pangkat","jabatan","status"],
+ certificates:["rujukan","noBadan","nama","status"],
+ documents:["rujukan","noBadan","tajuk","jenis"],
+ skills:["noBadan","nama","kategori","tahap"],
+ performance:["noBadan","tempoh","jam","sasaran","markah"],
+ serviceRecords:["noBadan","jenis","tarikh","tajuk"],
+ departments:["nama","pengarah"],
+ units:["nama","jenis","jabatan","ketua"],
+ announcements:["rujukan","tarikh","tajuk","status"],
+ letters:["rujukan","tarikh","tajuk","status"],
+ complaints:["rujukan","nama","kategori","status"]
+};
+
+/* ==================================================
+   BORANG REKOD
+================================================== */
+
+function optionsFor(type){
+ if(type==="member"){
+  return db.members.map(m=>[
+   getNoBadan(m),
+   getNoBadan(m)+" — "+m.nama
+  ]);
+ }
+ if(type==="department"){
+  return db.departments.map(d=>[d.nama,d.nama]);
+ }
+ return list(CHOICES[type]).map(v=>[v,v]);
+}
+
+function inputHTML(field,record){
+ const {key,label,type,required}=field;
+ let value=record[key]??"";
+
+ if(type==="auto"&&!value)
+  value=nextReference(formModule);
+
+ if(type==="date"&&!value)
+  value=today();
+
+ const req=required?"required":"";
+ let html="";
+
+ if(type==="textarea"){
+  html=`<textarea name="${esc(key)}" ${req}>${esc(value)}</textarea>`;
+ }else if(type==="auto"){
+  html=`<input name="${esc(key)}" value="${esc(value)}" readonly>`;
+ }else if(type==="member"||type==="department"||CHOICES[type]){
+  const choices=optionsFor(type);
+  let opts='<option value="">-- Pilih --</option>';
+
+  if(value&&!choices.some(p=>String(p[0])===String(value))){
+   opts+=`<option value="${esc(value)}" selected>${esc(value)}</option>`;
+  }
+  choices.forEach(([v,title])=>{
+   opts+=`<option value="${esc(v)}" ${
+    String(v)===String(value)?"selected":""
+   }>${esc(title)}</option>`;
+  });
+  html=`<select name="${esc(key)}" ${req}>${opts}</select>`;
+ }else{
+  const kind=type==="score"?"number":type;
+  const safe=["date","number","url"].includes(kind)?kind:"text";
+  const limits=type==="score"?'min="0" max="100" step="any"':
+   type==="number"?'min="0" step="any"':"";
+  html=`<input type="${safe}" name="${esc(key)}"
+    value="${esc(value)}" ${limits} ${req}>`;
+ }
+
+ return `<div class="field ${type==="textarea"?"full":""}">
+  <label>${esc(label)}</label>${html}
+ </div>`;
+}
+
+function openForm(module,id=null,defaults={}){
+ if(!checkSession()||!SCHEMA[module])return;
+
+ formModule=module;
+ editingId=id;
+
+ const old=id?db[module].find(r=>getRecordId(r)===id):null;
+ if(id&&!old)return;
+
+ const record={...(old||{}),...defaults};
+ if(module==="members"&&old)record.noBadan=getNoBadan(old);
+
+ $("formTitle").textContent=
+  (old?"Kemaskini ":"Tambah ")+SCHEMA[module].title;
+ $("formFields").innerHTML=
+  SCHEMA[module].fields.map(f=>inputHTML(f,record)).join("");
+ $("formLayer").hidden=false;
+}
+
+function closeForm(){
+ $("formLayer").hidden=true;
+ formModule=null;
+ editingId=null;
+}
+
+$("closeFormBtn").onclick=closeForm;
+$("formLayer").onclick=e=>{
+ if(e.target===$("formLayer"))closeForm();
+};
+
+$("recordForm").onsubmit=e=>{
+ e.preventDefault();
+ if(!checkSession()||!formModule)return;
+
+ const module=formModule;
+ const values={};
+ const data=new FormData(e.target);
+
+ SCHEMA[module].fields.forEach(f=>{
+  values[f.key]=String(data.get(f.key)||"").trim();
+ });
+
+ if(values.noBadan)values.noBadan=norm(values.noBadan);
+
+ const old=editingId
+  ?db[module].find(r=>getRecordId(r)===editingId):null;
+
+ if(module==="members"){
+  if(old&&getNoBadan(old)!==values.noBadan){
+   alert("Nombor badan tidak boleh diubah.");return;
+  }
+  if(db.members.some(m=>
+   getNoBadan(m)===values.noBadan&&getRecordId(m)!==editingId
+  )){
+   alert("Nombor badan sudah didaftarkan.");return;
+  }
+  if(values.noBadan===MAIN_ADMIN_ID&&
+    norm(values.status)!=="AKTIF"){
+   alert("G2002 dilindungi.");return;
+  }
+ }
+
+ if(module==="registrations"){
+  if(db.registrations.some(r=>
+   getNoBadan(r)===values.noBadan&&
+   getRecordId(r)!==editingId&&pending(r.status)
+  )){
+   alert("Permohonan nombor badan ini sedang diproses.");return;
+  }
+ }
+
+ if(module==="adminRequests"){
+  if(values.noBadan===MAIN_ADMIN_ID){
+   alert("G2002 tidak memerlukan permohonan.");return;
+  }
+  const member=findMember(values.noBadan);
+  if(!member||!isActive(member.status)){
+   alert("Pemohon mestilah anggota aktif.");return;
+  }
+  if(findAdmin(values.noBadan)&&
+   isActive(findAdmin(values.noBadan).status)){
+   alert("Anggota ini sudah menjadi pentadbir.");return;
+  }
+  if(db.adminRequests.some(r=>
+   getNoBadan(r)===values.noBadan&&pending(r.status)&&
+   getRecordId(r)!==editingId
+  )){
+   alert("Permohonan pentadbir sedang menunggu kelulusan.");return;
+  }
+  values.nama=member.nama;
+ }
+
+ if(module==="recoveries"){
+  const member=findMember(values.noBadan);
+  if(!member||!isActive(member.status)){
+   alert("Hanya anggota aktif boleh memohon pemulihan.");return;
+  }
+  if(db.recoveries.some(r=>
+   getNoBadan(r)===values.noBadan&&
+   getRecordId(r)!==editingId&&
+   ["MENUNGGU","DILULUSKAN"].includes(norm(r.status))
+  )){
+   alert("Permohonan pemulihan aktif sudah wujud.");return;
+  }
+ }
+
+ if(["certificates","documents","skills","performance",
+     "serviceRecords"].includes(module)&&
+    !findMember(values.noBadan)){
+  alert("Anggota tidak dijumpai.");return;
+ }
+
+ if(module==="performance"){
+  const hours=Number(values.jam),target=Number(values.sasaran);
+  if(!Number.isFinite(hours)||hours<0||
+     !Number.isFinite(target)||target<=0){
+   alert("Jam atau sasaran tidak sah.");return;
+  }
+ }
+
+ if(["certificates","documents"].includes(module)&&values.url){
+  try{
+   if(new URL(values.url).protocol!=="https:")throw Error();
+  }catch{
+   alert("Pautan dokumen mesti menggunakan HTTPS.");return;
+  }
+ }
+
+ const record={
+  ...(old||{}),...values,
+  id:editingId||uid(),updatedAt:now()
+ };
+
+ if(!old){
+  record.rujukan=nextReference(module,true);
+  if(["registrations","adminRequests","recoveries"].includes(module))
+   record.status="Menunggu";
+  if(module==="members"&&!record.status)record.status="Aktif";
+  if(module==="complaints"&&!record.status)
+   record.status="Menunggu Semakan";
+ }
+
+ if(module==="performance"){
+  record.pencapaian=(
+   Number(record.jam)/Number(record.sasaran)*100
+  ).toFixed(1)+"%";
+ }
+
+ if(old)Object.assign(old,record);
+ else db[module].push(record);
+
+ if(module==="members"&&!isActive(record.status)){
+  const admin=findAdmin(record.noBadan);
+  if(admin&&record.noBadan!==MAIN_ADMIN_ID){
+   admin.status="Dibatalkan";
+   admin.updatedAt=now();
+  }
+ }
+
+ addLog(old?"EDIT REKOD":"TAMBAH REKOD",
+  module+" — "+(record.rujukan||record.noBadan||record.nama));
+
+ if(saveData()){
+  closeForm();
+  showModule(module);
+  notify("Rekod berjaya disimpan.","success");
+ }
+};
+
+/* ==================================================
+   KELULUSAN ANGGOTA
+================================================== */
+
+function approveRegistration(id){
+ if(!checkSession())return;
+
+ const r=db.registrations.find(x=>getRecordId(x)===id);
+ if(!r||!pending(r.status))return;
+
+ const noBadan=getNoBadan(r);
+ if(!noBadan){alert("Nombor badan tiada.");return}
+ if(findMember(noBadan)){
+  alert("Nombor badan sudah mempunyai akaun.");return;
+ }
+
+ const passwordHash=
+  r.passwordHash||r.kataLaluanHash||r.hashKataLaluan||"";
+
+ if(!passwordHash){
+  alert("Permohonan belum mempunyai passwordHash.");return;
+ }
+
+ if(!confirm("Luluskan pendaftaran "+r.nama+"?"))return;
+
+ db.members.push({
+  id:uid(),
+  rujukan:nextReference("members",true),
+  nama:r.nama,
+  noBadan,
+  idAnggota:noBadan,
+  passwordHash,
+  pangkat:r.pangkat||"",
+  jawatan:r.jawatan||"",
+  jabatan:r.jabatan||"",
+  unit:r.unit||"",
+  tarikhMenyertai:r.tarikhMenyertai||r.tarikhSertai||today(),
+  status:"Aktif",
+  tarikhKelulusan:today(),
+  diluluskanOleh:session.noBadan,
+  updatedAt:now()
+ });
+
+ r.status="Diluluskan";
+ r.diluluskanOleh=session.noBadan;
+ r.tarikhKelulusan=today();
+ r.updatedAt=now();
+
+ delete r.passwordHash;
+ delete r.kataLaluanHash;
+ delete r.hashKataLaluan;
+ delete r.password;
+ delete r.kataLaluan;
+
+ addLog("LULUS PENDAFTARAN",noBadan+" — "+r.nama);
+
+ if(saveData())
+  notify("Pendaftaran anggota berjaya diluluskan.","success");
+}
+
+/* ==================================================
+   KELULUSAN PENTADBIR
+================================================== */
+
+function openAdminRequest(id){
+ if(!checkSession())return;
+
+ const r=db.adminRequests.find(x=>getRecordId(x)===id);
+ if(!r)return;
+
+ adminRequestTarget=id;
+ const member=findMember(getNoBadan(r));
+
+ $("adminRequestDetails").innerHTML=[
+  detailCell("NOMBOR RUJUKAN",r.rujukan||r.reference),
+  detailCell("STATUS",r.status),
+  detailCell("NAMA PEMOHON",r.nama||member?.nama),
+  detailCell("NOMBOR BADAN",getNoBadan(r)),
+  detailCell("PANGKAT",r.pangkat||member?.pangkat),
+  detailCell("JAWATAN",r.jawatan||member?.jawatan),
+  detailCell("JABATAN",r.jabatan||member?.jabatan),
+  detailCell("UNIT / BAHAGIAN",r.unit||member?.unit),
+  detailCell("TUJUAN PERMOHONAN",r.tujuan,true),
+  detailCell("JUSTIFIKASI",r.sebab||r.justifikasi,true),
+  detailCell("SEBAB PENOLAKAN",r.sebabPenolakan,true)
+ ].join("");
+
+ $("adminRequestActions").innerHTML=pending(r.status)
+  ?`<button class="btn success" data-modal-admin="approve">
+     LULUSKAN PERMOHONAN
+    </button>
+    <button class="btn danger" data-modal-admin="reject">
+     TOLAK PERMOHONAN
+    </button>`
+  :`<span class="badge">${esc(r.status||"Selesai")}</span>`;
+
+ $("adminRequestLayer").hidden=false;
+}
+
+function closeAdminRequest(){
+ $("adminRequestLayer").hidden=true;
+ adminRequestTarget=null;
+}
+
+$("closeAdminRequestBtn").onclick=closeAdminRequest;
+$("adminRequestLayer").onclick=e=>{
+ if(e.target===$("adminRequestLayer"))closeAdminRequest();
+};
+
+$("adminRequestActions").onclick=e=>{
+ const btn=e.target.closest("[data-modal-admin]");
+ if(!btn||!adminRequestTarget)return;
+ const id=adminRequestTarget;
+ if(btn.dataset.modalAdmin==="approve")approveAdmin(id);
+ if(btn.dataset.modalAdmin==="reject")rejectRequest("adminRequests",id);
+ closeAdminRequest();
+};
+
+function approveAdmin(id){
+ if(!checkSession())return;
+
+ const r=db.adminRequests.find(x=>getRecordId(x)===id);
+ if(!r||!pending(r.status))return;
+
+ const noBadan=getNoBadan(r);
+ const member=findMember(noBadan);
+
+ if(!member||!isActive(member.status)){
+  alert("Pemohon mesti anggota aktif.");return;
+ }
+ if(noBadan===MAIN_ADMIN_ID){
+  alert("G2002 ialah Pentadbir Utama.");return;
+ }
+ if(!confirm("Luluskan akses pentadbir kepada "+member.nama+"?"))
+  return;
+
+ let admin=findAdmin(noBadan);
+
+ if(admin){
+  admin.noBadan=noBadan;
+  admin.nama=member.nama;
+  admin.peranan="Pentadbir";
+  admin.status="Aktif";
+  admin.tarikhKelulusan=today();
+  admin.diluluskanOleh=session.noBadan;
+  admin.updatedAt=now();
+ }else{
+  db.admins.push({
+   id:uid(),
+   noBadan,
+   nama:member.nama,
+   peranan:"Pentadbir",
+   status:"Aktif",
+   tarikhKelulusan:today(),
+   diluluskanOleh:session.noBadan,
+   updatedAt:now()
+  });
+ }
+
+ r.status="Diluluskan";
+ r.diluluskanOleh=session.noBadan;
+ r.tarikhKelulusan=today();
+ r.updatedAt=now();
+
+ addLog("LULUS PENTADBIRAN",noBadan+" — "+member.nama);
+
+ if(saveData())
+  notify("Akses pentadbiran berjaya diluluskan.","success");
+}
+
+function rejectRequest(module,id){
+ if(!checkSession())return;
+
+ const r=db[module]?.find(x=>getRecordId(x)===id);
+ if(!r||!pending(r.status))return;
+
+ const reason=prompt("Nyatakan sebab penolakan:");
+ if(reason===null)return;
+ if(!reason.trim()){
+  alert("Sebab penolakan wajib diisi.");return;
+ }
+
+ r.status="Ditolak";
+ r.sebabPenolakan=reason.trim();
+ r.diprosesOleh=session.noBadan;
+ r.updatedAt=now();
+
+ if(module==="recoveries"){
+  delete r.recoveryCodeHash;
+  delete r.recoveryCode;
+  delete r.kodPemulihan;
+ }
+
+ addLog("TOLAK PERMOHONAN",
+  module+" | "+(r.rujukan||r.reference||"")+
+  " | Sebab: "+reason.trim());
+
+ if(saveData())
+  notify("Permohonan telah ditolak.","success");
+}
+
+/* ==================================================
+   PEMULIHAN AKAUN
+================================================== */
+
+async function sha256(value){
+ if(!window.crypto?.subtle)
+  throw new Error("Gunakan HTTPS atau localhost untuk menjana kod.");
+
+ const bytes=new TextEncoder().encode(value);
+ const hash=await crypto.subtle.digest("SHA-256",bytes);
+ return Array.from(new Uint8Array(hash),
+  b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+function generateRecoveryCode(){
+ if(!window.crypto?.getRandomValues)
+  throw new Error("Penjana nombor rawak selamat tidak tersedia.");
+ const bytes=new Uint8Array(24);
+ crypto.getRandomValues(bytes);
+ return Array.from(bytes,
+  b=>b.toString(16).padStart(2,"0")).join("").toUpperCase();
+}
+
+function openRecovery(id){
+ if(!checkSession())return;
+ const r=db.recoveries.find(x=>getRecordId(x)===id);
+ if(!r)return;
+
+ recoveryTarget=id;
+ displayedRecoveryCode="";
+
+ $("recoveryReference").value=r.rujukan||r.reference||"";
+ $("recoveryMemberId").value=getNoBadan(r);
+ $("recoveryName").value=r.nama||"";
+ $("recoveryStatus").value=r.status||"—";
+ $("recoveryMethod").value="";
+ $("recoveryVerificationNote").value="";
+ $("recoveryVerified").checked=false;
+ $("recoveryResult").hidden=true;
+
+ const status=norm(r.status);
+ $("recoveryForm").hidden=
+  !["MENUNGGU","DILULUSKAN"].includes(status);
+
+ $("generateRecoveryBtn").textContent=
+  status==="DILULUSKAN"
+   ?"SAHKAN & JANA SEMULA KOD"
+   :"SAHKAN, LULUSKAN & JANA KOD";
+
+ $("recoveryLayer").hidden=false;
+}
+
+function closeRecovery(){
+ $("recoveryLayer").hidden=true;
+ recoveryTarget=null;
+ displayedRecoveryCode="";
+ $("generatedRecoveryCode").textContent="—";
+ $("recoveryResult").hidden=true;
+ $("recoveryForm").hidden=false;
+}
+
+$("closeRecoveryBtn").onclick=closeRecovery;
+$("finishRecoveryBtn").onclick=closeRecovery;
+$("recoveryLayer").onclick=e=>{
+ if(e.target===$("recoveryLayer"))closeRecovery();
+};
+
+$("recoveryForm").onsubmit=async e=>{
+ e.preventDefault();
+ if(!checkSession()||!recoveryTarget)return;
+
+ const r=db.recoveries.find(x=>getRecordId(x)===recoveryTarget);
+ if(!r)return;
+
+ const member=findMember(getNoBadan(r));
+ if(!member||!isActive(member.status)||
+    norm(member.nama)!==norm(r.nama)){
+  alert("Identiti pemohon tidak sepadan atau anggota tidak aktif.");
+  return;
+ }
+
+ const method=$("recoveryMethod").value;
+ const note=$("recoveryVerificationNote").value.trim();
+
+ if(!method||!note||!$("recoveryVerified").checked){
+  alert("Lengkapkan pengesahan identiti.");return;
+ }
+
+ if(!confirm("Sahkan identiti dan jana kod pemulihan?"))return;
+
+ const button=$("generateRecoveryBtn");
+ button.disabled=true;
+
+ try{
+  db=loadData();
+  const latest=db.recoveries.find(x=>getRecordId(x)===recoveryTarget);
+  if(!latest||!["MENUNGGU","DILULUSKAN"].includes(norm(latest.status)))
+   throw new Error("Permohonan tidak boleh diproses.");
+
+  const code=generateRecoveryCode();
+  const hash=await sha256(code);
+
+  latest.status="Diluluskan";
+  latest.recoveryCodeHash=hash;
+  delete latest.recoveryCode;
+  delete latest.kodPemulihan;
+  latest.identitiDisahkan=true;
+  latest.kaedahPengesahan=method;
+  latest.catatanPengesahan=note;
+  latest.disahkanOleh=session.noBadan;
+  latest.tarikhPengesahan=now();
+  latest.diluluskanOleh=session.noBadan;
+  latest.tarikhKelulusan=now();
+  latest.kodDijanaPada=now();
+  latest.updatedAt=now();
+
+  addLog("JANA KOD PEMULIHAN",
+   (latest.rujukan||"")+" | "+getNoBadan(latest));
+
+  if(!saveData())throw new Error("Gagal menyimpan kod.");
+
+  displayedRecoveryCode=code;
+  $("recoveryStatus").value="Diluluskan";
+  $("generatedRecoveryCode").textContent=code;
+  $("recoveryForm").hidden=true;
+  $("recoveryResult").hidden=false;
+
+  notify("Kod pemulihan berjaya dijana.","success");
+ }catch(error){
+  alert(error.message||"Gagal menjana kod.");
+ }finally{
+  button.disabled=false;
+ }
+};
+
+$("copyRecoveryCode").onclick=async()=>{
+ if(!displayedRecoveryCode)return;
+ try{
+  await navigator.clipboard.writeText(displayedRecoveryCode);
+  alert("Kod berjaya disalin.");
+ }catch{
+  prompt("Salin kod:",displayedRecoveryCode);
+ }
+};
+
+/* ==================================================
+   KICK DAN PULIHKAN AKSES
+================================================== */
+
+function openKick(module,id){
+ if(!checkSession())return;
+ const r=db[module]?.find(x=>getRecordId(x)===id);
+ if(!r)return;
+
+ const noBadan=module==="admins"
+  ?getAdminNoBadan(r):getNoBadan(r);
+
+ if(noBadan===MAIN_ADMIN_ID){
+  alert("G2002 tidak boleh dikenakan KICK biasa.");return;
+ }
+
+ kickTarget={module,id,noBadan};
+
+ $("kickTitle").textContent=
+  module==="admins"?"KICK PENTADBIR":"KICK ANGGOTA";
+ $("kickId").value=noBadan;
+ $("kickOfficer").value=session.noBadan+" — "+session.nama;
+ $("kickReason").value="";
+
+ $("kickAction").innerHTML=module==="admins"
+  ?'<option value="Dibatalkan">Batalkan Akses Pentadbiran</option>'
+  :'<option value="Tamat Perkhidmatan">Tamat Perkhidmatan</option>'+
+   '<option value="Digantung">Gantung Perkhidmatan</option>';
+
+ $("kickLayer").hidden=false;
+}
+
+function closeKick(){
+ $("kickLayer").hidden=true;
+ kickTarget=null;
+}
+
+$("closeKickBtn").onclick=closeKick;
+$("kickLayer").onclick=e=>{
+ if(e.target===$("kickLayer"))closeKick();
+};
+
+$("kickForm").onsubmit=e=>{
+ e.preventDefault();
+ if(!checkSession()||!kickTarget)return;
+
+ const {module,noBadan}=kickTarget;
+ const action=$("kickAction").value;
+ const reason=$("kickReason").value.trim();
+
+ if(!reason){alert("Sebab tindakan wajib diisi.");return}
+ if(noBadan===MAIN_ADMIN_ID)return;
+ if(!confirm("Sahkan tindakan "+action+" terhadap "+noBadan+"?"))
+  return;
+
+ const member=findMember(noBadan);
+ const admin=findAdmin(noBadan);
+
+ if(module==="admins"){
+  if(!admin)return;
+  admin.status="Dibatalkan";
+  admin.updatedAt=now();
+ }else{
+  if(!member)return;
+  member.status=action;
+  member.updatedAt=now();
+
+  if(admin){
+   admin.status="Dibatalkan";
+   admin.updatedAt=now();
+  }
+ }
+
+ db.serviceRecords.push({
+  id:uid(),
+  rujukan:nextReference("serviceRecords",true),
+  noBadan,
+  jenis:"Disiplin",
+  tarikh:today(),
+  tajuk:"Tindakan Pentadbiran — "+action,
+  status:action,
+  keterangan:reason,
+  pegawaiPelulus:session.nama,
+  pegawaiPelaksana:session.noBadan,
+  updatedAt:now()
+ });
+
+ addLog("KICK / SEKAT AKSES",
+  noBadan+" | "+action+" | Sebab: "+reason);
+
+ if(saveData()){
+  closeKick();
+  notify("Tindakan berjaya direkodkan.","success");
+ }
+};
+
+function restoreAccess(module,id){
+ if(!checkSession())return;
+
+ const r=db[module]?.find(x=>getRecordId(x)===id);
+ if(!r)return;
+
+ const noBadan=module==="admins"
+  ?getAdminNoBadan(r):getNoBadan(r);
+
+ if(noBadan===MAIN_ADMIN_ID)return;
+
+ if(module==="admins"){
+  const member=findMember(noBadan);
+  if(!member||!isActive(member.status)){
+   alert("Anggota mesti Aktif sebelum akses dipulihkan.");return;
+  }
+ }
+
+ if(!confirm("Pulihkan akses "+noBadan+"?"))return;
+
+ r.status="Aktif";
+ r.updatedAt=now();
+
+ db.serviceRecords.push({
+  id:uid(),
+  rujukan:nextReference("serviceRecords",true),
+  noBadan,
+  jenis:"Lain-lain",
+  tarikh:today(),
+  tajuk:"Pemulihan Akses "+
+   (module==="admins"?"Pentadbiran":"Anggota"),
+  keterangan:"Akses dipulihkan oleh "+session.nama,
+  pegawaiPelulus:session.nama
+ });
+
+ addLog("PULIHKAN AKSES",noBadan);
+
+ if(saveData())notify("Akses berjaya dipulihkan.","success");
+}
+
+/* ==================================================
+   SENARAI REKOD DAN BUTANG
+================================================== */
+
+function badge(status){
+ const value=norm(status);
+ let color="";
+
+ if(["AKTIF","DILULUSKAN","DISAHKAN","DITERBITKAN",
+     "SELESAI"].includes(value))color="green";
+ else if(["MENUNGGU","MENUNGGU SEMAKAN","DRAF",
+          "DALAM TINDAKAN","DALAM SIASATAN"].includes(value))
+  color="gold";
+ else if(["DITOLAK","DIBATALKAN","DIGANTUNG",
+          "TAMAT PERKHIDMATAN"].includes(value))
+  color="red";
+
+ return `<span class="badge ${color}">${esc(status||"—")}</span>`;
+}
+
+function actionButton(label,action,module,id,style="secondary",source=""){
+ return `<button type="button" class="btn small ${style}"
+  data-action="${esc(action)}"
+  data-module="${esc(module)}"
+  data-id="${esc(id)}"
+  data-source="${esc(source)}">${esc(label)}</button>`;
+}
+
+function actionsFor(module,r){
+ const id=getRecordId(r);
+ const status=norm(r.status);
+ let html="";
+
+ if(module==="complaints"){
+  return actionButton(
+   "LIHAT & TINDAKAN","complaint",module,
+   r.__complaintSource==="public"
+    ?String(r.id||r.reference):id,
+   "success",r.__complaintSource||"internal"
+  );
+ }
+
+ if(module==="adminRequests"){
+  return actionButton(
+   "LIHAT PERMOHONAN","adminRequest",module,id,"secondary"
+  );
+ }
+
+ if(module==="recoveries"){
+  if(status==="MENUNGGU"){
+   html+=actionButton("SAHKAN & JANA KOD","recovery",module,id,"success");
+   html+=actionButton("TOLAK","reject",module,id,"danger");
+  }else if(status==="DILULUSKAN"){
+   html+=actionButton("JANA SEMULA KOD","recovery",module,id);
+  }
+  html+=actionButton("LIHAT","edit",module,id);
+  return html;
+ }
+
+ if(module==="registrations"&&pending(r.status)){
+  html+=actionButton("LULUS","approve",module,id,"success");
+  html+=actionButton("TOLAK","reject",module,id,"danger");
+ }
+
+ if(module==="admins"){
+  if(getAdminNoBadan(r)===MAIN_ADMIN_ID)
+   return '<span class="badge gold">PENTADBIR UTAMA</span>';
+
+  return isActive(r.status)
+   ?actionButton("KICK PENTADBIR","kick",module,id,"danger")
+   :actionButton("PULIHKAN","restore",module,id,"success");
+ }
+
+ if(module==="members"){
+  html+=actionButton("FAIL PERIBADI","file",module,id);
+  if(getNoBadan(r)!==MAIN_ADMIN_ID){
+   html+=isActive(r.status)
+    ?actionButton("KICK ANGGOTA","kick",module,id,"danger")
+    :actionButton("PULIHKAN","restore",module,id,"success");
+  }
+ }
+
+ html+=module==="announcements"
+  ?actionButton("EDIT PENGUMUMAN","editAnnouncement",module,id)
+  :actionButton("EDIT","edit",module,id);
+
+ const protectedModules=[
+  "registrations","adminRequests","recoveries","members",
+  "admins","serviceRecords","complaints"
+ ];
+
+ if(!protectedModules.includes(module)){
+  html+=actionButton("PADAM","delete",module,id,"danger");
+ }
+
+ return html;
+}
+
+function moduleRecords(module){
+ if(module==="admins"){
+  return [{
+   id:"MAIN-ADMIN",
+   noBadan:MAIN_ADMIN_ID,
+   nama:MAIN_ADMIN_NAME,
+   peranan:"Pentadbir Utama",
+   status:"Aktif"
+  },...db.admins.filter(a=>
+   getAdminNoBadan(a)!==MAIN_ADMIN_ID
+  )];
+ }
+
+ if(module==="complaints")return mergeComplaints();
+
+ return list(db[module]);
+}
+
+function tableValue(r,key){
+ if(key==="noBadan")
+  return getNoBadan(r)||getAdminNoBadan(r)||"—";
+ if(key==="nama")
+  return r.nama||r.name||"—";
+ if(key==="rujukan")
+  return r.rujukan||r.reference||"—";
+ if(key==="peranan")
+  return r.peranan||"Pentadbir";
+ return r[key]??"—";
+}
+
+function drawTable(){
+ const module=currentModule;
+ const cols=COLUMNS[module]||[];
+ const q=norm($("recordSearch").value);
+
+ const records=moduleRecords(module).filter(r=>{
+  if(!q)return true;
+  return norm(
+   cols.map(k=>tableValue(r,k)).join(" ")+" "+
+   (r.tujuan||"")+" "+(r.butiran||"")
+  ).includes(q);
+ });
+
+ $("recordHead").innerHTML="<tr>"+
+  cols.map(k=>`<th>${esc(k.toUpperCase())}</th>`).join("")+
+  "<th>TINDAKAN</th></tr>";
+
+ if(!records.length){
+  $("recordBody").innerHTML=
+   `<tr><td colspan="${cols.length+1}" class="empty">
+    Tiada rekod ditemui.</td></tr>`;
+  return;
+ }
+
+ $("recordBody").innerHTML=records.map(r=>{
+  const cells=cols.map(k=>`<td>${
+   k==="status"?badge(tableValue(r,k)):esc(tableValue(r,k))
+  }</td>`).join("");
+
+  return `<tr>${cells}<td>${actionsFor(module,r)}</td></tr>`;
+ }).join("");
+}
+
+document.addEventListener("click",e=>{
+ const b=e.target.closest("[data-action]");
+ if(!b||!checkSession())return;
+
+ const {action,module,id,source}=b.dataset;
+
+ if(action==="complaint")openComplaint(id,source);
+ else if(action==="adminRequest")openAdminRequest(id);
+ else if(action==="approve")approveRegistration(id);
+ else if(action==="reject")rejectRequest(module,id);
+ else if(action==="recovery")openRecovery(id);
+ else if(action==="kick")openKick(module,id);
+ else if(action==="restore")restoreAccess(module,id);
+ else if(action==="edit")openForm(module,id);
+ else if(action==="file"){
+  const member=db.members.find(r=>getRecordId(r)===id);
+  if(member)openMemberFile(getNoBadan(member));
+ }
+ else if(action==="editAnnouncement")editAnnouncement(id);
+ else if(action==="delete"){
+  const r=db[module]?.find(x=>getRecordId(x)===id);
+  if(!r)return;
+  if(!confirm("Padam rekod ini?"))return;
+  db[module]=db[module].filter(x=>getRecordId(x)!==id);
+  addLog("PADAM REKOD",module+" — "+(r.rujukan||r.nama||id));
+  if(saveData())notify("Rekod berjaya dipadam.","success");
+ }
+});
+
+/* ==================================================
+   FAIL PERIBADI ANGGOTA
+================================================== */
+
+function fillMemberSelect(){
+ $("fileMemberSelect").innerHTML=db.members.length
+  ?db.members.map(m=>{
+   const id=getNoBadan(m);
+   return `<option value="${esc(id)}" ${
+    id===selectedMember?"selected":""
+   }>${esc(id+" — "+m.nama)}</option>`;
+  }).join("")
+  :'<option value="">Tiada anggota</option>';
+}
+
+function openMemberFile(id){
+ selectedMember=norm(id);
+ fillMemberSelect();
+ drawMemberFile();
+ showView("fail");
+}
+
+function drawMemberFile(){
+ const member=findMember(selectedMember);
+
+ if(!member){
+  $("fileContent").innerHTML=
+   '<div class="empty">Tiada anggota dipilih.</div>';
+  return;
+ }
+
+ let html=`<div class="record">
+  <small>FAIL PERIBADI ANGGOTA</small>
+  <h4>${esc(member.pangkat||"")} ${esc(member.nama)}</h4>
+  <p>Nombor Badan: ${esc(getNoBadan(member))}</p>
+  <p>Jawatan: ${esc(member.jawatan||"—")}</p>
+  <p>Jabatan: ${esc(member.jabatan||"—")}</p>
+  <p>Unit: ${esc(member.unit||"—")}</p>
+  <p>Status: ${esc(member.status||"—")}</p>
+ </div>`;
+
+ const groups=[
+  ["SIJIL","certificates"],
+  ["DOKUMEN","documents"],
+  ["KEMAHIRAN & KEPAKARAN","skills"],
+  ["PRESTASI & KEHADIRAN","performance"],
+  ["SEJARAH PERKHIDMATAN","serviceRecords"]
+ ];
+
+ groups.forEach(([title,module])=>{
+  const records=db[module].filter(r=>
+   getNoBadan(r)===selectedMember
+  );
+
+  html+=`<div class="card" style="margin-top:20px">
+   <h3>${esc(title)} (${records.length})</h3>
+   <button type="button" class="btn small"
+    data-file-add="${esc(module)}">+ TAMBAH REKOD</button>`;
+
+  if(!records.length)
+   html+='<div class="empty">Belum ada rekod.</div>';
+
+  records.forEach(r=>{
+   html+=`<div class="record" style="margin-top:15px">
+    <h4>${esc(r.nama||r.tajuk||r.jenis||"Rekod")}</h4>
+    <p>Rujukan: ${esc(r.rujukan||"—")}</p>
+    <p>Tarikh / Tempoh: ${esc(r.tarikh||r.tempoh||"—")}</p>
+    <p>${esc(r.keterangan||r.catatan||"")}</p>
+    <button type="button" class="btn small secondary"
+     data-file-edit="${esc(module)}"
+     data-id="${esc(getRecordId(r))}">EDIT REKOD</button>
+   </div>`;
+  });
+
+  html+="</div>";
+ });
+
+ $("fileContent").innerHTML=html;
+}
+
+$("fileMemberSelect").onchange=e=>{
+ selectedMember=norm(e.target.value);
+ drawMemberFile();
+};
+
+document.addEventListener("click",e=>{
+ const add=e.target.closest("[data-file-add]");
+ const edit=e.target.closest("[data-file-edit]");
+
+ if(add)openForm(add.dataset.fileAdd,null,{noBadan:selectedMember});
+ if(edit)openForm(edit.dataset.fileEdit,edit.dataset.id);
+});
+
+/* ==================================================
+   PENGUMUMAN RASMI
+================================================== */
+
+const TEMPLATES={
+ umum:{
+  kategori:"Pengumuman Umum",kepada:"Semua yang berkenaan",
+  kandungan:"Dengan hormatnya perkara di atas adalah dirujuk.\n\nDimaklumkan bahawa ",
+  arahan:"Sila ambil maklum."
+ },
+ arahan:{
+  kategori:"Arahan Pentadbiran",kepada:"Semua Pegawai dan Anggota",
+  kandungan:"Arahan pentadbiran berikut hendaklah dipatuhi:\n\n1.\n2.\n3.",
+  arahan:"Semua pihak hendaklah mengambil tindakan."
+ },
+ mesyuarat:{
+  kategori:"Notis Mesyuarat",kepada:"Pegawai yang berkenaan",
+  kandungan:"Mesyuarat akan diadakan seperti berikut:\n\nTarikh:\nMasa:\nTempat:\nAgenda:",
+  arahan:"Kehadiran diperlukan."
+ },
+ anggota:{
+  kategori:"Makluman Anggota",
+  kepada:"Semua Anggota Polis Diraja MYMahkota",
+  kandungan:"Dimaklumkan kepada semua anggota bahawa ",
+  arahan:"Sila ambil maklum."
+ },
+ awam:{
+  kategori:"Hebahan Awam",kepada:"Orang Awam MYMahkota",
+  kandungan:"Polis Diraja MYMahkota ingin memaklumkan bahawa ",
+  arahan:"Kerjasama semua pihak amat dihargai."
+ },
+ perkhidmatan:{
+  kategori:"Notis Perkhidmatan",kepada:"Semua Anggota",
+  kandungan:"Ketetapan perkhidmatan adalah seperti berikut:\n\n",
+  arahan:"Sila patuhi arahan berkenaan."
+ }
+};
+
+function resetAnnouncement(){
+ editingAnnouncement=null;
+ $("announcementForm").reset();
+ $("aRujukan").value=nextReference("announcements");
+ $("aTarikh").value=today();
+ $("aStatus").value="Draf";
+ $("aKepada").value="Semua Anggota Polis Diraja MYMahkota";
+ $("aPengeluar").value=session?.nama||"";
+ $("announcementFormTitle").textContent="Borang Pengumuman Baharu";
+ $("announcementPreview").textContent=
+  "Isi borang untuk melihat pratonton.";
+}
+
+document.querySelectorAll("[data-template]").forEach(b=>{
+ b.onclick=()=>{
+  const t=TEMPLATES[b.dataset.template];
+  if(!t)return;
+
+  if($("aKandungan").value.trim()&&
+     !confirm("Gantikan kandungan dengan format ini?"))return;
+
+  $("aKategori").value=t.kategori;
+  $("aKepada").value=t.kepada;
+  $("aKandungan").value=t.kandungan;
+  $("aArahan").value=t.arahan;
+  $("aTajuk").focus();
+ };
+});
+
+function announcementValues(){
+ return {
+  rujukan:$("aRujukan").value,
+  tarikh:$("aTarikh").value,
+  kategori:$("aKategori").value,
+  kepada:$("aKepada").value.trim(),
+  tajuk:$("aTajuk").value.trim(),
+  perkara:$("aPerkara").value.trim(),
+  kandungan:$("aKandungan").value.trim(),
+  arahan:$("aArahan").value.trim(),
+  pengeluar:$("aPengeluar").value.trim(),
+  jawatan:$("aJawatan").value.trim(),
+  status:$("aStatus").value
+ };
+}
+
+function announcementText(r){
+ return [
+  "POLIS DIRAJA MYMAHKOTA",
+  "PENGUMUMAN RASMI",
+  "----------------------------------------",
+  "RUJUKAN : "+(r.rujukan||"—"),
+  "TARIKH  : "+(r.tarikh||"—"),
+  "KATEGORI: "+(r.kategori||"—"),
+  "KEPADA  : "+(r.kepada||"—"),
+  "",
+  "PERKARA: "+norm(r.tajuk),
+  "",r.perkara||"","",r.kandungan||"","",
+  r.arahan?"ARAHAN / TINDAKAN:\n"+r.arahan:"",
+  "","Sekian, terima kasih.","",
+  r.pengeluar||"Pegawai Pengeluar",
+  r.jawatan||"Polis Diraja MYMahkota"
+ ].join("\n");
+}
+
+$("previewBtn").onclick=()=>{
+ $("announcementPreview").textContent=
+  announcementText(announcementValues());
+};
+
+function saveAnnouncement(publish=false){
+ if(!checkSession())return;
+ if(!$("announcementForm").reportValidity())return;
+
+ const values=announcementValues();
+ if(publish)values.status="Diterbitkan";
+
+ const old=editingAnnouncement
+  ?db.announcements.find(r=>getRecordId(r)===editingAnnouncement)
+  :null;
+
+ const r={
+  ...(old||{}),...values,
+  id:editingAnnouncement||uid(),
+  updatedAt:now()
+ };
+
+ if(old)Object.assign(old,r);
+ else{
+  r.rujukan=nextReference("announcements",true);
+  db.announcements.push(r);
+ }
+
+ addLog(old?"EDIT PENGUMUMAN":"BUAT PENGUMUMAN",
+  r.rujukan+" — "+r.status);
+
+ if(saveData()){
+  resetAnnouncement();
+  notify("Pengumuman berjaya disimpan. Status: "+r.status,"success");
+ }
+}
+
+$("announcementForm").onsubmit=e=>{
+ e.preventDefault();
+ saveAnnouncement(false);
+};
+
+$("publishBtn").onclick=()=>{
+ if(confirm("Terbitkan pengumuman ini?"))saveAnnouncement(true);
+};
+
+$("resetAnnouncementBtn").onclick=()=>{
+ if(confirm("Kosongkan borang?"))resetAnnouncement();
+};
+
+function editAnnouncement(id){
+ const r=db.announcements.find(x=>getRecordId(x)===id);
+ if(!r)return;
+
+ editingAnnouncement=id;
+
+ const fields={
+  aRujukan:"rujukan",aTarikh:"tarikh",aKategori:"kategori",
+  aKepada:"kepada",aTajuk:"tajuk",aPerkara:"perkara",
+  aKandungan:"kandungan",aArahan:"arahan",
+  aPengeluar:"pengeluar",aJawatan:"jawatan",aStatus:"status"
+ };
+
+ Object.entries(fields).forEach(([el,key])=>{
+  $(el).value=r[key]||"";
+ });
+
+ $("announcementFormTitle").textContent=
+  "Kemaskini Pengumuman "+(r.rujukan||"");
+
+ $("announcementPreview").textContent=announcementText(r);
+ showView("pengumuman");
+}
+
+$("copyAnnouncementBtn").onclick=async()=>{
+ const content=announcementText(announcementValues());
+ $("announcementPreview").textContent=content;
+
+ try{
+  await navigator.clipboard.writeText(content);
+  notify("Pengumuman berjaya disalin.","success");
+ }catch{
+  prompt("Salin teks:",content);
+ }
+};
+
+$("printAnnouncementBtn").onclick=()=>{
+ const content=announcementText(announcementValues());
+ const popup=window.open("","_blank");
+
+ if(!popup){
+  alert("Benarkan pop-up untuk mencetak.");return;
+ }
+
+ popup.document.write(
+  '<!DOCTYPE html><html lang="ms"><head><meta charset="UTF-8">'+
+  '<title>Pengumuman Rasmi</title><style>'+
+  'body{margin:45px}pre{white-space:pre-wrap;'+
+  'font:15px/1.9 Georgia,serif}</style></head><body><pre>'+
+  esc(content)+'</pre></body></html>'
+ );
+
+ popup.document.close();
+ popup.print();
+};
+
+/* ==================================================
+   TETAPAN
+================================================== */
+
+function fillSettings(){
+ const form=$("settingsForm");
+ ["title","slogan","description","notice"].forEach(k=>{
+  form.elements[k].value=db.settings[k]||"";
+ });
+}
+
+$("settingsForm").onsubmit=e=>{
+ e.preventDefault();
+
+ db.settings={
+  ...db.settings,
+  title:e.target.elements.title.value.trim(),
+  slogan:e.target.elements.slogan.value.trim(),
+  description:e.target.elements.description.value.trim(),
+  notice:e.target.elements.notice.value.trim()
+ };
+
+ addLog("KEMASKINI TETAPAN","Tetapan Portal");
+
+ if(saveData())notify("Tetapan berjaya disimpan.","success");
+};
+
+/* ==================================================
+   SANDARAN DATA
+================================================== */
+
+$("exportBtn").onclick=()=>{
+ if(!checkSession())return;
+
+ const backup={
+  ...db,
+  publicComplaints:readPublicComplaints()
+ };
+
+ const blob=new Blob([JSON.stringify(backup,null,2)],{
+  type:"application/json"
+ });
+
+ const url=URL.createObjectURL(blob);
+ const anchor=document.createElement("a");
+ anchor.href=url;
+ anchor.download="rekod-mymahkota-"+today()+".json";
+ anchor.click();
+
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+
+$("importBtn").onclick=()=>{
+ if(checkSession())$("importFile").click();
+};
+
+$("importFile").onchange=async e=>{
+ const file=e.target.files[0];
+ if(!file)return;
+
+ try{
+  const incoming=JSON.parse(await file.text());
+
+  if(!incoming||typeof incoming!=="object"||
+     !Array.isArray(incoming.members)||
+     !Array.isArray(incoming.admins)){
+   throw new Error("Struktur sandaran tidak sah.");
+  }
+
+  if(!hasAccess(readSession(),incoming)){
+   throw new Error("Sandaran tidak mempunyai akses untuk akaun semasa.");
+  }
+
+  if(!confirm("Import akan menggantikan data sedia ada. Teruskan?"))
+   return;
+
+  const restored={
+   ...incoming,
+   counters:incoming.counters||{},
+   settings:{...db.settings,...(incoming.settings||{})}
+  };
+
+  MODULES.forEach(k=>{
+   restored[k]=Array.isArray(incoming[k])?incoming[k]:[];
+  });
+
+  db=restored;
+
+  addLog("IMPORT DATA",file.name);
+
+  if(!saveData())throw new Error("Gagal menyimpan data import.");
+
+  if(Array.isArray(incoming.publicComplaints)){
+   if(!savePublicComplaints(incoming.publicComplaints))
+    throw new Error("Data utama diimport tetapi aduan awam gagal disimpan.");
+  }
+
+  notify("Sandaran berjaya diimport.","success");
+ }catch(error){
+  notify("Import gagal: "+error.message,"error");
+ }finally{
+  $("importFile").value="";
+ }
+};
+
+function drawLogs(){
+ $("logRows").innerHTML=db.logs.length
+  ?db.logs.map(r=>`<tr>
+    <td>${esc(r.tarikh||"—")}</td>
+    <td>${esc(r.pelaksana||"—")}</td>
+    <td>${esc(r.tindakan||"—")}</td>
+    <td>${esc(r.butiran||"—")}</td>
+   </tr>`).join("")
+  :'<tr><td colspan="4" class="empty">Tiada aktiviti.</td></tr>';
+}
+
+/* ==================================================
+   NAVIGASI
+================================================== */
+
+const TITLES={
+ utama:"Ringkasan Utama",
+ fail:"Fail Peribadi Anggota",
+ pengumuman:"Buat Pengumuman",
+ tetapan:"Tetapan Portal",
+ sandaran:"Sandaran & Log Aktiviti"
+};
+
+function closeSidebar(){
+ $("sidebar").classList.remove("open");
+ $("overlay").classList.remove("show");
+}
+
+function showView(name,module=null){
+ if(!checkSession())return;
+ currentView=name;
+
+ document.querySelectorAll(".view").forEach(v=>{
+  v.hidden=v.id!=="view-"+name;
+ });
+
+ document.querySelectorAll(".nav-btn[data-view]").forEach(b=>{
+  b.classList.toggle("active",b.dataset.view===(module||name));
+ });
+
+ $("topTitle").textContent=module
+  ?module==="announcements"?"Senarai Pengumuman":
+   module==="admins"?"Senarai Pentadbir":
+   SCHEMA[module]?.title||"Pengurusan Rekod"
+  :TITLES[name]||"Panel Pentadbiran";
+
+ closeSidebar();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function showModule(module){
+ if(module!=="admins"&&module!=="announcements"&&!SCHEMA[module])
+  return;
+
+ currentModule=module;
+
+ $("recordHeading").textContent=module==="admins"
+  ?"Senarai Pentadbir"
+  :module==="announcements"
+   ?"Senarai Pengumuman Rasmi"
+   :SCHEMA[module].title;
+
+ $("recordSearch").value="";
+
+ $("addRecordBtn").hidden=[
+  "admins","complaints","adminRequests"
+ ].includes(module);
+
+ $("addRecordBtn").textContent=module==="announcements"
+  ?"+ BUAT PENGUMUMAN":"+ TAMBAH REKOD";
+
+ $("recordGuide").textContent=module==="complaints"
+  ?"Aduan daripada aduan.html dipaparkan di sini. Klik LIHAT & TINDAKAN untuk menyemak, memberi maklum balas dan menukar status."
+  :module==="adminRequests"
+   ?"Klik LIHAT PERMOHONAN untuk menyemak tujuan dan justifikasi sebelum meluluskan."
+   :"Semua tindakan penting disimpan dalam Log Aktiviti.";
+
+ showView("rekod",module);
+ drawTable();
+}
+
+document.querySelectorAll(".nav-btn[data-view]").forEach(b=>{
+ b.onclick=()=>{
+  db=loadData();
+  const name=b.dataset.view;
+
+  if(name==="utama"){
+   drawSummary();
+   showView("utama");
+  }else if(name==="fail"){
+   if(!selectedMember&&db.members.length)
+    selectedMember=getNoBadan(db.members[0]);
+
+   fillMemberSelect();
+   drawMemberFile();
+   showView("fail");
+  }else if(name==="pengumuman"){
+   showView("pengumuman");
+  }else if(name==="tetapan"){
+   fillSettings();
+   showView("tetapan");
+  }else if(name==="sandaran"){
+   drawLogs();
+   showView("sandaran");
+  }else{
+   showModule(name);
+  }
+ };
+});
+
+$("addRecordBtn").onclick=()=>{
+ if(currentModule==="announcements"){
+  resetAnnouncement();
+  showView("pengumuman");
+ }else{
+  openForm(currentModule);
+ }
+};
+
+$("refreshBtn").onclick=()=>{
+ db=loadData();
+ drawTable();
+ drawSummary();
+ notify("Data berjaya dimuat semula.","success");
+};
+
+$("recordSearch").oninput=drawTable;
+
+/* ==================================================
+   RINGKASAN & NOTIFIKASI
+================================================== */
+
+const QUICK_LINKS=[
+ ["registrations","Kelulusan Pendaftaran",
+  "Semak permohonan anggota."],
+ ["adminRequests","Kelulusan Pentadbiran",
+  "Semak permohonan pentadbir baharu."],
+ ["complaints","Aduan Awam",
+  "Siasat dan beri maklum balas aduan."],
+ ["recoveries","Pemulihan Akaun",
+  "Semak identiti dan jana kod pemulihan."],
+ ["members","Pengurusan Anggota",
+  "Urus profil dan status anggota."],
+ ["admins","Pengurusan Pentadbir",
+  "KICK atau pulihkan pentadbir."],
+ ["certificates","Sijil Anggota",
+  "Urus sijil dan kelayakan."],
+ ["skills","Kemahiran Anggota",
+  "Urus kemahiran dan kepakaran."],
+ ["performance","Prestasi Mingguan",
+  "Rekod jam bertugas dan markah."],
+ ["pengumuman","Pengumuman Rasmi",
+  "Cipta dan terbitkan pengumuman."],
+ ["serviceRecords","Rekod Perkhidmatan",
+  "Sejarah pangkat, latihan dan disiplin."],
+ ["documents","Dokumen Anggota",
+  "Urus dokumen rasmi anggota."]
+];
+
+$("quickGrid").innerHTML=QUICK_LINKS.map(([id,title,desc])=>`
+ <div class="quick-card">
+  <h3>${esc(title)}</h3>
+  <p>${esc(desc)}</p>
+  <button class="btn" data-quick="${esc(id)}">
+   BUKA BAHAGIAN
+  </button>
+ </div>
+`).join("");
+
+document.querySelectorAll("[data-quick]").forEach(b=>{
+ b.onclick=()=>{
+  const name=b.dataset.quick;
+  if(name==="pengumuman")showView("pengumuman");
+  else showModule(name);
+ };
+});
+
+function drawSummary(){
+ $("countMembers").textContent=db.members.length;
+ $("countRegistrations").textContent=
+  db.registrations.filter(r=>pending(r.status)).length;
+
+ $("countAdmins").textContent=
+  db.admins.filter(a=>
+   getAdminNoBadan(a)!==MAIN_ADMIN_ID&&isActive(a.status)
+  ).length+1;
+
+ const adminPending=
+  db.adminRequests.filter(r=>pending(r.status)).length;
+
+ $("countAdminRequests").textContent=adminPending;
+ $("adminRequestNavCount").textContent=adminPending;
+ $("adminRequestNavCount").hidden=adminPending===0;
+
+ $("countKicked").textContent=db.members.filter(m=>
+  ["TAMAT PERKHIDMATAN","DITAMATKAN","DIGANTUNG"]
+  .includes(norm(m.status))
+ ).length;
+
+ $("countRecoveries").textContent=
+  db.recoveries.filter(r=>pending(r.status)).length;
+
+ $("countCertificates").textContent=db.certificates.length;
+ $("countAnnouncements").textContent=db.announcements.length;
+
+ const complaintCount=
+  mergeComplaints().filter(r=>complaintPending(r.status)).length;
+
+ $("countComplaints").textContent=complaintCount;
+ $("complaintNavCount").textContent=complaintCount;
+ $("complaintNavCount").hidden=complaintCount===0;
+}
+
+function refreshAll(){
+ drawSummary();
+
+ if(currentView==="rekod")drawTable();
+ if(currentView==="fail")drawMemberFile();
+ if(currentView==="sandaran")drawLogs();
+}
+
+/* ==================================================
+   PERUBAHAN DATA
+================================================== */
+
+window.addEventListener("storage",e=>{
+ if(![STORE_KEY,COMPLAINT_KEY].includes(e.key))return;
+ if(!checkSession())return;
+ db=loadData();
+ refreshAll();
+});
+
+window.addEventListener("focus",()=>{
+ if(!checkSession())return;
+ db=loadData();
+ refreshAll();
+});
+
+document.addEventListener("visibilitychange",()=>{
+ if(!document.hidden){
+  if(!checkSession())return;
+  db=loadData();
+  refreshAll();
+ }
+});
+
+/* ==================================================
+   MENU TELEFON
+================================================== */
+
+$("menuToggle").onclick=()=>{
+ const opened=$("sidebar").classList.toggle("open");
+ $("overlay").classList.toggle("show",opened);
+};
+
+$("overlay").onclick=closeSidebar;
+
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"){
+  closeSidebar();
+  closeForm();
+  closeKick();
+  closeRecovery();
+  closeComplaint();
+  closeAdminRequest();
+ }
+});
+
+/* ==================================================
+   LOG KELUAR
+================================================== */
+
+$("logoutBtn").onclick=()=>{
+ if(confirm("Log keluar daripada Panel Pentadbiran?")){
+  sessionStorage.removeItem(SESSION_KEY);
+  location.replace("login-pentadbir.html");
+ }
+};
+
+/* ==================================================
+   MULAKAN PANEL
+================================================== */
+
+if(checkSession()){
+ $("adminName").textContent=session?.nama||"Pentadbir";
+ $("adminId").textContent=session?.noBadan||"—";
+ drawSummary();
+ fillSettings();
+ resetAnnouncement();
+ showView("utama");
+}else{
+ document.body.style.display="none";
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dashboard Anggota | Polis Diraja MYMahkota</title>
+<link rel="stylesheet" href="style.css">
+
+<script>
+"use strict";
+
+const STORE_KEY = "MYMAHKOTA_PORTAL_V1";
+const SESSION_KEY = "MYMAHKOTA_MEMBER_SESSION";
+const LOGIN_URL = "anggota.html";
+
+const norm = v => String(v ?? "").trim().toUpperCase();
+
+function readStore(){
+ try{
+  return JSON.parse(localStorage.getItem(STORE_KEY)||"{}")||{};
+ }catch(e){return {}}
+}
+
+function readSession(){
+ try{
+  return JSON.parse(sessionStorage.getItem(SESSION_KEY)||"null");
+ }catch(e){return null}
+}
+
+function memberId(m){
+ return norm(m?.noBadan||m?.idAnggota);
+}
+
+function findSessionMember(store,session){
+ if(!session?.noBadan || !Number.isFinite(Number(session.loginAt))){
+  return null;
+ }
+
+ const members=Array.isArray(store.members)?store.members:[];
+
+ return members.find(m=>
+  memberId(m)===norm(session.noBadan) &&
+  norm(m.status)==="AKTIF"
+ )||null;
+}
+
+if(!findSessionMember(readStore(),readSession())){
+ sessionStorage.removeItem(SESSION_KEY);
+ location.replace(LOGIN_URL);
+}
+</script>
+
+<style>
+:root{
+ --bg:#0d1118;--sidebar:#141c28;--panel:#1c2635;
+ --gold:#d8b76b;--gold2:#a98a4e;--text:#f4f5f7;
+ --muted:#a9b5c5;--border:#374456;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Arial,sans-serif;line-height:1.6
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+[hidden]{display:none!important}
+button:focus-visible,a:focus-visible,input:focus-visible{
+ outline:2px solid var(--gold);outline-offset:2px
+}
+.sidebar{
+ width:270px;position:fixed;inset:0 auto 0 0;
+ background:var(--sidebar);border-right:1px solid var(--border);
+ padding:20px 13px;overflow-y:auto;z-index:30
+}
+.brand{text-align:center;padding:15px 8px 23px;border-bottom:1px solid var(--border)}
+.brand img{width:80px;height:80px;object-fit:contain}
+.brand h2{font-size:14px;color:var(--gold);margin:10px 0 5px}
+.brand p{font-size:10px;color:var(--muted);letter-spacing:2px}
+.menu-title{
+ margin:24px 10px 9px;color:var(--gold2);
+ font-size:10px;font-weight:bold;letter-spacing:2px
+}
+.menu-link{
+ width:100%;display:flex;align-items:center;gap:11px;
+ background:transparent;border:1px solid transparent;
+ border-radius:7px;text-align:left;color:#cbd3df;
+ font-size:12px;padding:12px;margin-bottom:3px
+}
+.menu-link:hover,.menu-link.active{
+ background:#342d20;border-color:#665535;color:var(--gold)
+}
+.menu-link span{width:23px;text-align:center;font-size:16px}
+.logout{
+ width:100%;padding:13px;margin-top:16px;
+ background:#763941;color:white;border:0;border-radius:6px;
+ font-weight:bold;font-size:11px
+}
+.main{margin-left:270px;min-width:0}
+.topbar{
+ background:#161e2a;border-bottom:1px solid var(--border);
+ min-height:78px;display:flex;align-items:center;
+ justify-content:space-between;gap:15px;padding:15px 25px
+}
+.topbar h1{font-size:19px;margin:0}
+.topbar p{font-size:11px;color:var(--muted);margin:5px 0 0}
+.member-chip{
+ border:1px solid #665535;border-radius:20px;
+ padding:8px 15px;color:var(--gold);font-size:11px;text-align:right
+}
+.member-chip small{display:block;color:var(--muted)}
+.content{max-width:1500px;margin:auto;padding:27px}
+.page-head{margin-bottom:23px}
+.page-head small{font-size:10px;color:var(--gold);letter-spacing:2px}
+.page-head h2{font-size:27px;margin:8px 0}
+.page-head p{font-size:12px;color:var(--muted)}
+.line{width:65px;height:3px;background:var(--gold);margin-top:13px}
+.card{
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:9px;padding:22px;margin-bottom:20px
+}
+.card h3{font-size:16px;margin:0 0 16px}
+.stats{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:15px;margin-bottom:21px
+}
+.stat{
+ background:var(--panel);border:1px solid var(--border);
+ border-top:3px solid var(--gold2);border-radius:8px;padding:20px
+}
+.stat small{font-size:11px;color:var(--muted)}
+.stat strong{display:block;font-size:28px;color:var(--gold);margin-top:8px}
+.hero{
+ display:flex;align-items:center;gap:20px;padding:25px;
+ border:1px solid #665535;border-radius:10px;
+ background:linear-gradient(120deg,#293449,#191f2b);
+ margin-bottom:20px
+}
+.avatar{
+ width:76px;height:76px;border-radius:50%;flex-shrink:0;
+ border:2px solid var(--gold);background:#40351f;
+ display:grid;place-items:center;color:var(--gold);
+ font-size:24px;font-weight:bold
+}
+.hero h2{margin:0 0 5px;font-size:21px}
+.hero p{margin:4px 0;color:var(--muted);font-size:12px}
+.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.info{
+ background:#141d29;border:1px solid var(--border);
+ border-radius:7px;padding:15px;overflow-wrap:anywhere
+}
+.info small{display:block;color:var(--gold);font-size:10px;margin-bottom:7px}
+.info strong{font-size:13px}
+.record{
+ background:#151f2c;border:1px solid var(--border);
+ border-left:3px solid var(--gold);border-radius:7px;
+ padding:17px;margin-bottom:13px
+}
+.record h4{color:var(--gold);margin:8px 0;font-size:15px}
+.record p{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.record small{font-size:11px;color:var(--muted)}
+.badge{
+ display:inline-block;border-radius:20px;padding:5px 10px;
+ background:#344254;color:#e8edf4;font-size:10px
+}
+.badge.green{background:#204730;color:#a8e6bd}
+.badge.gold{background:#493b22;color:#f0d28c}
+.badge.red{background:#48292f;color:#f3b0b0}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:7px}
+table{width:100%;min-width:620px;border-collapse:collapse}
+th{background:#293649;color:var(--gold);text-align:left;padding:13px;font-size:11px}
+td{border-top:1px solid var(--border);padding:13px;font-size:12px}
+.empty{text-align:center;color:var(--muted);padding:25px;font-size:12px}
+.btn{
+ display:inline-block;background:var(--gold);border:0;
+ border-radius:6px;padding:11px 15px;
+ color:#111;font-weight:bold;font-size:11px
+}
+.btn.secondary{
+ color:var(--gold);background:transparent;border:1px solid var(--gold2)
+}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:17px}
+.search{
+ flex:1;min-width:175px;padding:12px;background:#101722;
+ border:1px solid var(--border);border-radius:6px;color:white
+}
+.footer{
+ border-top:1px solid var(--border);text-align:center;
+ color:var(--muted);font-size:10px;padding:22px
+}
+.mobile-menu{display:none}
+.overlay{display:none}
+@media(max-width:1100px){
+ .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:850px){
+ .sidebar{transform:translateX(-100%);transition:.25s}
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0}
+ .mobile-menu{
+  display:block;background:transparent;color:var(--gold);
+  border:1px solid var(--border);padding:8px 12px;border-radius:6px
+ }
+ .overlay.show{display:block;position:fixed;inset:0;background:#000b;z-index:20}
+ .topbar{padding:14px}
+ .content{padding:18px 14px}
+}
+@media(max-width:550px){
+ .stats,.info-grid{grid-template-columns:1fr}
+ .card{padding:17px}
+ .hero{gap:13px;padding:18px}
+ .hero h2{font-size:17px}
+ .avatar{width:58px;height:58px;font-size:20px}
+ .member-chip{display:none}
+ .page-head h2{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+
+ <div class="brand">
+  <img src="logo.png" alt="Logo Polis Diraja MYMahkota">
+  <h2>POLIS DIRAJA MYMAHKOTA</h2>
+  <p>DASHBOARD ANGGOTA</p>
+ </div>
+
+ <div class="menu-title">UTAMA</div>
+
+ <button class="menu-link active" data-page="utama">
+  <span>▦</span>Dashboard Utama
+ </button>
+ <button class="menu-link" data-page="profil">
+  <span>♙</span>Profil Anggota
+ </button>
+ <button class="menu-link" data-page="kerjaya">
+  <span>▤</span>Fail Peribadi & Kerjaya
+ </button>
+
+ <div class="menu-title">REKOD PERKHIDMATAN</div>
+
+ <button class="menu-link" data-page="sijil">
+  <span>▧</span>Sijil Anggota
+ </button>
+ <button class="menu-link" data-page="dokumen">
+  <span>▣</span>Dokumen Anggota
+ </button>
+ <button class="menu-link" data-page="kemahiran">
+  <span>✦</span>Kemahiran & Kepakaran
+ </button>
+ <button class="menu-link" data-page="prestasi">
+  <span>▥</span>Prestasi & Kehadiran
+ </button>
+ <button class="menu-link" data-page="kenaikan">
+  <span>↑</span>Kenaikan Pangkat
+ </button>
+ <button class="menu-link" data-page="latihan">
+  <span>◈</span>Latihan & Kursus
+ </button>
+ <button class="menu-link" data-page="anugerah">
+  <span>★</span>Anugerah & Penghargaan
+ </button>
+ <button class="menu-link" data-page="tatatertib">
+  <span>!</span>Amaran & Tatatertib
+ </button>
+
+ <div class="menu-title">MAKLUMAN</div>
+ <button class="menu-link" data-page="pengumuman">
+  <span>▣</span>Pengumuman Rasmi
+ </button>
+
+ <div class="menu-title">PENTADBIRAN</div>
+ <a class="menu-link" href="login-pentadbir.html">
+  <span>⚙</span>Log Masuk Pentadbir
+ </a>
+
+ <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:14px">
+  <a class="menu-link" href="index.html">
+   <span>←</span>Portal Utama
+  </a>
+  <button class="logout" id="logoutBtn">
+   LOG KELUAR ANGGOTA
+  </button>
+ </div>
+
+</aside>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="main">
+
+<header class="topbar">
+ <div style="display:flex;align-items:center;gap:12px">
+  <button type="button" id="menuToggle" class="mobile-menu">☰</button>
+  <div>
+   <h1 id="topTitle">Dashboard Anggota</h1>
+   <p>SISTEM REKOD PERKHIDMATAN</p>
+  </div>
+ </div>
+
+ <div class="member-chip">
+  <strong id="topName">ANGGOTA</strong>
+  <small id="topId">—</small>
+ </div>
+</header>
+
+<main class="content">
+
+<!-- DASHBOARD -->
+<section class="page" id="page-utama">
+ <div class="page-head">
+  <small>PUSAT MAKLUMAT ANGGOTA</small>
+  <h2>Dashboard Anggota</h2>
+  <p>Ringkasan maklumat perkhidmatan dan prestasi anggota.</p>
+  <div class="line"></div>
+ </div>
+
+ <div class="hero">
+  <div class="avatar" id="avatar">A</div>
+  <div>
+   <h2 id="heroName">Nama Anggota</h2>
+   <p id="heroRank">Pangkat</p>
+   <p id="heroDepartment">Jabatan</p>
+   <span class="badge green" id="heroStatus">Aktif</span>
+  </div>
+ </div>
+
+ <div class="stats">
+  <div class="stat">
+   <small>JUMLAH SIJIL</small>
+   <strong id="countCertificates">0</strong>
+  </div>
+  <div class="stat">
+   <small>KEMAHIRAN & KEPAKARAN</small>
+   <strong id="countSkills">0</strong>
+  </div>
+  <div class="stat">
+   <small>REKOD PRESTASI</small>
+   <strong id="countPerformance">0</strong>
+  </div>
+  <div class="stat">
+   <small>REKOD PERKHIDMATAN</small>
+   <strong id="countService">0</strong>
+  </div>
+ </div>
+
+ <div class="card">
+  <h3>Maklumat Anggota</h3>
+  <div class="info-grid" id="summaryInfo"></div>
+ </div>
+
+ <div class="card">
+  <h3>Prestasi Terkini</h3>
+  <div id="latestPerformance"></div>
+ </div>
+
+ <div class="card">
+  <h3>Pengumuman Terkini</h3>
+  <div id="latestAnnouncements"></div>
+ </div>
+</section>
+
+<!-- PROFIL -->
+<section class="page" id="page-profil" hidden>
+ <div class="page-head">
+  <small>MAKLUMAT ANGGOTA</small>
+  <h2>Profil Anggota</h2>
+  <p>Butiran keanggotaan dan penempatan semasa.</p>
+  <div class="line"></div>
+ </div>
+ <div class="card">
+  <h3>Maklumat Perkhidmatan</h3>
+  <div class="info-grid" id="profileInfo"></div>
+ </div>
+</section>
+
+<!-- KERJAYA -->
+<section class="page" id="page-kerjaya" hidden>
+ <div class="page-head">
+  <small>SEJARAH PERKHIDMATAN</small>
+  <h2>Fail Peribadi & Kerjaya</h2>
+  <p>Rekod perkembangan perkhidmatan anggota.</p>
+  <div class="line"></div>
+ </div>
+ <div class="card">
+  <h3>Butiran Kerjaya</h3>
+  <div class="info-grid" id="careerInfo"></div>
+ </div>
+ <div class="card">
+  <h3>Sejarah Perkhidmatan</h3>
+  <div id="careerRecords"></div>
+ </div>
+</section>
+
+<!-- SIJIL -->
+<section class="page" id="page-sijil" hidden>
+ <div class="page-head">
+  <small>KELAYAKAN ANGGOTA</small>
+  <h2>Sijil Anggota</h2>
+  <p>Sijil dan kelayakan yang direkodkan oleh pentadbir.</p>
+  <div class="line"></div>
+ </div>
+ <div id="certificatesList"></div>
+</section>
+
+<!-- DOKUMEN -->
+<section class="page" id="page-dokumen" hidden>
+ <div class="page-head">
+  <small>REKOD DOKUMEN</small>
+  <h2>Dokumen Anggota</h2>
+  <p>Maklumat dan dokumen berkaitan perkhidmatan.</p>
+  <div class="line"></div>
+ </div>
+ <div id="documentsList"></div>
+</section>
+
+<!-- KEMAHIRAN -->
+<section class="page" id="page-kemahiran" hidden>
+ <div class="page-head">
+  <small>KEPAKARAN ANGGOTA</small>
+  <h2>Kemahiran & Kepakaran</h2>
+  <p>Rekod kemahiran dan tahap penguasaan.</p>
+  <div class="line"></div>
+ </div>
+ <div id="skillsList"></div>
+</section>
+
+<!-- PRESTASI -->
+<section class="page" id="page-prestasi" hidden>
+ <div class="page-head">
+  <small>PENILAIAN ANGGOTA</small>
+  <h2>Prestasi & Kehadiran</h2>
+  <p>Jam bertugas, sasaran dan markah penilaian.</p>
+  <div class="line"></div>
+ </div>
+ <div class="card">
+  <h3>Rekod Penilaian</h3>
+  <div class="table-wrap">
+   <table>
+    <thead>
+     <tr>
+      <th>TEMPOH</th>
+      <th>JAM</th>
+      <th>SASARAN</th>
+      <th>PENCAPAIAN</th>
+      <th>MARKAH</th>
+      <th>KOD</th>
+     </tr>
+    </thead>
+    <tbody id="performanceRows"></tbody>
+   </table>
+  </div>
+ </div>
+</section>
+
+<!-- KENAIKAN -->
+<section class="page" id="page-kenaikan" hidden>
+ <div class="page-head">
+  <small>PERKEMBANGAN KERJAYA</small>
+  <h2>Kenaikan Pangkat</h2>
+  <div class="line"></div>
+ </div>
+ <div id="promotionList"></div>
+</section>
+
+<!-- LATIHAN -->
+<section class="page" id="page-latihan" hidden>
+ <div class="page-head">
+  <small>PEMBANGUNAN ANGGOTA</small>
+  <h2>Latihan & Kursus</h2>
+  <div class="line"></div>
+ </div>
+ <div id="trainingList"></div>
+</section>
+
+<!-- ANUGERAH -->
+<section class="page" id="page-anugerah" hidden>
+ <div class="page-head">
+  <small>PENGIKTIRAFAN</small>
+  <h2>Anugerah & Penghargaan</h2>
+  <div class="line"></div>
+ </div>
+ <div id="awardsList"></div>
+</section>
+
+<!-- TATATERTIB -->
+<section class="page" id="page-tatatertib" hidden>
+ <div class="page-head">
+  <small>REKOD INTEGRITI</small>
+  <h2>Amaran & Tatatertib</h2>
+  <div class="line"></div>
+ </div>
+ <div id="disciplineList"></div>
+</section>
+
+<!-- PENGUMUMAN -->
+<section class="page" id="page-pengumuman" hidden>
+ <div class="page-head">
+  <small>KOMUNIKASI RASMI</small>
+  <h2>Pengumuman Rasmi</h2>
+  <p>Hebahan dan arahan daripada pihak pentadbiran.</p>
+  <div class="line"></div>
+ </div>
+ <div class="toolbar">
+  <input class="search" id="announcementSearch"
+   placeholder="Cari tajuk atau rujukan">
+  <button class="btn secondary" id="refreshBtn">MUAT SEMULA</button>
+ </div>
+ <div id="announcementsList"></div>
+</section>
+
+</main>
+
+<footer class="footer">
+ POLIS DIRAJA MYMAHKOTA · DASHBOARD ANGGOTA
+ <p>© 2026 POLIS DIRAJA MYMAHKOTA</p>
+</footer>
+</div>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const esc = v => String(v ?? "")
+ .replaceAll("&","&amp;")
+ .replaceAll("<","&lt;")
+ .replaceAll(">","&gt;")
+ .replaceAll('"',"&quot;")
+ .replaceAll("'","&#39;");
+
+let db=readStore();
+let session=readSession();
+let member=findSessionMember(db,session);
+
+function logout(){
+ sessionStorage.removeItem(SESSION_KEY);
+ location.replace(LOGIN_URL);
+}
+
+function enforceSession(){
+ db=readStore();
+ session=readSession();
+ member=findSessionMember(db,session);
+
+ if(!member){
+  logout();
+  return false;
+ }
+
+ return true;
+}
+
+function items(key){
+ return Array.isArray(db[key])?db[key]:[];
+}
+
+function relatedId(record){
+ return norm(record?.noBadan||record?.idAnggota);
+}
+
+function ownRecords(key){
+ return items(key).filter(r=>relatedId(r)===memberId(member));
+}
+
+function sortRecords(records){
+ return [...records].sort((a,b)=>{
+  const da=String(a.updatedAt||a.createdAt||a.tarikh||"");
+  const dbb=String(b.updatedAt||b.createdAt||b.tarikh||"");
+  return dbb.localeCompare(da);
+ });
+}
+
+function formattedDate(v){
+ if(!v)return "—";
+ const value=String(v);
+ if(/^\d{4}-\d{2}-\d{2}$/.test(value)){
+  const [year,month,day]=value.split("-");
+  return day+"/"+month+"/"+year;
+ }
+ return value;
+}
+
+function badge(v){
+ const value=norm(v);
+ let color="";
+
+ if(["AKTIF","DISAHKAN","DILULUSKAN","HIJAU"].includes(value))
+  color="green";
+ else if(["MENUNGGU","KUNING","DRAF"].includes(value))
+  color="gold";
+ else if(["MERAH","DIGANTUNG","DIBATALKAN","DITAMATKAN"].includes(value))
+  color="red";
+
+ return `<span class="badge ${color}">${esc(v||"—")}</span>`;
+}
+
+function info(label,value){
+ return `<div class="info">
+  <small>${esc(label)}</small>
+  <strong>${esc(value===0?0:value||"—")}</strong>
+ </div>`;
+}
+
+function empty(message){
+ return `<div class="card empty">${esc(message)}</div>`;
+}
+
+function profileHTML(){
+ return [
+  info("NAMA PENUH",member.nama),
+  info("NOMBOR BADAN",memberId(member)),
+  info("PANGKAT",member.pangkat),
+  info("JAWATAN",member.jawatan),
+  info("JABATAN",member.jabatan),
+  info("UNIT / BAHAGIAN",member.unit),
+  info("TARIKH MENYERTAI",formattedDate(member.tarikhMenyertai)),
+  info("STATUS",member.status)
+ ].join("");
+}
+
+function renderProfile(){
+ const name=String(member.nama||"Anggota");
+ const initials=name.split(/\s+/).slice(0,2).map(w=>w[0]||"").join("");
+
+ $("avatar").textContent=initials.toUpperCase();
+ $("heroName").textContent=name;
+ $("heroRank").textContent=member.pangkat||"Pangkat belum direkodkan";
+ $("heroDepartment").textContent=member.jabatan||"Jabatan belum direkodkan";
+ $("heroStatus").textContent=member.status||"Aktif";
+ $("topName").textContent=name;
+ $("topId").textContent=memberId(member);
+
+ $("summaryInfo").innerHTML=profileHTML();
+ $("profileInfo").innerHTML=profileHTML();
+ $("careerInfo").innerHTML=profileHTML();
+}
+
+function recordCard(r){
+ return `<div class="record">
+  ${badge(r.jenis||"Rekod")}
+  <h4>${esc(r.tajuk||r.jenis||"Rekod Perkhidmatan")}</h4>
+  <small>${esc(formattedDate(r.tarikh))}
+  ${r.rujukan?" · "+esc(r.rujukan):""}</small>
+  ${r.pangkatLama||r.pangkatBaharu
+   ?`<p>Pangkat: ${esc(r.pangkatLama||"—")} → ${esc(r.pangkatBaharu||"—")}</p>`:""}
+  ${r.status?`<p>Status: ${esc(r.status)}</p>`:""}
+  ${r.keterangan?`<p>${esc(r.keterangan)}</p>`:""}
+  ${r.pegawaiPelulus?`<small>Pelulus: ${esc(r.pegawaiPelulus)}</small>`:""}
+ </div>`;
+}
+
+function renderService(){
+ const all=sortRecords(ownRecords("serviceRecords"));
+
+ $("careerRecords").innerHTML=all.length
+  ?all.map(recordCard).join("")
+  :'<div class="empty">Belum ada rekod perkhidmatan.</div>';
+
+ const groups=[
+  ["promotionList",r=>norm(r.jenis)==="KENAIKAN PANGKAT",
+   "Belum ada kenaikan pangkat."],
+  ["trainingList",r=>["LATIHAN","KURSUS"].includes(norm(r.jenis)),
+   "Belum ada rekod latihan atau kursus."],
+  ["awardsList",r=>["ANUGERAH","PENGHARGAAN"].includes(norm(r.jenis)),
+   "Belum ada rekod anugerah."],
+  ["disciplineList",r=>
+   ["AMARAN","DISIPLIN","TATATERTIB"].includes(norm(r.jenis))||
+   norm(r.tajuk).includes("TINDAKAN PENTADBIRAN"),
+   "Tiada rekod amaran atau tatatertib."]
+ ];
+
+ groups.forEach(([id,filter,message])=>{
+  const matching=all.filter(filter);
+  $(id).innerHTML=matching.length
+   ?matching.map(recordCard).join("")
+   :empty(message);
+ });
+}
+
+function safeLink(value){
+ if(!value)return "";
+ try{
+  const url=new URL(String(value));
+  return url.protocol==="https:"?url.href:"";
+ }catch(e){return ""}
+}
+
+function renderCertificates(){
+ const records=sortRecords(ownRecords("certificates"));
+
+ $("certificatesList").innerHTML=records.length
+  ?records.map(r=>`
+   <div class="card"><div class="record">
+    ${badge(r.status||"Direkodkan")}
+    <h4>${esc(r.nama||"Sijil")}</h4>
+    <p>Rujukan: ${esc(r.rujukan||"—")}</p>
+    <p>Jenis: ${esc(r.jenis||"—")}</p>
+    <p>Pengeluar: ${esc(r.pengeluar||"—")}</p>
+    <p>Tarikh: ${esc(formattedDate(r.tarikh))}</p>
+    ${r.keterangan?`<p>${esc(r.keterangan)}</p>`:""}
+    ${safeLink(r.url)?`<a class="btn secondary"
+      href="${esc(safeLink(r.url))}" target="_blank"
+      rel="noopener noreferrer">LIHAT SIJIL</a>`:""}
+   </div></div>`).join("")
+  :empty("Belum ada sijil anggota.");
+}
+
+function renderDocuments(){
+ const records=sortRecords(ownRecords("documents"));
+
+ $("documentsList").innerHTML=records.length
+  ?records.map(r=>`
+   <div class="card"><div class="record">
+    ${badge(r.jenis||"Dokumen")}
+    <h4>${esc(r.tajuk||"Dokumen Anggota")}</h4>
+    <p>Rujukan: ${esc(r.rujukan||"—")}</p>
+    <p>Pengeluar: ${esc(r.pengeluar||"—")}</p>
+    <p>Tarikh: ${esc(formattedDate(r.tarikh))}</p>
+    ${r.keterangan?`<p>${esc(r.keterangan)}</p>`:""}
+    ${safeLink(r.url)?`<a class="btn secondary"
+     href="${esc(safeLink(r.url))}" target="_blank"
+     rel="noopener noreferrer">BUKA DOKUMEN</a>`:""}
+   </div></div>`).join("")
+  :empty("Belum ada dokumen anggota.");
+}
+
+function renderSkills(){
+ const records=sortRecords(ownRecords("skills"));
+
+ $("skillsList").innerHTML=records.length
+  ?records.map(r=>`
+   <div class="card"><div class="record">
+    ${badge(r.kategori||"Kemahiran")}
+    <h4>${esc(r.nama||"Kemahiran")}</h4>
+    <p>Tahap: ${esc(r.tahap||"—")}</p>
+    <p>Disahkan oleh: ${esc(r.pengeluar||"—")}</p>
+    <p>Tarikh: ${esc(formattedDate(r.tarikh))}</p>
+    ${r.keterangan?`<p>${esc(r.keterangan)}</p>`:""}
+   </div></div>`).join("")
+  :empty("Belum ada rekod kemahiran dan kepakaran.");
+}
+
+function achievement(r){
+ const jam=Number(r.jam);
+ const sasaran=Number(r.sasaran);
+
+ if(!Number.isFinite(jam)||
+    !Number.isFinite(sasaran)||sasaran<=0)return "—";
+
+ return (jam/sasaran*100).toFixed(1)+"%";
+}
+
+function renderPerformance(){
+ const records=sortRecords(ownRecords("performance"));
+
+ $("performanceRows").innerHTML=records.length
+  ?records.map(r=>`
+   <tr>
+    <td>${esc(r.tempoh||"—")}</td>
+    <td>${esc(r.jam??"—")}</td>
+    <td>${esc(r.sasaran??"—")}</td>
+    <td>${esc(achievement(r))}</td>
+    <td>${esc(r.markah??"—")}</td>
+    <td>${badge(r.kod||"—")}</td>
+   </tr>`).join("")
+  :'<tr><td colspan="6" class="empty">Belum ada penilaian prestasi.</td></tr>';
+
+ if(!records.length){
+  $("latestPerformance").innerHTML=
+   '<div class="empty">Belum ada penilaian prestasi.</div>';
+  return;
+ }
+
+ const latest=records[0];
+
+ $("latestPerformance").innerHTML=`
+  <div class="info-grid">
+   ${info("TEMPOH",latest.tempoh)}
+   ${info("JAM BERTUGAS",latest.jam)}
+   ${info("SASARAN",latest.sasaran)}
+   ${info("PENCAPAIAN",achievement(latest))}
+   ${info("MARKAH",latest.markah)}
+   ${info("KOD PRESTASI",latest.kod)}
+  </div>
+  ${latest.catatan?`<div class="record" style="margin-top:15px">
+   <p>${esc(latest.catatan)}</p>
+  </div>`:""}`;
+}
+
+function visibleAnnouncements(){
+ return sortRecords(items("announcements").filter(r=>{
+  if(norm(r.status)!=="DITERBITKAN")return false;
+
+  const audience=norm(r.kepada||r.audience||"");
+
+  if(audience.includes("PENTADBIR SAHAJA"))return false;
+
+  if(audience.includes("JABATAN TERTENTU"))return false;
+
+  return true;
+ }));
+}
+
+function announcementCard(r){
+ return `<div class="record">
+  ${badge(r.kategori||"Pengumuman")}
+  <h4>${esc(r.tajuk||r.title||"Pengumuman Rasmi")}</h4>
+  <small>${esc(formattedDate(r.tarikh||r.date))}
+   · ${esc(r.rujukan||"—")}</small>
+  <p><strong>Kepada:</strong> ${esc(r.kepada||r.audience||"—")}</p>
+  ${r.perkara?`<p><strong>Perkara:</strong> ${esc(r.perkara)}</p>`:""}
+  <p>${esc(r.kandungan||r.body||"")}</p>
+  ${r.arahan?`<p><strong>Arahan / Tindakan:</strong>
+   ${esc(r.arahan)}</p>`:""}
+  ${r.pengeluar?`<small>Dikeluarkan oleh:
+   ${esc(r.pengeluar)} ${esc(r.jawatan||"")}</small>`:""}
+ </div>`;
+}
+
+function renderAnnouncements(){
+ const all=visibleAnnouncements();
+ const q=norm($("announcementSearch").value);
+
+ const filtered=all.filter(r=>
+  !q||norm([
+   r.tajuk,r.title,r.rujukan,r.kategori,r.kandungan
+  ].join(" ")).includes(q)
+ );
+
+ $("announcementsList").innerHTML=filtered.length
+  ?filtered.map(r=>`<div class="card">${announcementCard(r)}</div>`).join("")
+  :empty("Tiada pengumuman diterbitkan.");
+
+ $("latestAnnouncements").innerHTML=all.length
+  ?all.slice(0,3).map(announcementCard).join("")
+  :'<div class="empty">Belum ada pengumuman rasmi.</div>';
+}
+
+function renderAll(){
+ if(!member)return;
+
+ renderProfile();
+ renderService();
+ renderCertificates();
+ renderDocuments();
+ renderSkills();
+ renderPerformance();
+ renderAnnouncements();
+
+ $("countCertificates").textContent=ownRecords("certificates").length;
+ $("countSkills").textContent=ownRecords("skills").length;
+ $("countPerformance").textContent=ownRecords("performance").length;
+ $("countService").textContent=ownRecords("serviceRecords").length;
+}
+
+const TITLES={
+ utama:"Dashboard Anggota",
+ profil:"Profil Anggota",
+ kerjaya:"Fail Peribadi & Kerjaya",
+ sijil:"Sijil Anggota",
+ dokumen:"Dokumen Anggota",
+ kemahiran:"Kemahiran & Kepakaran",
+ prestasi:"Prestasi & Kehadiran",
+ kenaikan:"Kenaikan Pangkat",
+ latihan:"Latihan & Kursus",
+ anugerah:"Anugerah & Penghargaan",
+ tatatertib:"Amaran & Tatatertib",
+ pengumuman:"Pengumuman Rasmi"
+};
+
+function closeMenu(){
+ $("sidebar").classList.remove("open");
+ $("overlay").classList.remove("show");
+}
+
+function showPage(name){
+ if(!enforceSession())return;
+
+ document.querySelectorAll(".page").forEach(page=>{
+  page.hidden=page.id!=="page-"+name;
+ });
+
+ document.querySelectorAll(".menu-link[data-page]").forEach(button=>{
+  button.classList.toggle("active",button.dataset.page===name);
+ });
+
+ $("topTitle").textContent=TITLES[name]||"Dashboard Anggota";
+
+ closeMenu();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.querySelectorAll(".menu-link[data-page]").forEach(button=>{
+ button.addEventListener("click",()=>{
+  showPage(button.dataset.page);
+ });
+});
+
+$("menuToggle").addEventListener("click",()=>{
+ const opened=$("sidebar").classList.toggle("open");
+ $("overlay").classList.toggle("show",opened);
+});
+
+$("overlay").addEventListener("click",closeMenu);
+$("logoutBtn").addEventListener("click",()=>{
+ if(confirm("Log keluar daripada Dashboard Anggota?"))logout();
+});
+
+$("announcementSearch").addEventListener("input",()=>{
+ if(enforceSession())renderAnnouncements();
+});
+
+$("refreshBtn").addEventListener("click",()=>{
+ refreshAll();
+});
+
+function refreshAll(){
+ if(enforceSession())renderAll();
+}
+
+window.addEventListener("storage",event=>{
+ if(event.key===STORE_KEY)refreshAll();
+});
+
+window.addEventListener("focus",refreshAll);
+
+document.addEventListener("visibilitychange",()=>{
+ if(!document.hidden)refreshAll();
+});
+
+if(enforceSession()){
+ renderAll();
+}
+</script>
+</body>
+</html>

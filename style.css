@@ -1,0 +1,967 @@
+/* ==========================================
+   POLIS DIRAJA MYMAHKOTA
+   OFFICIAL PORTAL DESIGN
+   VERSION 3.1
+========================================== */
+
+/* GLOBAL SETTINGS */
+
+:root {
+    --black: #101010;
+    --dark: #181818;
+    --dark-light: #222222;
+    --gold: #c9a653;
+    --gold-light: #e4ca83;
+    --white: #ffffff;
+    --grey: #777777;
+    --light: #f5f5f3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--white);
+    color: #222;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--gold-light);
+    outline-offset: 3px;
+}
+
+.section {
+    width: 88%;
+    max-width: 1180px;
+    margin: auto;
+    padding-top: 85px;
+    padding-bottom: 85px;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.site-header {
+    background: var(--black);
+    border-bottom: 1px solid rgba(201,166,83,.45);
+}
+
+.header-container {
+    width: 88%;
+    max-width: 1250px;
+    min-height: 105px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+
+.brand img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+}
+
+.brand-text h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--white);
+    line-height: 1.3;
+}
+
+.brand-text h2 {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: var(--gold);
+    line-height: 1.3;
+}
+
+.brand-text span {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.official-label {
+    color: #c9c9c9;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.official-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--gold);
+    border-radius: 50%;
+}
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+.navigation {
+    background: #191919;
+    border-bottom: 1px solid #353535;
+    position: relative;
+    z-index: 100;
+}
+
+.nav-container {
+    width: 88%;
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-container a {
+    padding: 17px 15px;
+    color: #dedede;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: .25s;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-container a:hover,
+.nav-container a.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+}
+
+.nav-container .nav-member {
+    color: var(--gold-light);
+    border: 1px solid #796538;
+    margin-left: 12px;
+    padding: 10px 15px;
+}
+
+.nav-container .nav-member:hover {
+    background: var(--gold);
+    color: var(--black);
+}
+
+/* ==========================================
+   HERO SECTION
+========================================== */
+
+.hero {
+    background:
+        radial-gradient(
+            ellipse at 80% 50%,
+            rgba(201,166,83,.10),
+            transparent 55%
+        ),
+        linear-gradient(
+            120deg,
+            #101010,
+            #191919 65%,
+            #111111
+        );
+
+    color: var(--white);
+    border-bottom: 4px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 8%;
+    width: 1px;
+    height: 100%;
+    background: rgba(201,166,83,.15);
+}
+
+.hero-inner {
+    width: 88%;
+    max-width: 1180px;
+    margin: auto;
+    padding: 110px 0 70px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-line {
+    width: 55px;
+    height: 3px;
+    background: var(--gold);
+    margin-bottom: 25px;
+}
+
+.hero-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: var(--gold);
+    margin-bottom: 20px;
+}
+
+.hero h2 {
+    font-size: clamp(35px, 5.5vw, 68px);
+    line-height: 1.12;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.hero h2 span {
+    color: var(--gold-light);
+}
+
+.hero h3 {
+    color: #dedede;
+    font-size: clamp(15px, 2vw, 23px);
+    letter-spacing: 5px;
+    margin-top: 16px;
+    font-weight: 500;
+}
+
+.hero-description {
+    color: #bdbdbd;
+    max-width: 570px;
+    font-size: 14px;
+    margin-top: 25px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 35px;
+}
+
+.button-gold {
+    display: inline-block;
+    background: var(--gold);
+    color: #111;
+    padding: 14px 25px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    border: 1px solid var(--gold);
+    transition: .25s;
+}
+
+.button-gold:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+    transform: translateY(-2px);
+}
+
+.button-outline {
+    display: inline-block;
+    color: var(--white);
+    border: 1px solid #666;
+    padding: 14px 25px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    transition: .25s;
+}
+
+.button-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold-light);
+}
+
+.hero-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 85px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #929292;
+}
+
+.hero-bottom .separator {
+    color: var(--gold);
+}
+
+/* ==========================================
+   SECTION HEADINGS
+========================================== */
+
+.section-label {
+    color: #a17e32;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.section h2 {
+    color: #171717;
+    font-size: 32px;
+    font-weight: 750;
+    line-height: 1.3;
+}
+
+.gold-divider {
+    width: 55px;
+    height: 3px;
+    background: var(--gold);
+    margin: 22px 0;
+}
+
+/* ==========================================
+   INTRODUCTION
+========================================== */
+
+.introduction {
+    text-align: center;
+}
+
+.introduction .gold-divider {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.introduction p {
+    max-width: 850px;
+    margin: 18px auto;
+    color: #666;
+    font-size: 14px;
+}
+
+/* ==========================================
+   QUICK ACCESS
+========================================== */
+
+.quick-access {
+    background: var(--light);
+    border-top: 1px solid #e8e4da;
+    border-bottom: 1px solid #e8e4da;
+}
+
+.access-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 40px;
+}
+
+.access-card {
+    background: var(--white);
+    padding: 30px 24px;
+    min-height: 235px;
+    border: 1px solid #e5e1d7;
+    border-top: 3px solid var(--gold);
+    transition: .3s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.access-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+    box-shadow: 0 12px 28px rgba(0,0,0,.07);
+}
+
+.card-number {
+    font-size: 27px;
+    font-weight: 800;
+    color: #c4a45c;
+    margin-bottom: 16px;
+}
+
+.access-card h3 {
+    font-size: 17px;
+    color: #171717;
+    margin-bottom: 10px;
+}
+
+.access-card p {
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.card-link {
+    margin-top: auto;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #96752e;
+}
+
+/* ==========================================
+   DEPARTMENT
+========================================== */
+
+.department {
+    text-align: center;
+}
+
+.department .gold-divider {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.department p {
+    color: #666;
+    max-width: 650px;
+    margin: auto;
+    font-size: 14px;
+}
+
+.button-dark {
+    display: inline-block;
+    margin-top: 30px;
+    background: var(--black);
+    color: var(--gold-light);
+    padding: 14px 25px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    border: 1px solid var(--gold);
+    transition: .25s;
+}
+
+.button-dark:hover {
+    background: var(--gold);
+    color: var(--black);
+}
+
+/* ==========================================
+   ANNOUNCEMENTS
+========================================== */
+
+.announcements {
+    background: var(--light);
+    border-top: 1px solid #e6e2d8;
+}
+
+.announcements .section {
+    padding-top: 75px;
+    padding-bottom: 75px;
+}
+
+.announcement-box {
+    background: white;
+    border: 1px solid #e4e0d6;
+    border-left: 4px solid var(--gold);
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.035);
+}
+
+.announcement-date {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #97742c;
+    background: #f7f1e3;
+    padding: 6px 12px;
+    margin-bottom: 15px;
+}
+
+.announcement-box h3 {
+    color: #222;
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.announcement-box p {
+    font-size: 13px;
+    color: #777;
+}
+
+/* ==========================================
+   MEMBER PORTAL
+========================================== */
+
+.member-portal {
+    background:
+        radial-gradient(
+            ellipse at 80% 50%,
+            rgba(201,166,83,.12),
+            transparent 60%
+        ),
+        #171717;
+
+    border-top: 3px solid var(--gold);
+}
+
+.member-inner {
+    width: 88%;
+    max-width: 1180px;
+    margin: auto;
+    padding: 65px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.member-inner h2 {
+    color: white;
+    font-size: 30px;
+    margin: 8px 0;
+}
+
+.member-inner p {
+    color: #aaa;
+    font-size: 13px;
+    max-width: 600px;
+}
+
+.member-inner .button-gold {
+    white-space: nowrap;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer {
+    background: #0b0b0b;
+    color: white;
+    border-top: 1px solid #39301e;
+}
+
+.footer-container {
+    width: 88%;
+    max-width: 1180px;
+    margin: auto;
+    padding-top: 45px;
+}
+
+.footer-brand {
+    padding-bottom: 35px;
+}
+
+.footer-brand h2 {
+    color: var(--gold-light);
+    font-size: 18px;
+    letter-spacing: 3px;
+}
+
+.footer-brand p {
+    color: #929292;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 10px;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-top: 1px solid #303030;
+    padding: 20px 0;
+    color: #777;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN - TABLET
+========================================== */
+
+@media (max-width: 950px) {
+
+    .access-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav-container a {
+        padding: 14px 10px;
+        font-size: 9px;
+    }
+
+    .hero-inner {
+        padding-top: 90px;
+    }
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN - MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+
+    .section {
+        width: 90%;
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .header-container {
+        width: 90%;
+        min-height: 85px;
+    }
+
+    .brand {
+        gap: 10px;
+    }
+
+    .brand img {
+        width: 53px;
+        height: 53px;
+    }
+
+    .brand-text h1 {
+        font-size: 15px;
+    }
+
+    .brand-text h2 {
+        font-size: 16px;
+        letter-spacing: 2px;
+    }
+
+    .brand-text span {
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
+
+    .official-label {
+        display: none;
+    }
+
+    .nav-container {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-inner {
+        width: 90%;
+        padding: 75px 0 40px;
+    }
+
+    .hero h2 {
+        font-size: 36px;
+    }
+
+    .hero h3 {
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .hero-bottom {
+        margin-top: 55px;
+        gap: 9px;
+        font-size: 8px;
+    }
+
+    .section h2 {
+        font-size: 25px;
+    }
+
+    .access-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .access-card {
+        min-height: 190px;
+    }
+
+    .member-inner {
+        width: 90%;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 50px 0;
+    }
+
+    .member-inner h2 {
+        font-size: 25px;
+    }
+
+    .footer-container {
+        width: 90%;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+    }
+}
+
+/* ==========================================
+   MOBILE HAMBURGER MENU
+========================================== */
+
+.nav-mobile-header {
+    display: none;
+}
+
+.menu-toggle {
+    background: transparent;
+    color: var(--gold-light);
+    border: 1px solid var(--gold);
+    padding: 8px 14px;
+    font-size: 23px;
+    cursor: pointer;
+    min-width: 48px;
+    min-height: 44px;
+}
+
+@media (max-width: 600px) {
+
+    .nav-mobile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        margin: auto;
+        min-height: 58px;
+        color: var(--gold-light);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+    }
+
+    .nav-container {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        padding: 8px 5%;
+        border-top: 1px solid #353535;
+    }
+
+    .navigation.menu-open .nav-container {
+        display: flex;
+    }
+
+    .nav-container a {
+        display: block;
+        width: 100%;
+        padding: 14px 12px;
+        font-size: 11px;
+        text-align: left;
+        border-bottom: 1px solid #333;
+    }
+
+    .nav-container .nav-member {
+        margin: 10px 0;
+        text-align: center;
+    }
+}
+
+/* ==========================================
+   CARTA ORGANISASI
+========================================== */
+
+.organization-section {
+    background: var(--white);
+}
+
+.organization-chart {
+    display: grid;
+    gap: 18px;
+    margin-top: 35px;
+}
+
+.organization-director {
+    max-width: 520px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px;
+    text-align: center;
+    color: #171717;
+    background: linear-gradient(
+        135deg,
+        var(--gold-light),
+        var(--gold)
+    );
+    border: 1px solid #ad8b43;
+    border-radius: 8px;
+    box-shadow: 0 8px 22px rgba(0,0,0,.08);
+}
+
+.organization-director small,
+.organization-department small {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.organization-director strong,
+.organization-department strong {
+    display: block;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.organization-connector {
+    width: 2px;
+    height: 25px;
+    margin: 0 auto;
+    background: var(--gold);
+}
+
+.organization-departments {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.organization-department {
+    padding: 22px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #e5dfd0;
+    border-top: 3px solid var(--gold);
+    border-radius: 7px;
+}
+
+.organization-department small {
+    color: #96752e;
+}
+
+.organization-department strong {
+    color: #222;
+}
+
+/* ==========================================
+   PASANG APLIKASI
+========================================== */
+
+.install-section {
+    padding: 55px 6%;
+    color: var(--white);
+    background: #171717;
+    border-top: 3px solid var(--gold);
+}
+
+.install-inner {
+    max-width: 1180px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.install-inner h2 {
+    color: var(--gold-light);
+    margin-bottom: 8px;
+}
+
+.install-inner p {
+    color: #bdbdbd;
+    font-size: 13px;
+}
+
+.install-button {
+    display: inline-block;
+    padding: 14px 22px;
+    color: #111;
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.install-button:hover {
+    background: var(--gold-light);
+}
+
+/* ==========================================
+   RESPONSIVE CARTA & APLIKASI
+========================================== */
+
+@media (max-width: 700px) {
+
+    .organization-departments {
+        grid-template-columns: 1fr;
+    }
+
+    .install-inner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .organization-director,
+    .organization-department {
+        padding: 18px;
+    }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+/* ==========================================
+   END OF STYLESHEET
+========================================== */

@@ -1,0 +1,2223 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101010">
+<meta name="description" content="Portal Rasmi Polis Diraja MYMahkota">
+
+<title>Polis Diraja MYMahkota | Portal Rasmi</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="logo.png" type="image/png">
+
+<style>
+/* =================================
+   PENTADBIRAN
+================================= */
+
+.admin-entry {
+    background:linear-gradient(125deg,#171b22,#292316);
+    color:#f5f5f5;
+    padding:75px 20px;
+    border-top:1px solid #665333;
+    border-bottom:1px solid #665333;
+}
+
+.admin-entry-inner {
+    max-width:1160px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
+}
+
+.admin-entry h2 {
+    margin:10px 0;
+    color:#e2c781;
+    font-size:clamp(24px,4vw,34px);
+}
+
+.admin-entry p {
+    color:#d2d0cb;
+    max-width:650px;
+    line-height:1.8;
+}
+
+.admin-entry .admin-note {
+    color:#bfb9a8;
+    font-size:13px;
+}
+
+/* =================================
+   ANIMASI HALAMAN
+================================= */
+
+@keyframes goldGlow {
+    0%,100% { opacity:.35;transform:translateX(-20%); }
+    50% { opacity:.8;transform:translateX(20%); }
+}
+
+@keyframes floatSlow {
+    0%,100% { transform:translateY(0); }
+    50% { transform:translateY(-7px); }
+}
+
+@keyframes lineFlow {
+    0% { transform:translateY(-100%); }
+    100% { transform:translateY(170%); }
+}
+
+@keyframes fadeUp {
+    from { opacity:0;transform:translateY(30px); }
+    to { opacity:1;transform:translateY(0); }
+}
+
+@keyframes shimmer {
+    0% { background-position:200% center; }
+    100% { background-position:-200% center; }
+}
+
+.hero {
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+}
+
+.hero::after {
+    content:"";
+    position:absolute;
+    z-index:-1;
+    width:65%;
+    height:150%;
+    top:-25%;
+    left:17%;
+    pointer-events:none;
+    background:radial-gradient(
+        ellipse,
+        rgba(216,183,107,.13),
+        transparent 65%
+    );
+    animation:goldGlow 9s ease-in-out infinite;
+}
+
+.hero-inner {
+    position:relative;
+    z-index:1;
+}
+
+.hero h2 span {
+    background:linear-gradient(
+        110deg,
+        #b9974b 10%,
+        #ffe9aa 45%,
+        #b9974b 80%
+    );
+    background-size:220% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shimmer 7s linear infinite;
+}
+
+/* =================================
+   CARTA ORGANISASI PREMIUM
+================================= */
+
+#carta {
+    scroll-margin-top:35px;
+}
+
+#carta.org-section {
+    width:100%;
+    max-width:none;
+    padding:85px 18px;
+    background:
+      radial-gradient(
+        circle at 50% 0%,
+        rgba(216,183,107,.12),
+        transparent 40%
+      ),
+      linear-gradient(
+        180deg,
+        #0b1422 0%,
+        #101c2c 55%,
+        #0c1624 100%
+      );
+    color:white;
+    overflow:hidden;
+    position:relative;
+}
+
+.org-wrap {
+    position:relative;
+    z-index:1;
+    max-width:1200px;
+    margin:0 auto;
+    text-align:center;
+}
+
+.org-kicker {
+    font-size:11px;
+    letter-spacing:3px;
+    font-weight:800;
+    color:#d9b972;
+}
+
+.org-title {
+    color:#fff;
+    font-size:clamp(27px,4vw,42px);
+    margin:12px 0;
+    letter-spacing:1px;
+}
+
+.org-subtitle {
+    color:#b8c5d6;
+    max-width:740px;
+    margin:18px auto 38px;
+    font-size:14px;
+    line-height:1.85;
+}
+
+.org-gold-divider {
+    width:76px;
+    height:3px;
+    margin:15px auto;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #d8b76b,
+        #fff1c7,
+        #d8b76b,
+        transparent
+    );
+}
+
+.org-chart {
+    border:1px solid #425069;
+    border-top:4px solid #d8b76b;
+    border-radius:20px;
+    padding:37px 25px 30px;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(35,49,71,.94),
+        rgba(16,27,44,.97)
+      );
+    box-shadow:
+      0 25px 75px rgba(0,0,0,.3),
+      inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.org-stage-title {
+    display:inline-block;
+    color:#e1c27c;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:2px;
+    margin-bottom:20px;
+}
+
+.org-leadership {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.org-leader {
+    width:100%;
+    max-width:465px;
+    border-radius:14px;
+    padding:25px 24px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    transition:transform .35s,box-shadow .35s;
+}
+
+.org-leader:hover {
+    transform:translateY(-5px);
+}
+
+.org-leader.igp {
+    background:linear-gradient(
+        125deg,
+        #34465f,
+        #162338
+    );
+    border:2px solid #dfbc72;
+    box-shadow:0 12px 35px rgba(0,0,0,.22);
+}
+
+.org-leader.dig {
+    background:linear-gradient(
+        125deg,
+        #263b55,
+        #142338
+    );
+    border:1px solid #bca36f;
+    max-width:410px;
+}
+
+.org-symbol {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:50px;
+    height:50px;
+    margin:0 auto 14px;
+    border-radius:50%;
+    background:rgba(216,183,107,.12);
+    border:1px solid #c9a75f;
+    color:#f4d594;
+    font-size:24px;
+    animation:floatSlow 5s ease-in-out infinite;
+}
+
+.org-role {
+    display:block;
+    color:#e4c582;
+    font-weight:800;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:9px;
+}
+
+.org-leader h3 {
+    color:#fff;
+    font-size:clamp(17px,3vw,23px);
+    margin:0;
+    line-height:1.45;
+}
+
+.org-leader .org-name {
+    display:block;
+    margin-top:13px;
+    color:#f5dfad;
+    font-size:14px;
+    font-weight:700;
+}
+
+.org-leader .org-empty {
+    color:#b7c5d5;
+    font-size:12px;
+    margin-top:12px;
+    display:block;
+}
+
+.org-connector {
+    width:2px;
+    height:39px;
+    margin:0 auto;
+    background:linear-gradient(
+        #e9c875,
+        #71839f
+    );
+    position:relative;
+    overflow:hidden;
+}
+
+.org-connector::after {
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:55%;
+    background:linear-gradient(
+        transparent,
+        #fff9da,
+        transparent
+    );
+    animation:lineFlow 2.7s linear infinite;
+}
+
+.org-dept-heading {
+    margin:5px 0 24px;
+}
+
+.org-dept-heading h3 {
+    margin:0 0 8px;
+    color:#f4d594;
+    font-size:clamp(17px,3vw,23px);
+}
+
+.org-dept-heading p {
+    margin:0;
+    color:#aebcd0;
+    font-size:12px;
+}
+
+.org-dept-grid {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:20px;
+    text-align:left;
+    margin-top:0;
+}
+
+.org-dept-card {
+    position:relative;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(
+        145deg,
+        #1d3049,
+        #142337
+    );
+    border:1px solid #46536a;
+    border-top:3px solid #d8b76b;
+    border-radius:13px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.14);
+    transition:
+      transform .3s ease,
+      border-color .3s ease,
+      box-shadow .3s ease;
+}
+
+.org-dept-card:hover {
+    transform:translateY(-7px);
+    border-color:#d8b76b;
+    box-shadow:0 20px 45px rgba(0,0,0,.3);
+}
+
+.org-dept-number {
+    color:#d7b770;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:2px;
+    margin-bottom:11px;
+}
+
+.org-dept-card h4 {
+    color:white;
+    font-size:clamp(15px,2vw,18px);
+    line-height:1.55;
+    margin:0;
+    min-height:62px;
+}
+
+.org-card-line {
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        #a58c5e,
+        #435571,
+        transparent
+    );
+    margin:20px 0 17px;
+}
+
+.org-person-label {
+    color:#c5a86e;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.4px;
+    margin-bottom:8px;
+}
+
+.org-director-name {
+    color:#fff;
+    font-weight:700;
+    font-size:15px;
+    line-height:1.65;
+    min-height:48px;
+}
+
+.org-deputy-wrap {
+    margin-top:17px;
+    padding:14px;
+    background:rgba(5,15,29,.4);
+    border-radius:8px;
+    border:1px solid #384c65;
+}
+
+.org-deputy-name {
+    color:#b6c5d8;
+    font-size:12px;
+}
+
+.org-units {
+    margin-top:18px;
+    border-top:1px solid #43546b;
+    padding-top:15px;
+}
+
+.org-units h5 {
+    font-size:10px;
+    color:#dfc386;
+    letter-spacing:1px;
+    margin:0 0 10px;
+}
+
+.org-unit-list {
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.org-unit-list span {
+    background:#2c405a;
+    border:1px solid #4a5d75;
+    color:#dce6f1;
+    padding:7px 10px;
+    font-size:11px;
+    line-height:1.5;
+    border-radius:6px;
+}
+
+.org-chart-note {
+    text-align:center;
+    color:#aab9cc;
+    font-size:11px;
+    line-height:1.9;
+    margin:25px auto 0;
+    max-width:760px;
+}
+
+.org-directory-link {
+    margin-top:30px;
+    text-align:center;
+}
+
+.org-directory-link a {
+    display:inline-block;
+    padding:15px 26px;
+    border-radius:6px;
+    background:#d8b76b;
+    color:#141a24;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:800;
+    transition:.25s;
+}
+
+.org-directory-link a:hover {
+    background:#f2d596;
+    transform:translateY(-3px);
+}
+
+/* MUNCUL KETIKA SKROL */
+
+.org-reveal {
+    opacity:1;
+    transform:none;
+}
+
+.js-motion .org-reveal {
+    opacity:0;
+    transform:translateY(26px);
+    transition:
+      opacity .8s ease,
+      transform .8s ease;
+}
+
+.js-motion .org-reveal.is-visible {
+    opacity:1;
+    transform:translateY(0);
+}
+
+.org-dept-card:nth-child(2) { transition-delay:.08s; }
+.org-dept-card:nth-child(3) { transition-delay:.16s; }
+.org-dept-card:nth-child(4) { transition-delay:.24s; }
+
+/* =================================
+   AI BUTTON
+================================= */
+
+.ai-floating-button {
+    position:fixed;
+    right:25px;
+    bottom:28px;
+    z-index:9998;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 20px 11px 11px;
+    border:2px solid #f0d58f;
+    border-radius:60px;
+    background:linear-gradient(135deg,#f0d58f,#b9974b);
+    color:#171717;
+    box-shadow:0 0 0 5px #d8b76b22,0 8px 30px #0008;
+    cursor:pointer;
+    transition:.3s;
+    animation:aiFloat 2.5s infinite;
+}
+
+.ai-floating-button:hover {
+    transform:translateY(-5px) scale(1.04);
+    box-shadow:0 0 28px #d8b76bb3;
+}
+
+.ai-icon-circle {
+    width:52px;
+    height:52px;
+    min-width:52px;
+    background:#171717;
+    color:#e8c879;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.ai-icon-circle svg {
+    width:29px;
+    height:29px;
+}
+
+.ai-button-text {
+    text-align:left;
+}
+
+.ai-button-text strong {
+    display:block;
+    font-size:13px;
+    letter-spacing:.5px;
+}
+
+.ai-button-text span {
+    display:block;
+    font-size:10px;
+    margin-top:4px;
+}
+
+.ai-online-dot {
+    position:absolute;
+    top:0;
+    right:0;
+    width:13px;
+    height:13px;
+    background:#42d783;
+    border:2px solid #171717;
+    border-radius:50%;
+}
+
+@keyframes aiFloat {
+    0%,100% {
+        box-shadow:0 0 0 5px #d8b76b22,0 8px 30px #0008;
+    }
+    50% {
+        box-shadow:0 0 0 10px #d8b76b14,0 8px 35px #0009;
+    }
+}
+
+/* =================================
+   AI CHAT
+================================= */
+
+.ai-chat-window {
+    position:fixed;
+    right:25px;
+    bottom:112px;
+    width:min(390px,calc(100vw - 30px));
+    height:510px;
+    max-height:calc(100dvh - 140px);
+    z-index:9999;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    background:#151d29;
+    border:1px solid #b9974b;
+    border-top:4px solid #d8b76b;
+    border-radius:15px;
+    box-shadow:0 15px 55px #000b;
+}
+
+.ai-chat-window[hidden] {
+    display:none;
+}
+
+.ai-chat-header {
+    padding:17px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:linear-gradient(120deg,#252c36,#382f1e);
+    border-bottom:1px solid #655331;
+    color:white;
+}
+
+.ai-chat-logo {
+    width:43px;
+    height:43px;
+    border-radius:50%;
+    background:#d8b76b;
+    color:#171717;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.ai-chat-heading {
+    flex:1;
+}
+
+.ai-chat-heading strong {
+    display:block;
+    color:#f0d58f;
+    font-size:12px;
+}
+
+.ai-chat-heading span {
+    color:#a9edc2;
+    font-size:10px;
+}
+
+.ai-close {
+    background:transparent;
+    color:white;
+    border:0;
+    font-size:24px;
+    padding:5px;
+    cursor:pointer;
+}
+
+.ai-chat-messages {
+    flex:1;
+    overflow-y:auto;
+    padding:17px;
+    display:flex;
+    flex-direction:column;
+    gap:13px;
+    background:#101722;
+}
+
+.ai-message {
+    max-width:88%;
+    padding:12px 14px;
+    border-radius:12px;
+    font-size:12px;
+    line-height:1.7;
+    overflow-wrap:anywhere;
+    white-space:pre-wrap;
+}
+
+.ai-message.bot {
+    align-self:flex-start;
+    background:#263447;
+    color:#f1f1f1;
+    border:1px solid #39495c;
+    border-bottom-left-radius:3px;
+}
+
+.ai-message.user {
+    align-self:flex-end;
+    background:#554529;
+    color:#fff2d0;
+    border:1px solid #8a7042;
+    border-bottom-right-radius:3px;
+}
+
+.ai-quick-questions {
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    padding:10px 15px;
+    background:#151d29;
+}
+
+.ai-quick-questions button {
+    border:1px solid #78623c;
+    background:#29271f;
+    color:#e7cb86;
+    border-radius:20px;
+    padding:7px 10px;
+    font-size:10px;
+    cursor:pointer;
+}
+
+.ai-chat-form {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px;
+    background:#1b2635;
+    border-top:1px solid #394253;
+}
+
+.ai-chat-form input {
+    flex:1;
+    min-width:0;
+    background:#101722;
+    color:white;
+    border:1px solid #465264;
+    border-radius:25px;
+    padding:13px 15px;
+    outline:none;
+    font-size:12px;
+}
+
+.ai-chat-form input:focus {
+    border-color:#d8b76b;
+}
+
+.ai-chat-form button {
+    width:43px;
+    height:43px;
+    min-width:43px;
+    border:0;
+    border-radius:50%;
+    background:#d8b76b;
+    color:#171717;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.ai-chat-disclaimer {
+    padding:7px 12px;
+    text-align:center;
+    background:#1b2635;
+    color:#9da9b8;
+    font-size:9px;
+}
+
+/* =================================
+   MOBILE RESPONSIVE
+================================= */
+
+@media(max-width:900px) {
+    .org-dept-grid {
+        gap:13px;
+    }
+
+    .org-dept-card {
+        padding:19px;
+    }
+
+    .org-dept-card h4 {
+        min-height:84px;
+    }
+}
+
+@media(max-width:780px) {
+    .admin-entry-inner {
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .org-chart {
+        padding:25px 14px;
+    }
+
+    .org-dept-grid {
+        grid-template-columns:1fr;
+        max-width:570px;
+        margin:auto;
+    }
+
+    .org-dept-card h4 {
+        min-height:auto;
+    }
+
+    .org-director-name {
+        min-height:auto;
+    }
+}
+
+@media(max-width:600px) {
+    #carta.org-section {
+        padding:60px 12px;
+    }
+
+    .org-subtitle {
+        font-size:12px;
+    }
+
+    .org-chart {
+        padding:24px 12px;
+        border-radius:13px;
+    }
+
+    .org-leader {
+        padding:20px 13px;
+    }
+
+    .org-dept-card {
+        padding:19px 16px;
+    }
+
+    .org-dept-card h4 {
+        font-size:15px;
+    }
+
+    .ai-floating-button {
+        right:14px;
+        bottom:18px;
+        padding:8px 13px 8px 8px;
+        gap:9px;
+    }
+
+    .ai-icon-circle {
+        width:46px;
+        height:46px;
+        min-width:46px;
+    }
+
+    .ai-button-text strong {
+        font-size:11px;
+    }
+
+    .ai-button-text span {
+        font-size:9px;
+    }
+
+    .ai-chat-window {
+        right:10px;
+        bottom:88px;
+        width:calc(100vw - 20px);
+        height:500px;
+        max-height:calc(100dvh - 110px);
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    .hero::after,
+    .hero h2 span,
+    .org-symbol,
+    .org-connector::after,
+    .ai-floating-button {
+        animation:none!important;
+    }
+
+    .js-motion .org-reveal {
+        opacity:1!important;
+        transform:none!important;
+        transition:none!important;
+    }
+
+    .org-dept-card,
+    .org-leader {
+        transition:none!important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="header-container">
+        <a href="#utama" class="brand">
+            <img src="logo.png" alt="Logo Polis Diraja MYMahkota">
+            <div class="brand-text">
+                <h1>POLIS DIRAJA</h1>
+                <h2>MYMAHKOTA</h2>
+                <span>PORTAL RASMI</span>
+            </div>
+        </a>
+
+        <div class="header-right">
+            <span class="official-label">LAMAN WEB RASMI</span>
+            <span class="official-dot"></span>
+        </div>
+    </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="navigation" id="mainNavigation">
+    <div class="nav-mobile-header">
+        <span>MENU UTAMA</span>
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Buka menu"
+            aria-expanded="false"
+            aria-controls="navLinks">☰</button>
+    </div>
+
+    <div class="nav-container" id="navLinks">
+        <a href="#utama" class="active">UTAMA</a>
+        <a href="profil.html">PROFIL ORGANISASI</a>
+        <a href="direktori.html">JABATAN</a>
+        <a href="#carta">CARTA ORGANISASI</a>
+        <a href="pengumuman.html">PENGUMUMAN</a>
+        <a href="aduan.html">ADUAN AWAM</a>
+        <a href="#pentadbiran">PENTADBIRAN</a>
+        <a href="#hubungi">HUBUNGI KAMI</a>
+        <a href="anggota.html" class="nav-member">
+            PORTAL ANGGOTA
+        </a>
+    </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="utama">
+    <div class="hero-inner">
+        <div class="hero-line"></div>
+
+        <p class="hero-label">POLIS DIRAJA MYMAHKOTA</p>
+
+        <h2>BERKHIDMAT DENGAN <span>INTEGRITI</span></h2>
+        <h3>BERDAULAT DAN BERWIBAWA</h3>
+
+        <p class="hero-description">
+            Memelihara keamanan, menegakkan undang-undang
+            dan memastikan kesejahteraan masyarakat.
+        </p>
+
+        <div class="hero-actions">
+            <a href="profil.html" class="button-gold">
+                MENGENAI KAMI
+            </a>
+            <a href="direktori.html" class="button-outline">
+                LIHAT JABATAN
+            </a>
+        </div>
+
+        <div class="hero-bottom">
+            <span>INTEGRITI</span>
+            <span class="separator">/</span>
+            <span>PROFESIONALISME</span>
+            <span class="separator">/</span>
+            <span>KEDAULATAN</span>
+        </div>
+    </div>
+</section>
+
+<!-- INTRODUCTION -->
+<section class="introduction section" id="profil">
+    <div class="section-label">MENGENAI ORGANISASI</div>
+
+    <h2>Polis Diraja MYMahkota</h2>
+    <div class="gold-divider"></div>
+
+    <p>
+        Polis Diraja MYMahkota merupakan sebuah organisasi
+        kepolisan dalam dunia MYMahkota yang ditubuhkan pada
+        17 November 2024 oleh QIQI bersama KoCi
+        sebagai Timbalan Pengasas.
+    </p>
+
+    <p>
+        Organisasi ini mengutamakan pemeliharaan keamanan,
+        ketenteraman awam, integriti, disiplin serta
+        profesionalisme anggota dalam menjalankan
+        tanggungjawab kepada masyarakat MYMahkota.
+    </p>
+
+    <p>
+        Ketahui sejarah penubuhan, visi, misi, objektif,
+        nilai teras dan fungsi utama organisasi
+        melalui halaman profil yang lengkap.
+    </p>
+
+    <a href="profil.html" class="button-dark">
+        LIHAT PROFIL LENGKAP
+    </a>
+</section>
+
+<!-- QUICK ACCESS -->
+<section class="quick-access">
+    <div class="section">
+        <div class="section-label">PUSAT INFORMASI</div>
+        <h2>Maklumat & Perkhidmatan</h2>
+        <div class="gold-divider"></div>
+
+        <div class="access-grid">
+
+            <a href="profil.html" class="access-card">
+                <span class="card-number">01</span>
+                <h3>Profil Organisasi</h3>
+                <p>
+                    Sejarah penubuhan, pengasas, visi,
+                    misi, objektif dan nilai teras organisasi.
+                </p>
+                <span class="card-link">KETAHUI LAGI →</span>
+            </a>
+
+            <a href="direktori.html" class="access-card">
+                <span class="card-number">02</span>
+                <h3>Direktori Jabatan</h3>
+                <p>
+                    Maklumat pengarah jabatan, ketua bahagian,
+                    ketua unit dan bidang tanggungjawab.
+                </p>
+                <span class="card-link">LIHAT DIREKTORI →</span>
+            </a>
+
+            <a href="pengumuman.html" class="access-card">
+                <span class="card-number">03</span>
+                <h3>Pengumuman Rasmi</h3>
+                <p>
+                    Maklumat, notis dan hebahan rasmi organisasi.
+                </p>
+                <span class="card-link">KETAHUI LAGI →</span>
+            </a>
+
+            <a href="anggota.html" class="access-card">
+                <span class="card-number">04</span>
+                <h3>Sistem Anggota</h3>
+                <p>
+                    Kemudahan pengurusan dalaman dan
+                    rekod perkhidmatan anggota.
+                </p>
+                <span class="card-link">LOG MASUK →</span>
+            </a>
+
+            <a href="aduan.html" class="access-card">
+                <span class="card-number">05</span>
+                <h3>Aduan Awam</h3>
+                <p>
+                    Salurkan aduan dan maklum balas
+                    kepada Polis Diraja MYMahkota.
+                </p>
+                <span class="card-link">BUAT ADUAN →</span>
+            </a>
+
+            <a href="#pentadbiran" class="access-card">
+                <span class="card-number">06</span>
+                <h3>Panel Pentadbiran</h3>
+                <p>
+                    Laluan masuk pentadbir melalui
+                    Dashboard Anggota untuk mengurus portal.
+                </p>
+                <span class="card-link">
+                    AKSES PENTADBIRAN →
+                </span>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- =================================
+     CARTA ORGANISASI BAHARU
+================================= -->
+
+<section class="org-section" id="carta">
+
+    <div class="org-wrap">
+
+        <div class="org-kicker">
+            STRUKTUR KEPIMPINAN DAN PENTADBIRAN
+        </div>
+
+        <h2 class="org-title">CARTA ORGANISASI</h2>
+        <div class="org-gold-divider"></div>
+
+        <p class="org-subtitle">
+            Struktur kepimpinan tertinggi, barisan pengarah jabatan
+            serta hierarki pentadbiran Polis Diraja MYMahkota.
+        </p>
+
+        <div class="org-chart">
+
+            <!-- KEPIMPINAN TERTINGGI -->
+
+            <div class="org-stage-title org-reveal">
+                BARISAN KEPIMPINAN TERTINGGI
+            </div>
+
+            <div class="org-leadership">
+
+                <!-- IGP -->
+
+                <div class="org-leader igp org-reveal">
+
+                    <div class="org-symbol">♛</div>
+
+                    <span class="org-role">
+                        KEPIMPINAN UTAMA
+                    </span>
+
+                    <h3>KETUA POLIS NEGARA</h3>
+
+                    <span class="org-name">
+                        INSPEKTOR JENERAL POLIS (IGP)
+                    </span>
+
+                    <span class="org-empty">
+                        Nama pegawai belum dikemaskini
+                    </span>
+
+                </div>
+
+                <div class="org-connector"></div>
+
+                <!-- DIG -->
+
+                <div class="org-leader dig org-reveal">
+
+                    <div class="org-symbol">✦</div>
+
+                    <span class="org-role">
+                        TIMBALAN KEPIMPINAN
+                    </span>
+
+                    <h3>TIMBALAN KETUA POLIS NEGARA</h3>
+
+                    <span class="org-name">
+                        DEPUTY INSPECTOR GENERAL (DIG)
+                    </span>
+
+                    <span class="org-empty">
+                        Nama pegawai belum dikemaskini
+                    </span>
+
+                </div>
+
+                <div class="org-connector"></div>
+
+            </div>
+
+            <!-- PENGARAH-PENGARAH -->
+
+            <div class="org-dept-heading org-reveal">
+                <h3>BARISAN PENGARAH JABATAN</h3>
+
+                <p>
+                    Empat jabatan utama di bawah
+                    struktur pentadbiran organisasi.
+                </p>
+            </div>
+
+            <div class="org-dept-grid">
+
+                <!-- JABATAN 1 -->
+
+                <article class="org-dept-card org-reveal">
+
+                    <span class="org-dept-number">
+                        JABATAN 01
+                    </span>
+
+                    <h4>
+                        JABATAN PENGURUSAN
+                    </h4>
+
+                    <div class="org-card-line"></div>
+
+                    <div class="org-person-label">
+                        PENGARAH JABATAN
+                    </div>
+
+                    <div class="org-director-name">
+                        Tan Sri Panglima Garang Qiqi Bin Abdul Samad
+                    </div>
+
+                    <div class="org-deputy-wrap">
+                        <div class="org-person-label">
+                            TIMBALAN PENGARAH JABATAN
+                        </div>
+                        <div class="org-deputy-name">
+                            Belum dikemaskini
+                        </div>
+                    </div>
+
+                </article>
+
+                <!-- JABATAN 2 -->
+
+                <article class="org-dept-card org-reveal">
+
+                    <span class="org-dept-number">
+                        JABATAN 02
+                    </span>
+
+                    <h4>
+                        JABATAN KESELAMATAN DALAM NEGERI
+                        DAN KETENTERAMAN AWAM
+                    </h4>
+
+                    <div class="org-card-line"></div>
+
+                    <div class="org-person-label">
+                        PENGARAH JABATAN
+                    </div>
+
+                    <div class="org-director-name">
+                        Datuk Shah Al-Muizudin Bin Rayqal Imran
+                    </div>
+
+                    <div class="org-deputy-wrap">
+                        <div class="org-person-label">
+                            TIMBALAN PENGARAH JABATAN
+                        </div>
+                        <div class="org-deputy-name">
+                            Izz Alam Shah Bin Datuk Shah Al-Muizudin
+                        </div>
+                    </div>
+
+                    <div class="org-units">
+                        <h5>
+                            BAHAGIAN, UNIT DAN PASUKAN DIKETAHUI
+                        </h5>
+
+                        <div class="org-unit-list">
+                            <span>Bahagian Pengurusan</span>
+                            <span>Unit Tindakhas</span>
+                            <span>Pasukan Gerakan Udara</span>
+                        </div>
+                    </div>
+
+                </article>
+
+                <!-- JABATAN 3 -->
+
+                <article class="org-dept-card org-reveal">
+
+                    <span class="org-dept-number">
+                        JABATAN 03
+                    </span>
+
+                    <h4>
+                        JABATAN INTEGRITI DAN
+                        PEMATUHAN STANDARD
+                    </h4>
+
+                    <div class="org-card-line"></div>
+
+                    <div class="org-person-label">
+                        PENGARAH JABATAN
+                    </div>
+
+                    <div class="org-director-name">
+                        Dato' Sri Muhammad Ilham Bin Musa
+                    </div>
+
+                    <div class="org-deputy-wrap">
+                        <div class="org-person-label">
+                            TIMBALAN PENGARAH JABATAN
+                        </div>
+
+                        <div class="org-deputy-name">
+                            Belum dikemaskini
+                        </div>
+                    </div>
+
+                </article>
+
+                <!-- JABATAN 4 -->
+
+                <article class="org-dept-card org-reveal">
+
+                    <span class="org-dept-number">
+                        JABATAN 04
+                    </span>
+
+                    <h4>
+                        JABATAN PENCEGAHAN JENAYAH
+                        DAN KESELAMATAN KOMUNITI
+                    </h4>
+
+                    <div class="org-card-line"></div>
+
+                    <div class="org-person-label">
+                        PENGARAH JABATAN
+                    </div>
+
+                    <div class="org-director-name">
+                        Datuk Kai Bin Muhammad Haikal
+                    </div>
+
+                    <div class="org-deputy-wrap">
+                        <div class="org-person-label">
+                            TIMBALAN PENGARAH JABATAN
+                        </div>
+
+                        <div class="org-deputy-name">
+                            Belum dikemaskini
+                        </div>
+                    </div>
+
+                </article>
+
+            </div>
+
+            <p class="org-chart-note">
+                Maklumat nama pegawai yang belum disahkan
+                akan dikemaskini setelah pengesahan dibuat.
+                Carta ini memaparkan struktur utama organisasi.
+            </p>
+
+        </div>
+
+        <div class="org-directory-link">
+            <a href="direktori.html">
+                LIHAT DIREKTORI ORGANISASI →
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- DEPARTMENT -->
+<section class="department section" id="jabatan">
+    <div class="section-label">PENTADBIRAN ORGANISASI</div>
+
+    <h2>Jabatan & Bahagian</h2>
+    <div class="gold-divider"></div>
+
+    <p>
+        Dapatkan maklumat lengkap mengenai jabatan
+        Polis Diraja MYMahkota, termasuk pengarah jabatan,
+        ketua bahagian, ketua unit, pasukan dan
+        bidang tanggungjawab masing-masing.
+    </p>
+
+    <a href="direktori.html" class="button-dark">
+        DIREKTORI ORGANISASI
+    </a>
+</section>
+
+<!-- ANNOUNCEMENTS -->
+<section class="announcements" id="pengumuman">
+    <div class="section">
+        <div class="section-label">
+            HEBAHAN ORGANISASI
+        </div>
+
+        <h2>Pengumuman Rasmi</h2>
+        <div class="gold-divider"></div>
+
+        <div class="announcement-box">
+            <span class="announcement-date">
+                PORTAL RASMI
+            </span>
+
+            <h3>
+                Selamat Datang ke Portal Rasmi
+                Polis Diraja MYMahkota
+            </h3>
+
+            <p>
+                Pusat informasi rasmi Polis Diraja MYMahkota
+                untuk orang awam dan anggota.
+            </p>
+
+            <a href="pengumuman.html" class="card-link">
+                LIHAT SEMUA PENGUMUMAN →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- MEMBER PORTAL -->
+<section class="member-portal" id="anggota">
+    <div class="member-inner">
+        <div>
+            <span class="section-label">
+                AKSES DALAMAN
+            </span>
+
+            <h2>Portal Sistem Anggota</h2>
+
+            <p>
+                Sistem khas untuk pengurusan dan kemudahan
+                anggota Polis Diraja MYMahkota.
+            </p>
+        </div>
+
+        <a href="anggota.html" class="button-gold">
+            LOG MASUK ANGGOTA
+        </a>
+    </div>
+</section>
+
+<!-- ADMIN -->
+<section class="admin-entry" id="pentadbiran">
+    <div class="admin-entry-inner">
+        <div>
+            <span class="section-label">
+                AKSES TERHAD
+            </span>
+
+            <h2>Log Masuk Pentadbiran</h2>
+
+            <p>
+                Pentadbir perlu log masuk sebagai anggota
+                terlebih dahulu. Selepas masuk ke
+                Dashboard Anggota, pilih Panel Pentadbiran
+                pada menu sebelah kiri.
+            </p>
+
+            <p class="admin-note">
+                Pentadbir Utama: G2002 —
+                Dato' Sri Muhammad Ilham Bin Musa.
+                Pentadbir lain tertakluk kepada
+                kelulusan akses.
+            </p>
+        </div>
+
+        <a href="anggota.html" class="button-gold">
+            TERUSKAN KE LOG MASUK ANGGOTA
+        </a>
+    </div>
+</section>
+
+<!-- INSTALL APPLICATION -->
+<section class="install-section" id="pasang">
+    <div class="install-inner">
+        <div>
+            <div class="section-label">
+                APLIKASI RASMI
+            </div>
+
+            <h2>Pasang Portal MYMahkota</h2>
+
+            <p>
+                Pasang aplikasi Polis Diraja MYMahkota
+                pada telefon atau komputer untuk
+                akses yang lebih mudah.
+            </p>
+
+            <p id="installMessage" style="margin-top:10px;">
+                Aplikasi boleh dipasang melalui pelayar
+                yang menyokong pemasangan.
+            </p>
+        </div>
+
+        <button
+            type="button"
+            class="install-button"
+            id="installButton">
+            PASANG APLIKASI
+        </button>
+    </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer id="hubungi">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <h2>POLIS DIRAJA MYMAHKOTA</h2>
+
+            <p>
+                BERKHIDMAT DENGAN INTEGRITI,
+                PROFESIONALISME DAN DEDIKASI.
+            </p>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 POLIS DIRAJA MYMAHKOTA</span>
+            <span>PORTAL RASMI</span>
+        </div>
+    </div>
+</footer>
+
+<!-- AI FLOATING BUTTON -->
+<button
+    class="ai-floating-button"
+    type="button"
+    id="openAI"
+    aria-label="Buka AI Pembantu MYMahkota"
+    aria-expanded="false"
+    aria-controls="aiChatWindow">
+
+    <span class="ai-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2">
+            <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8
+            8.5 8.5 0 0 1-7.6 4.7
+            8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7
+            a8.4 8.4 0 0 1-.9-3.8
+            8.5 8.5 0 0 1 4.7-7.6
+            8.4 8.4 0 0 1 3.8-.9h.5
+            a8.5 8.5 0 0 1 8 8z"/>
+            <path d="M8 12h.01M12 12h.01M16 12h.01"/>
+        </svg>
+
+        <span class="ai-online-dot"></span>
+    </span>
+
+    <span class="ai-button-text">
+        <strong>TANYA AI MYMAHKOTA</strong>
+        <span>PEMBANTU MAYA RASMI</span>
+    </span>
+</button>
+
+<!-- AI CHAT WINDOW -->
+<div
+    class="ai-chat-window"
+    id="aiChatWindow"
+    role="dialog"
+    aria-label="AI Pembantu MYMahkota"
+    hidden>
+
+    <div class="ai-chat-header">
+        <div class="ai-chat-logo">AI</div>
+
+        <div class="ai-chat-heading">
+            <strong>AI POLIS DIRAJA MYMAHKOTA</strong>
+            <span>PEMBANTU MAYA PORTAL</span>
+        </div>
+
+        <button
+            class="ai-close"
+            type="button"
+            id="closeAI"
+            aria-label="Tutup chatbot">×</button>
+    </div>
+
+    <div class="ai-chat-messages" id="aiMessages">
+        <div class="ai-message bot">
+            Salam sejahtera! Selamat datang ke Portal Rasmi Polis Diraja MYMahkota.
+
+            Saya ialah Pembantu Maya portal. Anda boleh berbual atau bertanya tentang organisasi kami.
+        </div>
+    </div>
+
+    <div class="ai-quick-questions">
+        <button
+            type="button"
+            data-question="Bagaimana cara menyertai Polis Diraja MYMahkota?">
+            Pendaftaran anggota
+        </button>
+
+        <button
+            type="button"
+            data-question="Apakah jabatan yang terdapat dalam organisasi?">
+            Jabatan
+        </button>
+
+        <button
+            type="button"
+            data-question="Bagaimana cara membuat aduan awam?">
+            Aduan awam
+        </button>
+    </div>
+
+    <form class="ai-chat-form" id="aiChatForm">
+        <input
+            type="text"
+            id="aiInput"
+            placeholder="Taip soalan anda..."
+            autocomplete="off"
+            maxlength="1000"
+            required>
+
+        <button type="submit" aria-label="Hantar soalan">
+            ➤
+        </button>
+    </form>
+
+    <div class="ai-chat-disclaimer">
+        Pembantu Maya berasaskan jawapan tersedia
+        • Polis Diraja MYMahkota
+    </div>
+</div>
+
+<script>
+"use strict";
+
+/* =================================
+   NAVIGATION
+================================= */
+
+const menuToggle = document.getElementById("menuToggle");
+const mainNavigation = document.getElementById("mainNavigation");
+const navLinks = document.querySelectorAll("#navLinks a");
+
+menuToggle.addEventListener("click", function() {
+    const isOpen = mainNavigation.classList.toggle("menu-open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+});
+
+navLinks.forEach(link => {
+    link.addEventListener("click", function() {
+        mainNavigation.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
+
+        navLinks.forEach(item => item.classList.remove("active"));
+        link.classList.add("active");
+    });
+});
+
+/* =================================
+   ANIMASI CARTA ORGANISASI
+================================= */
+
+const orgElements = document.querySelectorAll(".org-reveal");
+const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
+
+if (
+    !reducedMotion &&
+    "IntersectionObserver" in window
+) {
+    document.documentElement.classList.add("js-motion");
+
+    const orgObserver = new IntersectionObserver(
+        function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold:0.08,
+            rootMargin:"0px 0px 40px 0px"
+        }
+    );
+
+    orgElements.forEach(element => {
+        orgObserver.observe(element);
+    });
+}
+
+/* =================================
+   PWA INSTALLATION
+================================= */
+
+let deferredInstallPrompt = null;
+
+const installButton = document.getElementById("installButton");
+const installMessage = document.getElementById("installMessage");
+
+window.addEventListener("beforeinstallprompt", function(event) {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    installButton.style.display = "inline-block";
+    installMessage.textContent = "Aplikasi sedia untuk dipasang.";
+});
+
+installButton.addEventListener("click", async function() {
+    if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+
+        const result = await deferredInstallPrompt.userChoice;
+
+        installMessage.textContent =
+            result.outcome === "accepted"
+            ? "Pemasangan aplikasi telah dipilih."
+            : "Pemasangan aplikasi dibatalkan.";
+
+        deferredInstallPrompt = null;
+        return;
+    }
+
+    installMessage.textContent =
+        "Pada iPhone, buka menu Share dan pilih Add to Home Screen. Pada Chrome, buka menu pelayar dan pilih Install App.";
+});
+
+window.addEventListener("appinstalled", function() {
+    installMessage.textContent = "Aplikasi berjaya dipasang.";
+    installButton.textContent = "APLIKASI DIPASANG";
+});
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+        navigator.serviceWorker.register("service-worker.js")
+            .catch(error => console.error("Service Worker:", error));
+    });
+}
+
+/* =================================
+   AI MYMAHKOTA
+================================= */
+
+const openAI = document.getElementById("openAI");
+const closeAI = document.getElementById("closeAI");
+const aiWindow = document.getElementById("aiChatWindow");
+const aiMessages = document.getElementById("aiMessages");
+const aiForm = document.getElementById("aiChatForm");
+const aiInput = document.getElementById("aiInput");
+
+let aiLastTopic = "";
+let aiHistory = [];
+
+function toggleAI(show) {
+    aiWindow.hidden = !show;
+    openAI.setAttribute("aria-expanded", String(show));
+
+    if (show) aiInput.focus();
+}
+
+openAI.addEventListener("click", () => toggleAI(aiWindow.hidden));
+closeAI.addEventListener("click", () => toggleAI(false));
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape" && !aiWindow.hidden) {
+        toggleAI(false);
+    }
+});
+
+function addAIMessage(message, type) {
+    const element = document.createElement("div");
+    element.className = "ai-message " + type;
+    element.textContent = message;
+
+    aiMessages.appendChild(element);
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+
+function cleanAIText(text) {
+    return String(text || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\p{L}\p{N}\s]/gu, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+function hasAny(text, words) {
+    return words.some(word => text.includes(word));
+}
+
+function randomAnswer(answers) {
+    return answers[Math.floor(Math.random() * answers.length)];
+}
+
+/* MAKLUMAT ORGANISASI */
+
+const myMahkotaInfo = {
+    name: "Polis Diraja MYMahkota",
+    founder: "QIQI",
+    deputyFounder: "KoCi",
+    date: "17 November 2024",
+    departments: [
+        "Jabatan Pengurusan",
+        "Jabatan Keselamatan Dalam Negeri dan Ketenteraman Awam",
+        "Jabatan Integriti dan Pematuhan Standard",
+        "Jabatan Pencegahan Jenayah dan Keselamatan Komuniti"
+    ],
+    directors: {
+        pengurusan:
+            "Tan Sri Panglima Garang Qiqi Bin Abdul Samad",
+        keselamatan:
+            "Datuk Shah Al-Muizudin Bin Rayqal Imran",
+        integriti:
+            "Dato' Sri Muhammad Ilham Bin Musa",
+        jenayah:
+            "Datuk Kai Bin Muhammad Haikal"
+    }
+};
+
+/* SISTEM JAWAPAN CHATBOT */
+
+function getLocalAIAnswer(question) {
+
+    const q = cleanAIText(question);
+
+    if (!q) {
+        return "Silakan taip pertanyaan anda. Saya sedia membantu!";
+    }
+
+    /* SALAM */
+
+    if (hasAny(q, [
+        "hai", "hello", "helo", "assalamualaikum",
+        "salam", "selamat pagi", "selamat petang",
+        "selamat malam", "hi"
+    ])) {
+        return randomAnswer([
+            "Waalaikumussalam dan salam sejahtera! Selamat datang ke Portal Rasmi Polis Diraja MYMahkota. Apa yang boleh saya bantu?",
+            "Hai! Selamat datang. Saya Pembantu Maya Polis Diraja MYMahkota. Silakan bertanya!",
+            "Salam sejahtera! Ada perkara yang ingin ditanyakan?"
+        ]);
+    }
+
+    /* PERBUALAN BIASA */
+
+    if (hasAny(q, [
+        "apa khabar", "khabar awak",
+        "how are you", "awak sihat"
+    ])) {
+        return "Saya berfungsi dengan baik dan bersedia membantu pengunjung portal. Bagaimana pula dengan anda?";
+    }
+
+    if (hasAny(q, [
+        "awak buat apa", "sedang buat apa",
+        "buat apa sekarang"
+    ])) {
+        return "Saya sedang bersedia membantu pengunjung Portal Polis Diraja MYMahkota. Anda boleh bertanya tentang organisasi, jabatan, pendaftaran dan penggunaan portal.";
+    }
+
+    if (hasAny(q, [
+        "siapa awak", "awak siapa", "nama awak",
+        "siapa kamu", "kenalkan diri"
+    ])) {
+        return "Saya ialah Pembantu Maya Polis Diraja MYMahkota. Saya menggunakan jawapan yang telah disediakan untuk membantu pengunjung mendapatkan maklumat portal.";
+    }
+
+    if (hasAny(q, [
+        "terima kasih", "thanks",
+        "thank you", "tq"
+    ])) {
+        return randomAnswer([
+            "Sama-sama! Saya gembira dapat membantu anda.",
+            "Dengan senang hati! Terima kasih kerana mengunjungi portal kami.",
+            "Sama-sama. Jika ada pertanyaan lain, jangan segan bertanya."
+        ]);
+    }
+
+    if (hasAny(q, ["maaf", "sorry"])) {
+        return "Tidak mengapa! Apa yang boleh saya bantu?";
+    }
+
+    if (hasAny(q, [
+        "bye", "selamat tinggal",
+        "jumpa lagi", "saya pergi dulu"
+    ])) {
+        return "Terima kasih kerana mengunjungi Portal Rasmi Polis Diraja MYMahkota. Jumpa lagi!";
+    }
+
+    /* KEPIMPINAN TERTINGGI */
+
+    if (hasAny(q, [
+        "siapa igp", "nama igp",
+        "ketua polis negara", "siapa dig",
+        "timbalan ketua polis negara"
+    ])) {
+        aiLastTopic = "kepimpinan";
+
+        return "Carta organisasi memaparkan jawatan Ketua Polis Negara (IGP) dan Timbalan Ketua Polis Negara (DIG). Nama pemegang kedua-dua jawatan ini belum dikemaskini dalam portal.";
+    }
+
+    /* NAMA PENGARAH */
+
+    if (hasAny(q, [
+        "siapa pengarah", "nama pengarah",
+        "pengarah pengurusan", "pengarah jabatan",
+        "senarai pengarah"
+    ])) {
+        aiLastTopic = "pengarah";
+
+        return "Barisan Pengarah Jabatan Polis Diraja MYMahkota:\n\n" +
+            "1. Jabatan Pengurusan — " +
+            myMahkotaInfo.directors.pengurusan + "\n\n" +
+            "2. Jabatan Keselamatan Dalam Negeri dan Ketenteraman Awam — " +
+            myMahkotaInfo.directors.keselamatan + "\n\n" +
+            "3. Jabatan Integriti dan Pematuhan Standard — " +
+            myMahkotaInfo.directors.integriti + "\n\n" +
+            "4. Jabatan Pencegahan Jenayah dan Keselamatan Komuniti — " +
+            myMahkotaInfo.directors.jenayah +
+            "\n\nAnda juga boleh melihat carta organisasi pada halaman utama.";
+    }
+
+    /* IDENTITI */
+
+    if (hasAny(q, [
+        "apa itu polis diraja",
+        "apa itu mymahkota",
+        "tentang organisasi",
+        "cerita tentang polis"
+    ])) {
+        aiLastTopic = "organisasi";
+
+        return "Polis Diraja MYMahkota merupakan sebuah organisasi kepolisan dalam dunia MYMahkota yang ditubuhkan pada 17 November 2024. Organisasi ini menekankan keamanan, ketenteraman, disiplin, integriti dan profesionalisme.";
+    }
+
+    /* PENGASAS */
+
+    if (hasAny(q, [
+        "siapa pengasas", "pengasas polis",
+        "siapa tubuhkan", "siapa yang menubuhkan",
+        "diasaskan oleh"
+    ])) {
+        aiLastTopic = "pengasas";
+
+        return "Berdasarkan maklumat portal, Polis Diraja MYMahkota ditubuhkan oleh QIQI bersama KoCi sebagai Timbalan Pengasas pada 17 November 2024.";
+    }
+
+    /* SEJARAH */
+
+    if (hasAny(q, [
+        "sejarah", "bila ditubuhkan",
+        "tarikh penubuhan", "tahun penubuhan"
+    ])) {
+        aiLastTopic = "sejarah";
+
+        return "Polis Diraja MYMahkota ditubuhkan pada 17 November 2024. Untuk maklumat lanjut, sila kunjungi halaman Profil Organisasi.";
+    }
+
+    /* JABATAN */
+
+    if (hasAny(q, [
+        "senarai jabatan", "jabatan apa",
+        "berapa jabatan", "jabatan yang ada",
+        "jabatan polis", "nama jabatan"
+    ])) {
+        aiLastTopic = "jabatan";
+
+        return "Berikut ialah empat jabatan dalam portal:\n\n" +
+            myMahkotaInfo.departments.map((name, index) =>
+                (index + 1) + ". " + name
+            ).join("\n") +
+            "\n\nUntuk maklumat lanjut, sila buka Direktori Jabatan.";
+    }
+
+    if (hasAny(q, [
+        "pengurusan", "pentadbiran jabatan"
+    ])) {
+        aiLastTopic = "pengurusan";
+
+        return "Jabatan Pengurusan dipimpin oleh " +
+            myMahkotaInfo.directors.pengurusan +
+            ". Maklumat lanjut boleh dirujuk melalui carta organisasi dan Direktori Jabatan.";
+    }
+
+    if (hasAny(q, [
+        "keselamatan dalam negeri",
+        "ketenteraman awam"
+    ])) {
+        aiLastTopic = "keselamatan";
+
+        return "Jabatan Keselamatan Dalam Negeri dan Ketenteraman Awam dipimpin oleh " +
+            myMahkotaInfo.directors.keselamatan +
+            ". Antara bahagian dan pasukan yang diketahui ialah Bahagian Pengurusan, Unit Tindakhas dan Pasukan Gerakan Udara.";
+    }
+
+    if (hasAny(q, [
+        "integriti", "pematuhan standard"
+    ])) {
+        aiLastTopic = "integriti";
+
+        return "Jabatan Integriti dan Pematuhan Standard dipimpin oleh " +
+            myMahkotaInfo.directors.integriti + ".";
+    }
+
+    if (hasAny(q, [
+        "pencegahan jenayah",
+        "keselamatan komuniti"
+    ])) {
+        aiLastTopic = "jenayah";
+
+        return "Jabatan Pencegahan Jenayah dan Keselamatan Komuniti dipimpin oleh " +
+            myMahkotaInfo.directors.jenayah + ".";
+    }
+
+    /* PENDAFTARAN */
+
+    if (hasAny(q, [
+        "daftar anggota", "jadi anggota",
+        "menyertai polis", "permohonan anggota",
+        "nak jadi polis", "cara masuk polis"
+    ])) {
+        aiLastTopic = "pendaftaran";
+
+        return "Jika anda berminat menyertai Polis Diraja MYMahkota, sila buka Portal Anggota dan cari bahagian pendaftaran. Permohonan akan melalui proses semakan dan kelulusan.";
+    }
+
+    /* ANGGOTA */
+
+    if (hasAny(q, [
+        "portal anggota", "dashboard anggota",
+        "akaun anggota", "log masuk anggota"
+    ])) {
+        aiLastTopic = "anggota";
+
+        return "Portal Anggota merupakan sistem dalaman untuk kemudahan anggota Polis Diraja MYMahkota. Anggota boleh mengakses akaun masing-masing melalui halaman Portal Anggota.";
+    }
+
+    /* PENTADBIR */
+
+    if (hasAny(q, [
+        "pentadbir", "pentadbiran",
+        "panel pentadbiran", "admin"
+    ])) {
+        aiLastTopic = "pentadbiran";
+
+        return "Panel Pentadbiran merupakan ruang pengurusan dalaman untuk pentadbir yang telah mendapat kelulusan. Akses dibuat melalui sistem anggota dan tertakluk kepada pengesahan.";
+    }
+
+    /* PENGUMUMAN */
+
+    if (hasAny(q, [
+        "pengumuman", "hebahan", "notis rasmi"
+    ])) {
+        aiLastTopic = "pengumuman";
+
+        return "Semua pengumuman dan hebahan organisasi boleh disemak melalui halaman Pengumuman Rasmi.";
+    }
+
+    /* ADUAN */
+
+    if (hasAny(q, [
+        "aduan", "buat laporan",
+        "lapor masalah", "maklum balas"
+    ])) {
+        aiLastTopic = "aduan";
+
+        return "Untuk menghantar aduan atau maklum balas, sila buka halaman Aduan Awam melalui menu utama portal. Simpan nombor rujukan yang diterima untuk semakan status.";
+    }
+
+    /* PROFIL */
+
+    if (hasAny(q, [
+        "profil organisasi", "visi",
+        "misi", "objektif", "matlamat"
+    ])) {
+        aiLastTopic = "profil";
+
+        return "Maklumat mengenai profil, visi, misi, objektif dan sejarah organisasi boleh dirujuk melalui halaman Profil Organisasi.";
+    }
+
+    /* DIREKTORI */
+
+    if (hasAny(q, [
+        "direktori", "ketua jabatan"
+    ])) {
+        aiLastTopic = "direktori";
+
+        return "Direktori Jabatan menyediakan maklumat berkaitan struktur jabatan, pegawai dan jawatan organisasi. Sila tekan menu Jabatan untuk melihat maklumat lanjut.";
+    }
+
+    /* HUBUNGI */
+
+    if (hasAny(q, [
+        "hubungi", "contact", "pertanyaan"
+    ])) {
+        aiLastTopic = "hubungi";
+
+        return "Anda boleh menggunakan halaman Aduan Awam untuk menyampaikan pertanyaan atau maklum balas kepada Polis Diraja MYMahkota.";
+    }
+
+    /* SOALAN SUSULAN */
+
+    if (hasAny(q, [
+        "ceritakan lagi", "terangkan lagi",
+        "jelaskan lagi", "sambung",
+        "lebih lanjut", "bagaimana pula"
+    ])) {
+
+        const followUps = {
+            organisasi:
+                "Organisasi ini menekankan keamanan, ketenteraman, disiplin dan profesionalisme.",
+            pengasas:
+                "QIQI ialah pengasas dan KoCi merupakan Timbalan Pengasas.",
+            sejarah:
+                "Tarikh penubuhan yang disenaraikan ialah 17 November 2024.",
+            jabatan:
+                "Anda boleh memilih jabatan tertentu dalam Direktori Jabatan.",
+            pengarah:
+                "Keempat-empat nama Pengarah Jabatan dipaparkan dalam Carta Organisasi.",
+            kepimpinan:
+                "Nama IGP dan DIG akan dipaparkan apabila maklumat telah dikemaskini.",
+            pengurusan:
+                "Maklumat Jabatan Pengurusan boleh dirujuk dalam Direktori Jabatan.",
+            keselamatan:
+                "Semak Direktori Jabatan untuk maklumat unit dan pasukan.",
+            integriti:
+                "Maklumat lanjut Jabatan Integriti boleh disemak dalam Direktori Jabatan.",
+            jenayah:
+                "Maklumat lanjut Jabatan Pencegahan Jenayah boleh disemak dalam Direktori Jabatan.",
+            pendaftaran:
+                "Pastikan anda melengkapkan borang pendaftaran.",
+            anggota:
+                "Sistem Anggota disediakan untuk akaun berdaftar.",
+            pentadbiran:
+                "Akses pentadbiran hanya diberikan selepas kelulusan.",
+            pengumuman:
+                "Semak halaman Pengumuman Rasmi.",
+            aduan:
+                "Simpan nombor rujukan aduan untuk membuat semakan.",
+            profil:
+                "Halaman Profil Organisasi menyediakan maklumat lengkap.",
+            direktori:
+                "Direktori Jabatan membantu mengenal pasti pegawai berkaitan."
+        };
+
+        return followUps[aiLastTopic] ||
+            "Boleh! Bahagian mana yang anda mahu saya terangkan?";
+    }
+
+    /* JAWAPAN UMUM */
+
+    return randomAnswer([
+        "Menarik pertanyaan anda! Boleh terangkan sedikit lagi supaya saya dapat memahami maksud anda?",
+        "Saya sedia membantu. Adakah soalan ini berkaitan Polis Diraja MYMahkota, jabatan, anggota atau perkara lain?",
+        "Boleh jelaskan sedikit lagi? Saya mahu memastikan jawapan yang diberikan tepat.",
+        "Baik, mari kita bincangkan perkara tersebut. Apakah maklumat khusus yang anda ingin ketahui?"
+    ]);
+}
+
+/* =================================
+   HANTAR MESEJ
+================================= */
+
+let aiIsSending = false;
+
+function sendLocalAIMessage(question) {
+    const text = question.trim();
+
+    if (!text || aiIsSending) return;
+
+    addAIMessage(text, "user");
+
+    aiHistory.push({
+        role:"user",
+        content:text
+    });
+
+    aiIsSending = true;
+    aiInput.disabled = true;
+
+    const typing = document.createElement("div");
+    typing.className = "ai-message bot";
+    typing.textContent = "Sedang menaip...";
+
+    aiMessages.appendChild(typing);
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+
+    const answer = getLocalAIAnswer(text);
+
+    setTimeout(function() {
+        typing.remove();
+
+        addAIMessage(answer, "bot");
+
+        aiHistory.push({
+            role:"assistant",
+            content:answer
+        });
+
+        if (aiHistory.length > 30) {
+            aiHistory = aiHistory.slice(-30);
+        }
+
+        aiIsSending = false;
+        aiInput.disabled = false;
+        aiInput.focus();
+
+    }, 450);
+}
+
+/* BORANG CHAT */
+
+aiForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const question = aiInput.value.trim();
+
+    if (!question) return;
+
+    aiInput.value = "";
+    sendLocalAIMessage(question);
+});
+
+/* SOALAN PANTAS */
+
+document.querySelectorAll("[data-question]").forEach(function(button) {
+    button.addEventListener("click", function() {
+        sendLocalAIMessage(button.dataset.question);
+    });
+});
+
+</script>
+
+</body>
+</html>

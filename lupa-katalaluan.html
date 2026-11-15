@@ -1,0 +1,1177 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lupa Kata Laluan | Polis Diraja MYMahkota</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+:root {
+    --bg:#0e1118;
+    --panel:#191e28;
+    --gold:#d8b76b;
+    --gold-light:#f0d58f;
+    --muted:#abb5c4;
+    --border:#51442e;
+    --white:#f5f5f5;
+}
+
+* {
+    box-sizing:border-box;
+}
+
+body {
+    margin:0;
+    background:var(--bg);
+    color:var(--white);
+    font-family:Arial,sans-serif;
+    line-height:1.7;
+}
+
+button,
+input {
+    font:inherit;
+}
+
+button {
+    cursor:pointer;
+}
+
+[hidden] {
+    display:none!important;
+}
+
+/* HALAMAN PEMULIHAN */
+
+.reset-page {
+    min-height:85vh;
+    padding:55px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(
+        ellipse at top,
+        #342b1c,
+        #0e1118 70%
+    );
+}
+
+.reset-container {
+    width:100%;
+    max-width:570px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-top:4px solid var(--gold);
+    border-radius:10px;
+    padding:38px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+/* KEPALA */
+
+.reset-heading {
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.reset-heading img {
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:15px;
+}
+
+.reset-heading h2 {
+    color:var(--gold);
+    font-size:23px;
+    margin:10px 0;
+    letter-spacing:1px;
+}
+
+.reset-heading p {
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.8;
+    letter-spacing:1px;
+}
+
+.gold-line {
+    width:70px;
+    height:3px;
+    background:var(--gold);
+    margin:20px auto 0;
+}
+
+/* MAKLUMAN */
+
+.notice {
+    padding:18px;
+    background:#302719;
+    border:1px solid #75603a;
+    border-radius:7px;
+    color:#e8d19d;
+    font-size:12px;
+    line-height:1.9;
+    margin-bottom:27px;
+}
+
+.notice strong {
+    display:block;
+    margin-bottom:8px;
+    letter-spacing:1px;
+}
+
+.notice p {
+    margin:0;
+}
+
+/* LANGKAH PEMULIHAN */
+
+.process-steps {
+    display:grid;
+    gap:12px;
+    margin-bottom:30px;
+}
+
+.process-step {
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding:15px;
+    background:#222a36;
+    border:1px solid #414753;
+    border-radius:7px;
+}
+
+.step-number {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-width:32px;
+    height:32px;
+    border-radius:50%;
+    background:#44371e;
+    color:var(--gold);
+    font-size:12px;
+    font-weight:bold;
+}
+
+.step-text {
+    min-width:0;
+}
+
+.step-text strong {
+    display:block;
+    color:var(--gold);
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.step-text p {
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.7;
+    margin:0;
+}
+
+/* BORANG */
+
+.form-section {
+    border-bottom:1px solid #414753;
+    padding-bottom:13px;
+    margin-bottom:23px;
+}
+
+.form-section h3 {
+    margin:0;
+    color:var(--gold);
+    font-size:16px;
+}
+
+.form-section p {
+    margin:7px 0 0;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.form-group {
+    margin-bottom:22px;
+}
+
+.form-group label {
+    display:block;
+    color:var(--gold);
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.form-group input {
+    width:100%;
+    padding:15px;
+    background:#10141c;
+    border:1px solid #4a5361;
+    border-radius:6px;
+    color:#fff;
+    font-size:14px;
+}
+
+.form-group input::placeholder {
+    color:#929aaa;
+}
+
+.form-group input:focus {
+    outline:none;
+    border-color:var(--gold);
+    box-shadow:0 0 0 2px rgba(216,183,107,.12);
+}
+
+.form-group small {
+    display:block;
+    color:var(--muted);
+    margin-top:8px;
+    font-size:11px;
+    line-height:1.7;
+}
+
+/* BUTANG */
+
+.submit-button {
+    display:block;
+    width:100%;
+    padding:17px;
+    background:var(--gold);
+    color:#111;
+    border:none;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:1px;
+    transition:.2s;
+}
+
+.submit-button:hover {
+    background:var(--gold-light);
+}
+
+.submit-button:disabled {
+    opacity:.65;
+    cursor:not-allowed;
+}
+
+/* MESEJ */
+
+.form-message {
+    margin-top:22px;
+    padding:17px;
+    border:1px solid #75603a;
+    background:#302719;
+    color:#ead49a;
+    border-radius:7px;
+    font-size:13px;
+    line-height:1.8;
+    overflow-wrap:anywhere;
+    white-space:pre-line;
+}
+
+.form-message.success {
+    background:#193a2b;
+    border-color:#42835d;
+    color:#b5e6c6;
+}
+
+.form-message.error {
+    background:#391f23;
+    border-color:#9a4b52;
+    color:#ffb4bb;
+}
+
+/* NOMBOR RUJUKAN */
+
+.reference-box {
+    margin-top:22px;
+    padding:25px 20px;
+    border:1px solid var(--gold);
+    border-radius:8px;
+    background:#111923;
+    text-align:center;
+}
+
+.reference-box small {
+    color:var(--muted);
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+.reference-box strong {
+    display:block;
+    color:var(--gold);
+    font-size:21px;
+    margin:15px 0;
+    overflow-wrap:anywhere;
+}
+
+.reference-box p {
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.8;
+}
+
+.reference-button {
+    width:100%;
+    padding:13px;
+    border:1px solid var(--gold);
+    border-radius:6px;
+    background:transparent;
+    color:var(--gold);
+    font-size:11px;
+    font-weight:bold;
+    margin-top:12px;
+}
+
+.reference-button:hover {
+    background:#342c1c;
+}
+
+.reference-link {
+    display:block;
+    margin-top:14px;
+    padding:13px;
+    background:var(--gold);
+    color:#111;
+    border-radius:6px;
+    text-align:center;
+    text-decoration:none;
+    font-size:11px;
+    font-weight:bold;
+}
+
+/* BAWAH HALAMAN */
+
+.help-section {
+    margin-top:28px;
+    padding-top:23px;
+    border-top:1px solid #414753;
+    text-align:center;
+}
+
+.help-section h3 {
+    color:var(--gold);
+    font-size:14px;
+    margin:0 0 10px;
+}
+
+.help-section p {
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.8;
+    margin-bottom:18px;
+}
+
+.outline-link {
+    display:block;
+    padding:14px;
+    border:1px solid var(--gold);
+    border-radius:6px;
+    color:var(--gold);
+    text-align:center;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.outline-link:hover {
+    background:#342c1c;
+}
+
+.security-note {
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.8;
+    text-align:center;
+    margin-top:24px;
+}
+
+.back-link {
+    display:block;
+    margin-top:26px;
+    color:var(--gold);
+    text-decoration:none;
+    text-align:center;
+    font-size:12px;
+}
+
+.back-link:hover {
+    color:white;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+    .reset-page {
+        padding:30px 14px;
+    }
+
+    .reset-container {
+        padding:27px 20px;
+    }
+
+    .reset-heading img {
+        width:80px;
+        height:80px;
+    }
+
+    .reset-heading h2 {
+        font-size:20px;
+    }
+
+    .reference-box strong {
+        font-size:17px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="header-container">
+
+        <a href="index.html" class="brand">
+            <img
+                src="logo.png"
+                alt="Logo Polis Diraja MYMahkota"
+            >
+
+            <div class="brand-text">
+                <h1>POLIS DIRAJA</h1>
+                <h2>MYMAHKOTA</h2>
+                <span>PEMULIHAN AKAUN</span>
+            </div>
+        </a>
+
+        <div class="header-right">
+            <span class="official-label">
+                SISTEM ANGGOTA
+            </span>
+            <span class="official-dot"></span>
+        </div>
+
+    </div>
+</header>
+
+<!-- HALAMAN PEMULIHAN -->
+<main class="reset-page">
+
+    <div class="reset-container">
+
+        <!-- KEPALA -->
+        <div class="reset-heading">
+
+            <img
+                src="logo.png"
+                alt="Logo Polis Diraja MYMahkota"
+            >
+
+            <h2>PEMULIHAN KATA LALUAN</h2>
+
+            <p>
+                SISTEM PENGURUSAN AKAUN ANGGOTA
+                <br>
+                POLIS DIRAJA MYMAHKOTA
+            </p>
+
+            <div class="gold-line"></div>
+
+        </div>
+
+        <!-- MAKLUMAN -->
+        <div class="notice">
+
+            <strong>PROSEDUR PEMULIHAN AKAUN</strong>
+
+            <p>
+                Anggota yang terlupa kata laluan
+                hendaklah mengemukakan permohonan
+                melalui borang ini.
+
+                Permohonan akan disimpan untuk
+                semakan pentadbir dan diberikan
+                nombor rujukan.
+
+                Penetapan kata laluan baharu
+                hanya boleh dilakukan selepas
+                pengesahan identiti yang sewajarnya.
+            </p>
+
+        </div>
+
+        <!-- LANGKAH -->
+        <div class="process-steps">
+
+            <div class="process-step">
+                <span class="step-number">01</span>
+                <div class="step-text">
+                    <strong>HANTAR PERMOHONAN</strong>
+                    <p>
+                        Masukkan nama penuh
+                        dan nombor badan anggota.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <span class="step-number">02</span>
+                <div class="step-text">
+                    <strong>TERIMA NOMBOR RUJUKAN</strong>
+                    <p>
+                        Simpan nombor rujukan
+                        permohonan yang dipaparkan.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <span class="step-number">03</span>
+                <div class="step-text">
+                    <strong>SEMAKAN DAN KELULUSAN</strong>
+                    <p>
+                        Pentadbir menyemak permohonan
+                        dalam Panel Pentadbiran.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <span class="step-number">04</span>
+                <div class="step-text">
+                    <strong>TETAPKAN KATA LALUAN BAHARU</strong>
+                    <p>
+                        Selepas identiti disahkan,
+                        anggota boleh meneruskan proses
+                        pemulihan yang dibenarkan.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BORANG -->
+        <form id="resetForm">
+
+            <div class="form-section">
+                <h3>BORANG PERMOHONAN PEMULIHAN</h3>
+                <p>
+                    Lengkapkan maklumat seperti
+                    yang telah didaftarkan.
+                </p>
+            </div>
+
+            <div class="form-group">
+
+                <label for="nama">
+                    NAMA PENUH ANGGOTA *
+                </label>
+
+                <input
+                    type="text"
+                    id="nama"
+                    name="nama"
+                    placeholder="Masukkan nama penuh anggota"
+                    autocomplete="name"
+                    maxlength="100"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="memberId">
+                    NOMBOR BADAN / ID ANGGOTA *
+                </label>
+
+                <input
+                    type="text"
+                    id="memberId"
+                    name="memberId"
+                    placeholder="Masukkan nombor badan anggota"
+                    autocomplete="username"
+                    maxlength="50"
+                    required
+                >
+
+                <small>
+                    Gunakan nombor badan yang sama
+                    seperti dalam rekod akaun.
+                </small>
+
+            </div>
+
+            <button
+                type="submit"
+                id="submitButton"
+                class="submit-button">
+                HANTAR PERMOHONAN PEMULIHAN
+            </button>
+
+        </form>
+
+        <!-- MESEJ -->
+        <div
+            id="resetMessage"
+            class="form-message"
+            role="status"
+            aria-live="polite"
+            hidden>
+        </div>
+
+        <!-- RUJUKAN SELEPAS PERMOHONAN -->
+        <div id="referenceBox"
+             class="reference-box"
+             hidden>
+
+            <small>
+                NOMBOR RUJUKAN PERMOHONAN
+            </small>
+
+            <strong id="referenceNumber">—</strong>
+
+            <p>
+                Simpan nombor rujukan ini untuk
+                menyemak status permohonan.
+
+                Permohonan belum memberi akses
+                untuk menukar kata laluan.
+            </p>
+
+            <button
+                type="button"
+                id="copyReference"
+                class="reference-button">
+                SALIN NOMBOR RUJUKAN
+            </button>
+
+            <a
+                href="rujukan-pemulihan.html"
+                id="checkReference"
+                class="reference-link">
+                SEMAK STATUS PERMOHONAN
+            </a>
+
+        </div>
+
+        <!-- SEMAK RUJUKAN -->
+        <div class="help-section">
+
+            <h3>
+                SUDAH MEMPUNYAI NOMBOR RUJUKAN?
+            </h3>
+
+            <p>
+                Gunakan halaman semakan untuk
+                mengetahui status permohonan
+                pemulihan akaun.
+            </p>
+
+            <a
+                href="rujukan-pemulihan.html"
+                class="outline-link">
+                SEMAK NOMBOR RUJUKAN / STATUS
+            </a>
+
+        </div>
+
+        <div class="security-note">
+            Jangan berkongsi kata laluan
+            atau kod pemulihan akaun
+            dengan individu lain.
+        </div>
+
+        <a
+            href="anggota.html"
+            class="back-link">
+            ← KEMBALI KE LOG MASUK ANGGOTA
+        </a>
+
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-brand">
+            <h2>POLIS DIRAJA MYMAHKOTA</h2>
+            <p>
+                BERKHIDMAT DENGAN INTEGRITI,
+                PROFESIONALISME DAN DEDIKASI.
+            </p>
+        </div>
+
+        <div class="footer-bottom">
+            <span>
+                © 2026 POLIS DIRAJA MYMAHKOTA
+            </span>
+            <span>
+                PEMULIHAN AKAUN ANGGOTA
+            </span>
+        </div>
+
+    </div>
+</footer>
+
+<script>
+"use strict";
+
+/* ======================================
+   KONFIGURASI SISTEM
+====================================== */
+
+const STORE_KEY = "MYMAHKOTA_PORTAL_V1";
+
+const $ = id =>
+    document.getElementById(id);
+
+const normalize = value =>
+    String(value ?? "")
+        .trim()
+        .replace(/\s+/g," ")
+        .toUpperCase();
+
+function today() {
+    const date = new Date();
+
+    return [
+        date.getFullYear(),
+        String(date.getMonth()+1).padStart(2,"0"),
+        String(date.getDate()).padStart(2,"0")
+    ].join("-");
+}
+
+function now() {
+    return new Date().toISOString();
+}
+
+function uid() {
+    if (window.crypto?.randomUUID) {
+        return crypto.randomUUID();
+    }
+
+    return "PULIH-" +
+        Date.now() + "-" +
+        Math.random().toString(36).slice(2,9);
+}
+
+/* ======================================
+   BACA DAN SIMPAN DATA
+====================================== */
+
+function loadDatabase() {
+    try {
+        const saved =
+            localStorage.getItem(STORE_KEY);
+
+        const db = saved
+            ? JSON.parse(saved)
+            : {};
+
+        if (
+            !db ||
+            typeof db !== "object" ||
+            Array.isArray(db)
+        ) {
+            throw new Error(
+                "Struktur data portal tidak sah."
+            );
+        }
+
+        if (!Array.isArray(db.members)) {
+            db.members = [];
+        }
+
+        if (!Array.isArray(db.recoveries)) {
+            db.recoveries = [];
+        }
+
+        if (!Array.isArray(db.logs)) {
+            db.logs = [];
+        }
+
+        if (
+            !db.counters ||
+            typeof db.counters !== "object" ||
+            Array.isArray(db.counters)
+        ) {
+            db.counters = {};
+        }
+
+        return db;
+
+    } catch(error) {
+        return null;
+    }
+}
+
+function saveDatabase(db) {
+    localStorage.setItem(
+        STORE_KEY,
+        JSON.stringify(db)
+    );
+}
+
+/* ======================================
+   SEMAKAN MAKLUMAT ANGGOTA
+====================================== */
+
+function getMemberId(record) {
+    return normalize(
+        record?.noBadan ||
+        record?.idAnggota ||
+        ""
+    );
+}
+
+function findMember(db,noBadan) {
+    return db.members.find(member =>
+        getMemberId(member) === noBadan
+    ) || null;
+}
+
+function isActive(status) {
+    return normalize(status) === "AKTIF";
+}
+
+function isPending(status) {
+    return normalize(status) === "MENUNGGU";
+}
+
+/* ======================================
+   NOMBOR RUJUKAN
+====================================== */
+
+function nextReference(db) {
+
+    const year = new Date().getFullYear();
+
+    const counterKey = "recoveries-" + year;
+
+    let highest = Number(
+        db.counters[counterKey] || 0
+    );
+
+    db.recoveries.forEach(record => {
+
+        const reference = String(
+            record.rujukan ||
+            record.reference ||
+            ""
+        );
+
+        const match = reference.match(
+            /-(\d{4})-(\d+)$/
+        );
+
+        if (
+            match &&
+            Number(match[1]) === year
+        ) {
+            highest = Math.max(
+                highest,
+                Number(match[2])
+            );
+        }
+
+    });
+
+    const next = highest + 1;
+
+    db.counters[counterKey] = next;
+
+    return "PDM-PULIH-" +
+        year + "-" +
+        String(next).padStart(5,"0");
+}
+
+/* ======================================
+   PAPAR MESEJ
+====================================== */
+
+function showMessage(text,type="") {
+
+    $("resetMessage").textContent = text;
+
+    $("resetMessage").className =
+        "form-message " + type;
+
+    $("resetMessage").hidden = false;
+
+}
+
+function showReference(reference) {
+
+    $("referenceNumber").textContent =
+        reference;
+
+    $("checkReference").href =
+        "rujukan-pemulihan.html?rujukan=" +
+        encodeURIComponent(reference);
+
+    $("referenceBox").hidden = false;
+
+    $("referenceBox").scrollIntoView({
+        behavior:"smooth",
+        block:"nearest"
+    });
+}
+
+/* ======================================
+   HANTAR PERMOHONAN PEMULIHAN
+====================================== */
+
+$("resetForm").addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+        const nama =
+            $("nama").value.trim();
+
+        const noBadan =
+            normalize($("memberId").value);
+
+        if (!nama || !noBadan) {
+
+            showMessage(
+                "Sila lengkapkan nama penuh " +
+                "dan nombor badan.",
+                "error"
+            );
+
+            return;
+        }
+
+        const button = $("submitButton");
+
+        button.disabled = true;
+
+        button.textContent =
+            "MENYIMPAN PERMOHONAN...";
+
+        $("resetMessage").hidden = true;
+        $("referenceBox").hidden = true;
+
+        try {
+
+            const db = loadDatabase();
+
+            if (!db) {
+                throw new Error(
+                    "Rekod portal tidak dapat dibaca."
+                );
+            }
+
+            const member = findMember(
+                db,
+                noBadan
+            );
+
+            /*
+              Permohonan hanya dicatat untuk
+              identiti yang sepadan dengan
+              anggota berdaftar dan aktif.
+
+              Pengesahan ini sahaja tidak
+              memberi hak menukar kata laluan.
+            */
+
+            if (
+                !member ||
+                !isActive(member.status) ||
+                normalize(member.nama) !==
+                    normalize(nama)
+            ) {
+
+                throw new Error(
+                    "Permohonan tidak dapat " +
+                    "diproses menggunakan " +
+                    "maklumat yang diberikan. " +
+                    "Sila semak maklumat atau " +
+                    "hubungi pentadbir."
+                );
+
+            }
+
+            const existing =
+                db.recoveries.find(record =>
+                    getMemberId(record) ===
+                        noBadan &&
+                    isPending(record.status)
+                );
+
+            if (existing) {
+
+                /*
+                  Elakkan permohonan berulang.
+                  Jangan dedahkan rujukan lama
+                  melalui borang awam.
+                */
+
+                showMessage(
+                    "Permohonan pemulihan " +
+                    "untuk akaun ini sedang " +
+                    "menunggu tindakan. " +
+                    "Sila gunakan nombor " +
+                    "rujukan yang diterima " +
+                    "sebelum ini atau hubungi " +
+                    "pentadbir.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+            const reference =
+                nextReference(db);
+
+            const application = {
+
+                id:uid(),
+
+                rujukan:reference,
+
+                noBadan:noBadan,
+
+                idAnggota:noBadan,
+
+                nama:member.nama,
+
+                status:"Menunggu",
+
+                tarikh:today(),
+
+                createdAt:now(),
+
+                tujuan:
+                    "Permohonan pemulihan kata laluan",
+
+                catatan:
+                    "Pemohon memohon pemulihan " +
+                    "akses akaun anggota. " +
+                    "Pengesahan identiti " +
+                    "diperlukan sebelum " +
+                    "penetapan kata laluan baharu."
+
+            };
+
+            db.recoveries.push(
+                application
+            );
+
+            db.logs.unshift({
+
+                id:uid(),
+
+                tarikh:now(),
+
+                pelaksana:noBadan,
+
+                tindakan:
+                    "PERMOHONAN PEMULIHAN AKAUN",
+
+                butiran:
+                    reference + " — " +
+                    member.nama
+
+            });
+
+            saveDatabase(db);
+
+            $("resetForm").reset();
+
+            showMessage(
+                "PERMOHONAN BERJAYA DIREKODKAN.\n\n" +
+                "Status: MENUNGGU KELULUSAN.\n\n" +
+                "Simpan nombor rujukan di bawah " +
+                "untuk semakan status. " +
+                "Pentadbir perlu mengesahkan " +
+                "identiti sebelum pemulihan " +
+                "kata laluan boleh diteruskan.",
+                "success"
+            );
+
+            showReference(reference);
+
+        } catch(error) {
+
+            showMessage(
+                error.message ||
+                "Permohonan gagal disimpan.",
+                "error"
+            );
+
+        } finally {
+
+            button.disabled = false;
+
+            button.textContent =
+                "HANTAR PERMOHONAN PEMULIHAN";
+
+        }
+
+    }
+);
+
+/* ======================================
+   SALIN NOMBOR RUJUKAN
+====================================== */
+
+$("copyReference").addEventListener(
+    "click",
+    async function() {
+
+        const reference =
+            $("referenceNumber").textContent;
+
+        try {
+
+            await navigator.clipboard.writeText(
+                reference
+            );
+
+            showMessage(
+                "Nombor rujukan berjaya disalin.",
+                "success"
+            );
+
+        } catch(error) {
+
+            window.prompt(
+                "Salin nombor rujukan:",
+                reference
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
